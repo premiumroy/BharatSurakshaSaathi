@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">सुरक्षा साथी</string>
+    <string name="notification_listener_label">सुरक्षा साथी संदेश जाँच</string>
+
+    <!-- Home -->
+    <string name="home_title">क्या यह संदेश धोखा है?</string>
+    <string name="home_subtitle">कोई भी SMS, WhatsApp संदेश या लिंक यहाँ पेस्ट करें। जाँच आपके फ़ोन पर ही होती है। कुछ भी कहीं नहीं भेजा जाता।</string>
+    <string name="home_check_button">इस मैसेज को जाँचो</string>
+    <string name="home_input_label">जाँचने के लिए संदेश</string>
+    <string name="home_input_hint">संदेश यहाँ पेस्ट करें…</string>
+    <string name="home_paste_button">पेस्ट करें</string>
+    <string name="home_clear_button">हटाएँ</string>
+    <string name="home_examples_title">एक उदाहरण आज़माएँ</string>
+    <string name="home_example_1">प्रिय ग्राहक, आपका KYC आज समाप्त हो रहा है। अभी http://sbi-kyc-update.xyz पर अपडेट करें वरना आपका खाता बंद कर दिया जाएगा।</string>
+    <string name="home_example_2">CBI नोटिस: आपके नाम पर अवैध सामान का पार्सल है। आप डिजिटल अरेस्ट में हैं। तुरंत इस नंबर पर कॉल करें।</string>
+    <string name="home_example_3">लॉगिन के लिए आपका OTP 4821 है। इसे किसी के साथ साझा न करें।</string>
+    <string name="home_history_button">इतिहास</string>
+    <string name="home_easy_mode_on">आसान मोड: चालू</string>
+    <string name="home_easy_mode_off">आसान मोड: बंद</string>
+    <string name="home_notif_button">स्वतः जाँच चालू करें</string>
+    <string name="home_notif_enabled">स्वतः जाँच चालू है</string>
+    <string name="home_clipboard_empty">क्लिपबोर्ड खाली है</string>
+    <string name="home_empty_message">पहले कोई संदेश पेस्ट करें।</string>
+    <string name="home_quick_tools">और जाँचें</string>
+    <string name="home_tool_image">स्क्रीनशॉट / फ़ोटो</string>
+    <string name="home_tool_link">लिंक जाँचें</string>
+    <string name="home_tool_phone">नंबर जाँचें</string>
+    <string name="home_tool_tips">धोखे की जानकारी</string>
+    <string name="home_tool_recover">मेरे साथ ठगी हुई</string>
+    <string name="home_tool_settings">सेटिंग्स</string>
+    <string name="home_easy_button">आसान मोड</string>
+    <string name="home_kids_badge">बच्चों का सुरक्षित मोड</string>
+
+    <!-- Verdicts -->
+    <string name="verdict_safe">सुरक्षित लगता है</string>
+    <string name="verdict_careful">सावधान रहें</string>
+    <string name="verdict_dangerous">खतरनाक</string>
+    <string name="verdict_safe_short">सुरक्षित</string>
+    <string name="verdict_careful_short">सावधान</string>
+    <string name="verdict_dangerous_short">खतरनाक</string>
+
+    <!-- Result -->
+    <string name="result_title">जाँच का नतीजा</string>
+    <string name="result_score_label">जोखिम स्कोर: 100 में से %1$d</string>
+    <string name="result_confidence_label">भरोसा: %1$s</string>
+    <string name="confidence_low">कम</string>
+    <string name="confidence_medium">मध्यम</string>
+    <string name="confidence_high">ज़्यादा</string>
+    <string name="result_reasons_title">हमें ऐसा क्यों लगा</string>
+    <string name="result_what_to_do_title">अब क्या करें</string>
+    <string name="result_checked_message_title">जाँचा गया संदेश</string>
+    <string name="result_again_button">दूसरा संदेश जाँचें</string>
+    <string name="result_disclaimer">यह एक मददगार जाँच है, कोई गारंटी नहीं। कोई भी ऐप हर धोखे को नहीं पकड़ सकता। जहाँ पैसा या निजी जानकारी की बात हो, वहाँ हमेशा अपने बैंक कार्ड या पासबुक पर लिखे आधिकारिक नंबर पर पुष्टि करें।</string>
+    <string name="result_no_reasons">इस संदेश में धोखे के आम पैटर्न नहीं मिले। फिर भी सतर्क रहें।</string>
+    <string name="result_family_alert">परिवार को बताएँ</string>
+    <string name="result_recover_button">मेरे साथ ठगी हुई — अब क्या करें?</string>
+    <string name="result_online_explain">बेहतर जानकारी पाएँ (ऑनलाइन)</string>
+    <string name="result_online_consent_title">यह संदेश ऑनलाइन भेजें?</string>
+    <string name="result_online_consent_message">ऑनलाइन मोड डिफ़ॉल्ट रूप से बंद है। आगे बढ़ने पर सिर्फ़ इसी संदेश का टेक्स्ट आपके सेट किए सर्वर पर भेजा जाएगा, ताकि आसान भाषा में बेहतर जानकारी मिल सके। और कुछ साझा नहीं होगा।</string>
+    <string name="result_online_send">भेजें</string>
+    <string name="result_online_cancel">नहीं, ऑफ़लाइन रखें</string>
+    <string name="result_online_getting">बेहतर जानकारी ली जा रही है…</string>
+    <string name="result_online_unavailable">अभी ऑनलाइन जानकारी नहीं मिल सकी।</string>
+    <string name="result_online_off">इसके लिए सेटिंग्स में ऑनलाइन मोड चालू करें।</string>
+
+    <!-- Advice steps -->
+    <string name="advice_dont_share_otp">अपना OTP, PIN, CVV या पासवर्ड किसी के साथ साझा न करें — चाहे वह खुद को आपका बैंक बताए।</string>
+    <string name="advice_dont_click">लिंक पर क्लिक न करें। उसे ब्राउज़र में न खोलें।</string>
+    <string name="advice_dont_pay">पैसे “पाने” या रिफंड के लिए कोई पैसा न भेजें और कोई QR कोड स्कैन न करें।</string>
+    <string name="advice_block_number">नंबर को ब्लॉक करें और स्पैम रिपोर्ट करें।</string>
+    <string name="advice_no_remote_app">उनके कहने पर AnyDesk, TeamViewer या कोई स्क्रीन-शेयर ऐप इंस्टॉल न करें।</string>
+    <string name="advice_verify_official">अपने बैंक कार्ड या पासबुक पर लिखे आधिकारिक नंबर पर कॉल करके पुष्टि करें। संदेश में दिए नंबर का उपयोग न करें।</string>
+    <string name="advice_police_no_arrest">पुलिस, CBI, कोर्ट या आयकर अधिकारी कभी फ़ोन, वीडियो कॉल या संदेश पर गिरफ्तार या जुर्माना नहीं करते।</string>
+    <string name="advice_report_1930">अगर पैसे चले गए हैं, तो तुरंत साइबर हेल्पलाइन 1930 और अपने बैंक को कॉल करें।</string>
+    <string name="advice_report_cybercrime">cybercrime.gov.in पर रिपोर्ट करें या 1930 पर कॉल करें।</string>
+    <string name="advice_keep_message">कुछ भी मिटाने से पहले संदेश को सबूत के तौर पर सहेज लें।</string>
+
+    <!-- History -->
+    <string name="history_title">जाँचे गए संदेश</string>
+    <string name="history_empty">अभी कुछ जाँचा नहीं गया। आपकी जाँचें यहाँ दिखेंगी — सिर्फ़ इसी फ़ोन पर।</string>
+    <string name="history_delete_all">सारा इतिहास हटाएँ</string>
+    <string name="history_delete_all_title">सारा इतिहास हटाएँ?</string>
+    <string name="history_delete_all_message">इससे इस फ़ोन से हर सहेजी गई जाँच हट जाएगी। इसे वापस नहीं लाया जा सकता।</string>
+    <string name="history_delete">हटाएँ</string>
+    <string name="history_cancel">रद्द करें</string>
+    <string name="history_privacy_note">इतिहास सिर्फ़ इसी फ़ोन पर रहता है। इसे कभी अपलोड नहीं किया जाता।</string>
+
+    <!-- Notifications -->
+    <string name="channel_alerts_name">धोखे की चेतावनी</string>
+    <string name="channel_alerts_desc">जब कोई संदेश धोखा लगे तो चेतावनी</string>
+    <string name="channel_tips_name">कॉल याद दिलाना</string>
+    <string name="channel_tips_desc">कॉल के दौरान याद दिलाना</string>
+    <string name="notif_warning_title">संभावित धोखा: %1$s</string>
+    <string name="notif_open_to_check">पूरी जाँच देखने के लिए सुरक्षा साथी खोलें।</string>
+    <string name="call_tip_title">सुरक्षा याद दिलाना</string>
+    <string name="call_tip_body">%1$s — असली पुलिस, CBI या बैंक कभी कॉल पर पैसे या OTP नहीं माँगते।</string>
+    <string name="call_tip_unknown">अज्ञात नंबर</string>
+
+    <!-- Notification access -->
+    <string name="notif_access_title">संदेशों की स्वतः जाँच</string>
+    <string name="notif_access_why">आपकी अनुमति से, सुरक्षा साथी नए संदेशों की सूचनाओं का टेक्स्ट चुपचाप जाँच सकता है और सिर्फ़ धोखा लगने पर चेतावनी दे सकता है। यह वैकल्पिक है — इसके बिना भी ऐप पूरी तरह काम करता है।</string>
+    <string name="notif_access_how">अगली स्क्रीन में “सुरक्षा साथी” चालू करें, फिर वापस आएँ।</string>
+    <string name="notif_access_grant">नोटिफ़िकेशन एक्सेस खोलें</string>
+    <string name="notif_access_granted">नोटिफ़िकेशन एक्सेस: चालू</string>
+    <string name="notif_access_not_granted">नोटिफ़िकेशन एक्सेस: बंद</string>
+    <string name="notif_access_notif_perm">सूचनाओं की अनुमति दें (चेतावनी दिखाने के लिए ज़रूरी)</string>
+    <string name="notif_access_contacts">संपर्क की अनुमति दें (वैकल्पिक, जाने-पहचाने कॉलर छोड़ने के लिए)</string>
+    <string name="notif_access_callscreen">कॉल याद दिलाना चालू करें</string>
+    <string name="notif_access_open_settings">सेटिंग्स खोलें</string>
+    <string name="notif_access_privacy">हम सिर्फ़ मैसेजिंग ऐप्स की सूचनाओं का टेक्स्ट पढ़ते हैं। हम कभी कॉल रिकॉर्ड नहीं करते और आपका SMS स्टोर नहीं पढ़ते।</string>
+
+    <!-- Image check -->
+    <string name="image_title">स्क्रीनशॉट या फ़ोटो जाँचें</string>
+    <string name="image_intro">कोई स्क्रीनशॉट चुनें या संदेश की फ़ोटो लें। टेक्स्ट आपके फ़ोन पर पढ़ा जाता है और उसी इंजन से जाँचा जाता है।</string>
+    <string name="image_pick">इमेज चुनें</string>
+    <string name="image_take">फ़ोटो लें</string>
+    <string name="image_reading">टेक्स्ट पढ़ा जा रहा है…</string>
+    <string name="image_no_text">उस इमेज में कोई टेक्स्ट नहीं पढ़ा जा सका। साफ़ स्क्रीनशॉट आज़माएँ।</string>
+    <string name="image_recognized">इमेज में मिला टेक्स्ट</string>
+    <string name="image_check">इस टेक्स्ट को जाँचें</string>
+
+    <!-- Link check -->
+    <string name="link_title">लिंक जाँचें</string>
+    <string name="link_intro">कोई लिंक या लिंक वाला टेक्स्ट पेस्ट करें। हम छोटे लिंक, नकली बैंक/UPI पते, अजीब डोमेन और IP लिंक ढूँढते हैं — पूरी तरह ऑफ़लाइन।</string>
+    <string name="link_input_hint">लिंक या टेक्स्ट पेस्ट करें…</string>
+    <string name="link_check_button">लिंक जाँचें</string>
+    <string name="link_found_title">मिले लिंक</string>
+    <string name="link_no_links">उस टेक्स्ट में कोई लिंक नहीं मिला।</string>
+    <string name="link_looks_safe">लिंक में कोई साफ़ चाल नहीं मिली। फिर भी अनजाने लिंक से सावधान रहें।</string>
+    <string name="link_official_title">हम जिन आधिकारिक डोमेन से तुलना करते हैं</string>
+    <string name="link_official_note">हम इन साइटों से कभी संपर्क नहीं करते — यह सिर्फ़ तुलना के लिए बंडल की गई सूची है।</string>
+
+    <!-- Phone check -->
+    <string name="phone_title">नंबर जाँचें</string>
+    <string name="phone_intro">कोई फ़ोन नंबर लिखें। हम उसका फ़ॉर्मैट ऑफ़लाइन जाँचते हैं — कोई डेटाबेस नहीं, कोई नेटवर्क नहीं।</string>
+    <string name="phone_input_hint">जैसे +91 98200 45123</string>
+    <string name="phone_check_button">नंबर जाँचें</string>
+    <string name="phone_add_blocklist">मेरी ब्लॉकलिस्ट में जोड़ें</string>
+    <string name="phone_remove_blocklist">ब्लॉकलिस्ट से हटाएँ</string>
+    <string name="phone_blocklist_title">मेरी ब्लॉकलिस्ट</string>
+    <string name="phone_blocklist_empty">आपकी ब्लॉकलिस्ट खाली है।</string>
+    <string name="phone_no_signals">इस नंबर में कुछ असामान्य नहीं मिला।</string>
+
+    <!-- Settings -->
+    <string name="settings_title">सेटिंग्स</string>
+    <string name="settings_detection">पहचान</string>
+    <string name="settings_sensitivity">संवेदनशीलता</string>
+    <string name="sensitivity_low">कम (कम चेतावनियाँ)</string>
+    <string name="sensitivity_medium">मध्यम (सुझावित)</string>
+    <string name="sensitivity_high">ज़्यादा (अधिक चेतावनियाँ)</string>
+    <string name="settings_watch_apps">किन ऐप्स पर नज़र</string>
+    <string name="settings_watch_apps_help">चुनें कि स्वतः जाँच किन ऐप्स को देखे। कुछ न चुनें तो हम आम मैसेजिंग ऐप्स देखते हैं।</string>
+    <string name="settings_auto_check">नए संदेशों की स्वतः जाँच</string>
+    <string name="settings_call_tip">कॉल याद दिलाना</string>
+    <string name="settings_appearance">दिखावट</string>
+    <string name="settings_easy_mode">आसान मोड (बड़ा टेक्स्ट और बटन)</string>
+    <string name="settings_high_contrast">हाई-कॉन्ट्रास्ट थीम</string>
+    <string name="settings_kids_mode">बच्चों का सुरक्षित मोड</string>
+    <string name="settings_language">भाषा</string>
+    <string name="settings_online">ऑनलाइन मोड (वैकल्पिक)</string>
+    <string name="settings_online_help">डिफ़ॉल्ट रूप से बंद। चालू होने पर आप चुन सकते हैं कि बेहतर जानकारी के लिए एक संदेश अपने सर्वर पर भेजें। ऐप में कोई API कुंजी नहीं रखी जाती।</string>
+    <string name="settings_online_endpoint">सर्वर पता</string>
+    <string name="settings_data">आपका डेटा</string>
+    <string name="settings_clear_data">सारा डेटा मिटाएँ</string>
+    <string name="settings_clear_data_title">सारा डेटा मिटाएँ?</string>
+    <string name="settings_clear_data_message">इससे इस फ़ोन से आपका इतिहास, सबूत, ब्लॉकलिस्ट और सेटिंग्स हट जाएँगी। इसे वापस नहीं लाया जा सकता।</string>
+    <string name="settings_clear_done">सारा स्थानीय डेटा मिट गया।</string>
+    <string name="settings_privacy">निजता</string>
+    <string name="settings_tips">धोखे की जानकारी</string>
+    <string name="settings_about">ऐप के बारे में</string>
+    <string name="settings_about_body">सुरक्षा साथी एक मुफ़्त, ऑफ़लाइन-प्रथम सुरक्षा ऐप है। यह एक मददगार जाँच है, कोई गारंटी नहीं।</string>
+    <string name="settings_kids_locked">बच्चों का सुरक्षित मोड चालू है। सेटिंग्स बदलने के लिए पैरेंट PIN डालें।</string>
+    <string name="settings_manage_pin">पैरेंट PIN सेट / बदलें</string>
+    <string name="settings_kids_sensitivity_note">बच्चों का सुरक्षित मोड ज़्यादा संवेदनशीलता और आसान शब्द इस्तेमाल करता है।</string>
+
+    <!-- PIN -->
+    <string name="pin_set_title">पैरेंट PIN सेट करें</string>
+    <string name="pin_enter_title">पैरेंट PIN डालें</string>
+    <string name="pin_hint">4 से 6 अंक</string>
+    <string name="pin_confirm">PIN दोबारा डालें</string>
+    <string name="pin_wrong">गलत PIN। फिर कोशिश करें।</string>
+    <string name="pin_mismatch">दोनों PIN मेल नहीं खाते।</string>
+    <string name="pin_too_short">कम से कम 4 अंक डालें।</string>
+    <string name="pin_saved">PIN सहेजा गया।</string>
+    <string name="pin_forgot">PIN भूल गए? Android सेटिंग्स &gt; ऐप्स &gt; सुरक्षा साथी &gt; डेटा मिटाएँ से बच्चों का मोड बंद करें (इससे ऐप डेटा मिट जाएगा)।</string>
+    <string name="pin_ok">ठीक है</string>
+    <string name="pin_cancel">रद्द करें</string>
+
+    <!-- Easy mode -->
+    <string name="easy_title">आसान मोड</string>
+    <string name="easy_check_message">संदेश जाँचें</string>
+    <string name="easy_speak">बोलें</string>
+    <string name="easy_call_family">परिवार को कॉल करें</string>
+    <string name="easy_call_none">अभी कोई पारिवारिक संपर्क सहेजा नहीं गया। सेटिंग्स में जोड़ें।</string>
+    <string name="easy_hint">नीचे कोई बड़ा बटन दबाएँ।</string>
+
+    <!-- Voice -->
+    <string name="voice_title">बोलें</string>
+    <string name="voice_intro">जो संदेश जाँचना है उसे बोलें, या कोई सवाल पूछें। हम जवाब ज़ोर से पढ़ते हैं।</string>
+    <string name="voice_tap">दबाएँ और बोलें</string>
+    <string name="voice_listening">सुन रहे हैं…</string>
+    <string name="voice_not_available">इस फ़ोन पर वाक् पहचान उपलब्ध नहीं है।</string>
+    <string name="voice_permission">सुनने के लिए माइक्रोफ़ोन की अनुमति चाहिए।</string>
+    <string name="voice_heard">हमने सुना</string>
+    <string name="voice_speak_result">नतीजा ज़ोर से पढ़ें</string>
+    <string name="voice_speaking">बोल रहे हैं…</string>
+    <string name="voice_stop">रोकें</string>
+    <string name="voice_again">फिर बोलें</string>
+
+    <!-- Kids -->
+    <string name="kids_title">बच्चों का सुरक्षित मोड</string>
+    <string name="kids_intro">सख़्त जाँच और आसान शब्द, ताकि बच्चों को साफ़ चेतावनी मिले।</string>
+    <string name="kids_on">बच्चों का सुरक्षित मोड चालू है</string>
+
+    <!-- Tips -->
+    <string name="tips_title">धोखे की जानकारी</string>
+    <string name="tips_intro">भारत में सबसे ज़्यादा नुकसान करने वाले धोखों के छोटे कार्ड।</string>
+    <string name="tips_what_real_never">असली पुलिस / बैंक ये कभी नहीं करते</string>
+    <string name="tips_digital_arrest_title">डिजिटल अरेस्ट / नकली पुलिस कॉल</string>
+    <string name="tips_digital_arrest_body">कोई कॉल करने वाला खुद को CBI, पुलिस या कस्टम बताता है और कहता है कि आपके नाम पर पार्सल या केस है। वे आपको वीडियो कॉल पर रखते हैं और “केस खत्म” करने के लिए पैसे माँगते हैं।</string>
+    <string name="tips_digital_arrest_never">असली पुलिस कभी फ़ोन या वीडियो कॉल पर गिरफ्तार, पूछताछ या जुर्माना नहीं करती। “डिजिटल अरेस्ट” जैसी कोई चीज़ नहीं होती।</string>
+    <string name="tips_kyc_title">नकली KYC / खाता बंद</string>
+    <string name="tips_kyc_body">एक SMS कहता है कि आपका KYC समाप्त हो रहा है या खाता बंद हो जाएगा, और “अपडेट” के लिए लिंक देता है।</string>
+    <string name="tips_kyc_never">बैंक कभी संदेश के लिंक से KYC अपडेट करने को नहीं कहते। यह सिर्फ़ बैंक के अपने ऐप या शाखा में करें।</string>
+    <string name="tips_job_title">नौकरी / घर बैठे काम की फीस</string>
+    <string name="tips_job_body">एक “नौकरी” आसान कमाई का लालच देती है, पर पहले रजिस्ट्रेशन, सिक्योरिटी या ट्रेनिंग फीस माँगती है।</string>
+    <string name="tips_job_never">असली नियोक्ता नौकरी देने के लिए कभी पैसे नहीं माँगता।</string>
+    <string name="tips_lottery_title">लॉटरी / इनाम</string>
+    <string name="tips_lottery_body">आपने ऐसी लॉटरी या लकी ड्रॉ “जीती” जिसमें आपने भाग ही नहीं लिया, और दावा करने के लिए टैक्स या फीस माँगी जाती है।</string>
+    <string name="tips_lottery_never">जिस लॉटरी में भाग नहीं लिया, वह जीती नहीं जा सकती। छोटी फीस के बदले कोई मुफ़्त पैसा नहीं देता।</string>
+    <string name="tips_loan_title">लोन ऐप और धमकियाँ</string>
+    <string name="tips_loan_body">एक इंस्टेंट लोन ऐप जल्दी पैसे देता है, फिर न चुकाने पर आपके संपर्कों को कॉल करने या फ़ोटो वायरल करने की धमकी देता है।</string>
+    <string name="tips_loan_never">कोई कानूनी कर्ज़दाता आपके परिवार या फ़ोटो की धमकी नहीं देता। ऐसे ऐप की शिकायत करें और पैसे न दें।</string>
+    <string name="tips_sextortion_title">सिक्स्टॉर्शन / वीडियो कॉल ब्लैकमेल</string>
+    <string name="tips_sextortion_body">कोई अज्ञात नंबर वीडियो कॉल करता है, रिकॉर्ड करता है, और फिर पैसे न देने पर उसे साझा करने की धमकी देता है।</string>
+    <string name="tips_sextortion_never">पैसे न दें और घबराएँ नहीं — पैसे देने से वे कभी नहीं रुकते। सबूत सहेजें और पुलिस या cybercrime.gov.in पर रिपोर्ट करें।</string>
+
+    <!-- Recovery flow -->
+    <string name="recover_title">मेरे साथ ठगी हुई — अब क्या करें?</string>
+    <string name="recover_intro">ये कदम क्रम से उठाएँ। पहले कुछ घंटों में कार्रवाई सबसे ज़्यादा मायने रखती है।</string>
+    <string name="recover_step1_title">1. तुरंत 1930 पर कॉल करें</string>
+    <string name="recover_step1_body">जितनी जल्दी हो, राष्ट्रीय साइबर-क्राइम हेल्पलाइन 1930 पर कॉल करें। जल्दी शिकायत से पैसे रोकने की सबसे अच्छी संभावना रहती है।</string>
+    <string name="recover_step2_title">2. अपने बैंक को बताएँ</string>
+    <string name="recover_step2_body">अपने कार्ड या पासबुक पर लिखे आधिकारिक नंबर पर बैंक को कॉल करें और खाता फ्रीज़ या लेनदेन रोकने को कहें।</string>
+    <string name="recover_step3_title">3. ऑनलाइन रिपोर्ट करें</string>
+    <string name="recover_step3_body">cybercrime.gov.in पर शिकायत दर्ज करें। पावती नंबर सँभाल कर रखें।</string>
+    <string name="recover_step4_title">4. अपने सबूत सहेजें</string>
+    <string name="recover_step4_body">स्क्रीनशॉट, जुड़े नंबर, समय और राशि सहेजें। कुछ भी मिटाएँ नहीं।</string>
+    <string name="recover_call_1930">1930 पर कॉल करें</string>
+    <string name="recover_open_cybercrime">cybercrime.gov.in खोलें</string>
+    <string name="recover_call_bank">अपने बैंक को कॉल करें</string>
+    <string name="recover_checklist_title">अपने सबूत सहेजें</string>
+    <string name="recover_field_title">क्या हुआ (छोटा शीर्षक)</string>
+    <string name="recover_field_amount">गई राशि</string>
+    <string name="recover_field_when">कब हुआ</string>
+    <string name="recover_field_numbers">जुड़े नंबर</string>
+    <string name="recover_field_notes">नोट्स</string>
+    <string name="recover_add_screenshot">स्क्रीनशॉट जोड़ें</string>
+    <string name="recover_save">सबूत सहेजें</string>
+    <string name="recover_saved">सबूत इस फ़ोन पर सहेजा गया।</string>
+    <string name="recover_saved_items">सहेजे गए सबूत</string>
+    <string name="recover_empty">अभी कोई सबूत सहेजा नहीं गया।</string>
+    <string name="recover_export_pdf">PDF बनाएँ</string>
+    <string name="recover_share_pdf">PDF साझा करें</string>
+    <string name="recover_delete_all">सारे सबूत हटाएँ</string>
+
+    <!-- Family alert -->
+    <string name="family_title">परिवार को बताएँ</string>
+    <string name="family_intro">भरोसेमंद संपर्क जोड़ें। जब जाँच खतरनाक हो, आप एक टैप में उन्हें बता सकते हैं — हमेशा आपकी ओर से, कभी अपने आप नहीं।</string>
+    <string name="family_add">संपर्क नंबर जोड़ें</string>
+    <string name="family_empty">अभी कोई पारिवारिक संपर्क सहेजा नहीं गया।</string>
+    <string name="family_share_sms">SMS भेजें</string>
+    <string name="family_share_whatsapp">WhatsApp पर भेजें</string>
+    <string name="family_message">⚠️ सुरक्षा साथी: मुझे एक संदिग्ध संदेश मिला जो धोखा लगता है। मैंने कोई पैसा नहीं भेजा। कृपया मुझे कॉल करें।</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">सुरक्षा साथी में आपका स्वागत है</string>
+    <string name="onboarding_p1_title">कोई भी संदेश जाँचें</string>
+    <string name="onboarding_p1_body">SMS, WhatsApp संदेश या लिंक पेस्ट करें और साफ़ नतीजा पाएँ — सुरक्षित, सावधान या खतरनाक — वजहों के साथ।</string>
+    <string name="onboarding_p2_title">ऑफ़लाइन काम करता है</string>
+    <string name="onboarding_p2_body">पूरी जाँच आपके फ़ोन पर होती है। कोई लॉगिन नहीं, कोई विज्ञापन नहीं, कोई ट्रैकिंग नहीं। कुछ भी अपलोड नहीं होता।</string>
+    <string name="onboarding_p3_title">सबके लिए बना</string>
+    <string name="onboarding_p3_body">हिंदी और अंग्रेज़ी, बड़े बटन, बुज़ुर्गों के लिए आसान मोड, बच्चों का सुरक्षित मोड, और आवाज़ से जाँच।</string>
+    <string name="onboarding_p4_title">नियंत्रण आपके पास</string>
+    <string name="onboarding_p4_body">हर जाँच भरोसे का स्तर और आसान वजहें दिखाती है। हम कभी 100% सटीकता का दावा नहीं करते।</string>
+    <string name="onboarding_next">आगे</string>
+    <string name="onboarding_back">पीछे</string>
+    <string name="onboarding_start">शुरू करें</string>
+    <string name="onboarding_skip">छोड़ें</string>
+    <string name="onboarding_language">भाषा चुनें</string>
+
+    <!-- Privacy -->
+    <string name="privacy_title">निजता</string>
+    <string name="privacy_body">आपके फ़ोन पर क्या रहता है:\n\n• आपके जाँचे संदेश और नतीजे\n• आपका इतिहास और सहेजे सबूत\n• आपकी ब्लॉकलिस्ट और पारिवारिक संपर्क\n• सारी सेटिंग्स\n\nये सिर्फ़ इसी ऐप में, इसी फ़ोन पर रहते हैं। हमारे सर्वर नहीं हैं, और हम आपके SMS, संपर्क या कॉल डेटा कभी अपलोड नहीं करते।\n\nफ़ोन से बाहर क्या जा सकता है, सिर्फ़ तब जब आप अनुमति दें:\n\n• स्वतः जाँच के लिए सूचना का टेक्स्ट फ़ोन पर ही पढ़ा जाता है — कहीं भेजा नहीं जाता\n• अगर आप ऑनलाइन मोड चालू करके “भेजें” दबाएँ, तो सिर्फ़ वही संदेश टेक्स्ट आपके सेट किए सर्वर पर जाता है, बेहतर जानकारी के लिए\n\nहम जो अनुमतियाँ माँगते हैं, और क्यों:\n\n• सूचनाएँ — चेतावनी दिखाने के लिए\n• माइक्रोफ़ोन — सिर्फ़ जब आप बोलें दबाएँ\n• नोटिफ़िकेशन एक्सेस — वैकल्पिक, स्वतः जाँच के लिए\n• संपर्क — वैकल्पिक, कॉल याद दिलाने में जाने-पहचाने कॉलर छोड़ने के लिए\n• इंटरनेट — सिर्फ़ वैकल्पिक ऑनलाइन मोड के लिए; इसके बिना ऐप पूरी तरह ऑफ़लाइन है</string>
+    <string name="privacy_local_only">सिर्फ़ इसी फ़ोन पर</string>
+
+    <!-- Common -->
+    <string name="action_back">वापस</string>
+    <string name="action_ok">ठीक है</string>
+    <string name="action_close">बंद करें</string>
+    <string name="action_save">सहेजें</string>
+    <string name="action_share">साझा करें</string>
+    <string name="action_add">जोड़ें</string>
+    <string name="action_retry">फिर कोशिश करें</string>
+    <string name="action_open_settings">सेटिंग्स खोलें</string>
+    <string name="language_label">भाषा / Language</string>
+    <string name="easy_mode_label">आसान मोड (बड़ा टेक्स्ट और बटन)</string>
+</resources>

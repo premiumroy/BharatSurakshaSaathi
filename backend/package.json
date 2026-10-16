@@ -1,0 +1,19 @@
+{
+  "name": "suraksha-saathi-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal backend proxy for Bharat Suraksha Saathi's optional online explanation mode.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@fastify/rate-limit": "^9.1.0",
+    "fastify": "^4.28.1"
+  }
+}

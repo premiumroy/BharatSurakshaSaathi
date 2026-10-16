@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Suraksha Saathi</string>
+    <string name="notification_listener_label">Suraksha Saathi message check</string>
+
+    <!-- Home -->
+    <string name="home_title">Is this message a scam?</string>
+    <string name="home_subtitle">Paste any SMS, WhatsApp message or link. We check it on your phone. Nothing is sent anywhere.</string>
+    <string name="home_check_button">Check this message</string>
+    <string name="home_input_label">Message to check</string>
+    <string name="home_input_hint">Paste the message here…</string>
+    <string name="home_paste_button">Paste</string>
+    <string name="home_clear_button">Clear</string>
+    <string name="home_examples_title">Try an example</string>
+    <string name="home_example_1">Dear customer, your KYC is expiring today. Update now at http://sbi-kyc-update.xyz or your account will be blocked.</string>
+    <string name="home_example_2">CBI notice: a parcel with illegal items is in your name. You are under digital arrest. Call this number immediately.</string>
+    <string name="home_example_3">Your OTP for login is 4821. Do not share it with anyone.</string>
+    <string name="home_history_button">History</string>
+    <string name="home_easy_mode_on">Easy Mode: ON</string>
+    <string name="home_easy_mode_off">Easy Mode: OFF</string>
+    <string name="home_notif_button">Turn on auto-check</string>
+    <string name="home_notif_enabled">Auto-check is on</string>
+    <string name="home_clipboard_empty">Clipboard is empty</string>
+    <string name="home_empty_message">Please paste a message first.</string>
+    <string name="home_quick_tools">More checks</string>
+    <string name="home_tool_image">Screenshot / photo</string>
+    <string name="home_tool_link">Check a link</string>
+    <string name="home_tool_phone">Check a number</string>
+    <string name="home_tool_tips">Scam tips</string>
+    <string name="home_tool_recover">I was scammed</string>
+    <string name="home_tool_settings">Settings</string>
+    <string name="home_easy_button">Easy Mode</string>
+    <string name="home_kids_badge">Kids Safe Mode</string>
+
+    <!-- Verdicts -->
+    <string name="verdict_safe">Looks Safe</string>
+    <string name="verdict_careful">Be Careful</string>
+    <string name="verdict_dangerous">Dangerous</string>
+    <string name="verdict_safe_short">Safe</string>
+    <string name="verdict_careful_short">Careful</string>
+    <string name="verdict_dangerous_short">Dangerous</string>
+
+    <!-- Result -->
+    <string name="result_title">Check result</string>
+    <string name="result_score_label">Risk score: %1$d out of 100</string>
+    <string name="result_confidence_label">Confidence: %1$s</string>
+    <string name="confidence_low">Low</string>
+    <string name="confidence_medium">Medium</string>
+    <string name="confidence_high">High</string>
+    <string name="result_reasons_title">Why we think so</string>
+    <string name="result_what_to_do_title">What to do now</string>
+    <string name="result_checked_message_title">Message you checked</string>
+    <string name="result_again_button">Check another message</string>
+    <string name="result_disclaimer">This is a helpful check, not a guarantee. No app can catch every scam. When money or personal details are involved, always verify with the official number on your bank card or passbook.</string>
+    <string name="result_no_reasons">We did not find the common scam patterns in this message. Still stay alert.</string>
+    <string name="result_family_alert">Alert my family</string>
+    <string name="result_recover_button">I was scammed — what now?</string>
+    <string name="result_online_explain">Get a better explanation (online)</string>
+    <string name="result_online_consent_title">Send this message online?</string>
+    <string name="result_online_consent_message">Online mode is off by default. If you continue, ONLY this message text will be sent to the server you configured, to get a better plain-language explanation. Nothing else is shared.</string>
+    <string name="result_online_send">Send it</string>
+    <string name="result_online_cancel">No, keep it offline</string>
+    <string name="result_online_getting">Getting a better explanation…</string>
+    <string name="result_online_unavailable">Could not get an online explanation right now.</string>
+    <string name="result_online_off">Turn on Online mode in Settings to use this.</string>
+
+    <!-- Advice steps -->
+    <string name="advice_dont_share_otp">Never share your OTP, PIN, CVV or password with anyone — not even someone claiming to be from your bank.</string>
+    <string name="advice_dont_click">Do not click the link. Do not open it in your browser.</string>
+    <string name="advice_dont_pay">Do not send any money or scan any QR code to “receive” money or to get a refund.</string>
+    <string name="advice_block_number">Block the number and report it as spam.</string>
+    <string name="advice_no_remote_app">Do not install AnyDesk, TeamViewer or any screen-sharing app at their request.</string>
+    <string name="advice_verify_official">Verify by calling the official number printed on your bank card or passbook. Do not use the number in the message.</string>
+    <string name="advice_police_no_arrest">Police, CBI, courts and tax officers never arrest or fine you over a phone call, video call or message.</string>
+    <string name="advice_report_1930">If you already lost money, call the cyber helpline 1930 and your bank at once.</string>
+    <string name="advice_report_cybercrime">Report it at cybercrime.gov.in or call 1930.</string>
+    <string name="advice_keep_message">Save the message as proof before deleting anything.</string>
+
+    <!-- History -->
+    <string name="history_title">Checked messages</string>
+    <string name="history_empty">Nothing checked yet. Your checks will appear here — only on this phone.</string>
+    <string name="history_delete_all">Delete all history</string>
+    <string name="history_delete_all_title">Delete all history?</string>
+    <string name="history_delete_all_message">This removes every saved check from this phone. This cannot be undone.</string>
+    <string name="history_delete">Delete</string>
+    <string name="history_cancel">Cancel</string>
+    <string name="history_privacy_note">History stays only on this phone. It is never uploaded.</string>
+
+    <!-- Notifications -->
+    <string name="channel_alerts_name">Scam warnings</string>
+    <string name="channel_alerts_desc">Warnings when a message looks like a scam</string>
+    <string name="channel_tips_name">Call reminders</string>
+    <string name="channel_tips_desc">Reminders during incoming calls</string>
+    <string name="notif_warning_title">Possible scam: %1$s</string>
+    <string name="notif_open_to_check">Open Suraksha Saathi to see the full check.</string>
+    <string name="call_tip_title">Safety reminder</string>
+    <string name="call_tip_body">%1$s — Real police, CBI or banks never ask for money or OTP on a call.</string>
+    <string name="call_tip_unknown">Unknown number</string>
+
+    <!-- Notification access -->
+    <string name="notif_access_title">Auto-check messages</string>
+    <string name="notif_access_why">With your permission, Suraksha Saathi can quietly check the text of new message notifications and warn you only when something looks like a scam. This is optional — the app works fully without it.</string>
+    <string name="notif_access_how">Turn on “Suraksha Saathi” in the next screen, then come back.</string>
+    <string name="notif_access_grant">Open Notification Access</string>
+    <string name="notif_access_granted">Notification Access: ON</string>
+    <string name="notif_access_not_granted">Notification Access: OFF</string>
+    <string name="notif_access_notif_perm">Allow notifications (needed to show warnings)</string>
+    <string name="notif_access_contacts">Allow contacts (optional, to skip known callers)</string>
+    <string name="notif_access_callscreen">Turn on call reminders</string>
+    <string name="notif_access_open_settings">Open settings</string>
+    <string name="notif_access_privacy">We only read notification text from messaging apps. We never record calls and never read your SMS store.</string>
+
+    <!-- Image check -->
+    <string name="image_title">Check a screenshot or photo</string>
+    <string name="image_intro">Pick a screenshot or take a photo of a message. The text is read on your phone and checked by the same engine.</string>
+    <string name="image_pick">Choose image</string>
+    <string name="image_take">Take photo</string>
+    <string name="image_reading">Reading the text…</string>
+    <string name="image_no_text">We could not read any text in that image. Try a clearer screenshot.</string>
+    <string name="image_recognized">Text found in the image</string>
+    <string name="image_check">Check this text</string>
+
+    <!-- Link check -->
+    <string name="link_title">Check a link</string>
+    <string name="link_intro">Paste a link or any text with a link. We look for shortened links, look-alike bank/UPI addresses, odd domains and IP links — all offline.</string>
+    <string name="link_input_hint">Paste a link or text…</string>
+    <string name="link_check_button">Check link</string>
+    <string name="link_found_title">Links found</string>
+    <string name="link_no_links">No links found in that text.</string>
+    <string name="link_looks_safe">No obvious link tricks found. Still be careful with unexpected links.</string>
+    <string name="link_official_title">Official domains we compare against</string>
+    <string name="link_official_note">We never contact these sites — this is just a bundled list for comparison.</string>
+
+    <!-- Phone check -->
+    <string name="phone_title">Check a number</string>
+    <string name="phone_intro">Type a phone number. We check its format offline — no database, no network.</string>
+    <string name="phone_input_hint">e.g. +91 98200 45123</string>
+    <string name="phone_check_button">Check number</string>
+    <string name="phone_add_blocklist">Add to my blocklist</string>
+    <string name="phone_remove_blocklist">Remove from blocklist</string>
+    <string name="phone_blocklist_title">My blocklist</string>
+    <string name="phone_blocklist_empty">Your blocklist is empty.</string>
+    <string name="phone_no_signals">Nothing unusual in this number.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_detection">Detection</string>
+    <string name="settings_sensitivity">Sensitivity</string>
+    <string name="sensitivity_low">Low (fewer warnings)</string>
+    <string name="sensitivity_medium">Medium (recommended)</string>
+    <string name="sensitivity_high">High (more warnings)</string>
+    <string name="settings_watch_apps">Apps to watch</string>
+    <string name="settings_watch_apps_help">Choose which apps the auto-check watches. If none are chosen, we watch common messaging apps.</string>
+    <string name="settings_auto_check">Auto-check new messages</string>
+    <string name="settings_call_tip">Call reminders</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_easy_mode">Easy Mode (bigger text and buttons)</string>
+    <string name="settings_high_contrast">High-contrast theme</string>
+    <string name="settings_kids_mode">Kids Safe Mode</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_online">Online mode (optional)</string>
+    <string name="settings_online_help">Off by default. When on, you can choose to send a single message to your own server for a better explanation. No API keys are stored in the app.</string>
+    <string name="settings_online_endpoint">Server address</string>
+    <string name="settings_data">Your data</string>
+    <string name="settings_clear_data">Clear all data</string>
+    <string name="settings_clear_data_title">Clear all data?</string>
+    <string name="settings_clear_data_message">This deletes your history, evidence, blocklist and settings from this phone. It cannot be undone.</string>
+    <string name="settings_clear_done">All local data cleared.</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="settings_tips">Scam tips</string>
+    <string name="settings_about">About</string>
+    <string name="settings_about_body">Suraksha Saathi is a free, offline-first safety app. It is a helpful check, not a guarantee.</string>
+    <string name="settings_kids_locked">Kids Safe Mode is on. Enter the parent PIN to change settings.</string>
+    <string name="settings_manage_pin">Set / change parent PIN</string>
+    <string name="settings_kids_sensitivity_note">Kids Safe Mode uses high sensitivity and simpler words.</string>
+
+    <!-- PIN -->
+    <string name="pin_set_title">Set a parent PIN</string>
+    <string name="pin_enter_title">Enter parent PIN</string>
+    <string name="pin_hint">4 to 6 digits</string>
+    <string name="pin_confirm">Confirm PIN</string>
+    <string name="pin_wrong">Wrong PIN. Try again.</string>
+    <string name="pin_mismatch">The PINs do not match.</string>
+    <string name="pin_too_short">Use at least 4 digits.</string>
+    <string name="pin_saved">PIN saved.</string>
+    <string name="pin_forgot">Forgot PIN? Turn off Kids Safe Mode from Android Settings &gt; Apps &gt; Suraksha Saathi &gt; Clear data (this erases app data).</string>
+    <string name="pin_ok">OK</string>
+    <string name="pin_cancel">Cancel</string>
+
+    <!-- Easy mode -->
+    <string name="easy_title">Easy Mode</string>
+    <string name="easy_check_message">Check a message</string>
+    <string name="easy_speak">Speak</string>
+    <string name="easy_call_family">Call my family</string>
+    <string name="easy_call_none">No family contact saved yet. Add one in Settings.</string>
+    <string name="easy_hint">Tap a big button below.</string>
+
+    <!-- Voice -->
+    <string name="voice_title">Speak</string>
+    <string name="voice_intro">Speak the message you want checked, or ask a question. We read the answer out loud.</string>
+    <string name="voice_tap">Tap and speak</string>
+    <string name="voice_listening">Listening…</string>
+    <string name="voice_not_available">Speech recognition is not available on this phone.</string>
+    <string name="voice_permission">Microphone permission is needed to listen.</string>
+    <string name="voice_heard">We heard</string>
+    <string name="voice_speak_result">Read the result aloud</string>
+    <string name="voice_speaking">Speaking…</string>
+    <string name="voice_stop">Stop</string>
+    <string name="voice_again">Speak again</string>
+
+    <!-- Kids -->
+    <string name="kids_title">Kids Safe Mode</string>
+    <string name="kids_intro">Stricter checking and simpler words, so children get a clear warning.</string>
+    <string name="kids_on">Kids Safe Mode is ON</string>
+
+    <!-- Tips -->
+    <string name="tips_title">Scam tips</string>
+    <string name="tips_intro">Short cards about the scams that hurt Indians the most.</string>
+    <string name="tips_what_real_never">What real police / banks never do</string>
+    <string name="tips_digital_arrest_title">Digital arrest / fake police call</string>
+    <string name="tips_digital_arrest_body">A caller claims to be CBI, police or customs and says a parcel or case is in your name. They keep you on a video call and demand money to “clear” it.</string>
+    <string name="tips_digital_arrest_never">Real police never arrest, interrogate or fine you over a phone or video call. There is no such thing as a “digital arrest”.</string>
+    <string name="tips_kyc_title">Fake KYC / account block</string>
+    <string name="tips_kyc_body">An SMS says your KYC is expiring or your account will be blocked, and gives a link to “update” it.</string>
+    <string name="tips_kyc_never">Banks never ask you to update KYC through a link in a message. Do it only in the bank’s own app or branch.</string>
+    <string name="tips_job_title">Job / work-from-home fee</string>
+    <string name="tips_job_body">A “job” offers easy money but asks for a registration, security or training fee first.</string>
+    <string name="tips_job_never">A real employer never asks you to pay to get a job.</string>
+    <string name="tips_lottery_title">Lottery / prize</string>
+    <string name="tips_lottery_body">You “won” a lottery or lucky draw you never entered, and must pay a tax or fee to claim it.</string>
+    <string name="tips_lottery_never">You cannot win a lottery you never entered. Nobody gives free money for a small fee.</string>
+    <string name="tips_loan_title">Loan apps and threats</string>
+    <string name="tips_loan_body">An instant loan app gives money fast, then threatens to call your contacts or leak morphed photos if you do not pay up.</string>
+    <string name="tips_loan_never">No legal lender threatens your family or your photos. Report such apps and do not pay.</string>
+    <string name="tips_sextortion_title">Sextortion / video-call blackmail</string>
+    <string name="tips_sextortion_body">An unknown number video-calls you, records it, and then threatens to share it unless you pay.</string>
+    <string name="tips_sextortion_never">Do not pay and do not panic — paying never stops them. Save the evidence and report to police or cybercrime.gov.in.</string>
+
+    <!-- Recovery flow -->
+    <string name="recover_title">I was scammed — what now?</string>
+    <string name="recover_intro">Do these steps in order. Acting in the first few hours matters the most.</string>
+    <string name="recover_step1_title">1. Call 1930 right away</string>
+    <string name="recover_step1_body">Call the national cyber-crime helpline 1930 as soon as you can. Early reports have the best chance of freezing the money.</string>
+    <string name="recover_step2_title">2. Inform your bank</string>
+    <string name="recover_step2_body">Call your bank on the official number on your card or passbook and ask them to freeze the account or stop the transaction.</string>
+    <string name="recover_step3_title">3. Report online</string>
+    <string name="recover_step3_body">File a complaint at cybercrime.gov.in. Keep the acknowledgement number.</string>
+    <string name="recover_step4_title">4. Keep your evidence</string>
+    <string name="recover_step4_body">Save screenshots, the numbers involved, the time and the amount. Do not delete anything.</string>
+    <string name="recover_call_1930">Call 1930</string>
+    <string name="recover_open_cybercrime">Open cybercrime.gov.in</string>
+    <string name="recover_call_bank">Call my bank</string>
+    <string name="recover_checklist_title">Save your evidence</string>
+    <string name="recover_field_title">What happened (short title)</string>
+    <string name="recover_field_amount">Amount lost</string>
+    <string name="recover_field_when">When it happened</string>
+    <string name="recover_field_numbers">Numbers involved</string>
+    <string name="recover_field_notes">Notes</string>
+    <string name="recover_add_screenshot">Attach a screenshot</string>
+    <string name="recover_save">Save evidence</string>
+    <string name="recover_saved">Evidence saved on this phone.</string>
+    <string name="recover_saved_items">Saved evidence</string>
+    <string name="recover_empty">No evidence saved yet.</string>
+    <string name="recover_export_pdf">Export as PDF</string>
+    <string name="recover_share_pdf">Share PDF</string>
+    <string name="recover_delete_all">Delete all evidence</string>
+
+    <!-- Family alert -->
+    <string name="family_title">Family alert</string>
+    <string name="family_intro">Add trusted contacts. When a check is Dangerous you can alert them with one tap — always by you, never automatically.</string>
+    <string name="family_add">Add a contact number</string>
+    <string name="family_empty">No family contacts saved yet.</string>
+    <string name="family_share_sms">Send SMS</string>
+    <string name="family_share_whatsapp">Send on WhatsApp</string>
+    <string name="family_message">⚠️ Suraksha Saathi: I got a suspicious message that looks like a scam. I have not sent any money. Please call me.</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Welcome to Suraksha Saathi</string>
+    <string name="onboarding_p1_title">Check any message</string>
+    <string name="onboarding_p1_body">Paste an SMS, WhatsApp message or link and get a clear verdict with reasons — Safe, Be Careful or Dangerous.</string>
+    <string name="onboarding_p2_title">Works offline</string>
+    <string name="onboarding_p2_body">All checking happens on your phone. No login, no ads, no tracking. Nothing is uploaded.</string>
+    <string name="onboarding_p3_title">Built for everyone</string>
+    <string name="onboarding_p3_body">Hindi and English, big buttons, Easy Mode for elders, a Kids Safe Mode, and voice in and out.</string>
+    <string name="onboarding_p4_title">You are in control</string>
+    <string name="onboarding_p4_body">Every check shows a confidence level and plain reasons. We never claim 100% accuracy.</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_back">Back</string>
+    <string name="onboarding_start">Start</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_language">Choose language</string>
+
+    <!-- Privacy -->
+    <string name="privacy_title">Privacy</string>
+    <string name="privacy_body">What stays on your phone:\n\n• Messages you check and the verdicts\n• Your history and saved evidence\n• Your blocklist and family contacts\n• All settings\n\nThese are stored only in this app on this phone. We do not have servers, and we never upload your SMS, contacts or call data.\n\nWhat can leave the phone, only if YOU allow it:\n\n• Notification text is read on the device for auto-check — it is not sent anywhere\n• If you switch on Online mode and tap “Send it”, only that one message text goes to the server you configured, for a better explanation\n\nPermissions we ask for, and why:\n\n• Notifications — to show a warning\n• Microphone — only when you tap Speak\n• Notification access — optional, for auto-check\n• Contacts — optional, to skip known callers in call reminders\n• Internet — only for the optional Online mode; the app is fully offline without it</string>
+    <string name="privacy_local_only">Local only</string>
+
+    <!-- Common -->
+    <string name="action_back">Back</string>
+    <string name="action_ok">OK</string>
+    <string name="action_close">Close</string>
+    <string name="action_save">Save</string>
+    <string name="action_share">Share</string>
+    <string name="action_add">Add</string>
+    <string name="action_retry">Try again</string>
+    <string name="action_open_settings">Open settings</string>
+    <string name="language_label">भाषा / Language</string>
+    <string name="easy_mode_label">Easy Mode (bigger text and buttons)</string>
+</resources>
