@@ -8,6 +8,10 @@ import android.telecom.Call
 import android.telecom.CallScreeningService
 import androidx.core.content.ContextCompat
 import com.bharatsuraksha.saathi.data.prefs.SettingsRepository
+import com.bharatsuraksha.saathi.domain.agent.NumberHeuristics
+import com.bharatsuraksha.saathi.domain.model.Verdict
+import com.bharatsuraksha.saathi.ui.session.AgentActivityStore
+import com.bharatsuraksha.saathi.ui.session.BankHelplineStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,11 +20,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * When an incoming call arrives from a number that is not in the user's contacts,
- * shows a small heads-up reminder ("Real police/CBI never ask for money on a call").
+ * Call screening. Runs offline checks on the incoming number and, when the user
+ * has turned it on, shows a quiet heads-up.
  *
- * It does NOT record, listen to, or transcribe calls, and it never blocks a call.
- * Requires the Call Screening role, which the user grants manually.
+ * It NEVER records, listens to or transcribes a call. It does not block a call
+ * unless the user has explicitly switched on "silence unknown callers".
+ * Requires the Call Screening role, granted manually by the user.
  */
 @AndroidEntryPoint
 class CallSafetyScreeningService : CallScreeningService() {
@@ -30,14 +35,51 @@ class CallSafetyScreeningService : CallScreeningService() {
     private val scope = CoroutineScope(Dispatchers.Default)
 
     override fun onScreenCall(callDetails: Call.Details) {
-        // Always allow the call through — we only add a reminder.
-        respondToCall(callDetails, CallResponse.Builder().build())
-
         val number = callDetails.handle?.schemeSpecificPart
+
         scope.launch {
-            if (!settingsRepository.callTipEnabled.first()) return@launch
-            if (number != null && isInContacts(number)) return@launch
-            NotificationHelper.postCallTip(this@CallSafetyScreeningService, number)
+            val enabled = settingsRepository.agentCallScreening.first()
+            val paused = settingsRepository.isAgentPaused()
+            val silenceUnknown = settingsRepository.silenceUnknownCallers.first()
+
+            if (!enabled || paused) {
+                respondToCall(callDetails, CallResponse.Builder().build())
+                return@launch
+            }
+
+            val inContacts = number != null && isInContacts(number)
+            val trustedBanks = BankHelplineStore.entries.value.map { it.number }.toSet()
+            val blocklist = settingsRepository.blocklist.first()
+
+            val analysis = NumberHeuristics.analyze(
+                rawNumber = number,
+                isInContacts = inContacts,
+                trustedBankNumbers = trustedBanks,
+                blocklist = blocklist
+            )
+
+            AgentActivityStore.recordCall(this@CallSafetyScreeningService)
+
+            // Only ever silence when the user asked for it, and only for an
+            // unknown number that looks dangerous.
+            val shouldSilence = silenceUnknown && !inContacts && analysis.verdict == Verdict.DANGEROUS
+
+            val response = CallResponse.Builder()
+                .setDisallowCall(shouldSilence)
+                .setRejectCall(shouldSilence)
+                .setSkipCallLog(false)
+                .setSkipNotification(false)
+                .build()
+            respondToCall(callDetails, response)
+
+            if (!shouldSilence && analysis.verdict != Verdict.SAFE) {
+                NotificationHelper.postCallTip(
+                    this@CallSafetyScreeningService,
+                    number,
+                    analysis.verdict,
+                    analysis.findings.map { it.reasonKey }
+                )
+            }
         }
     }
 

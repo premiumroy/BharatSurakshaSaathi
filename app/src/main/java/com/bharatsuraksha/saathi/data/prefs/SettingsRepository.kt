@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -47,6 +48,26 @@ class SettingsRepository @Inject constructor(
     /** Trusted family contacts (phone numbers) for the one-tap family alert. */
     val familyContacts: Flow<Set<String>> = stringSet(FAMILY_CONTACTS, emptySet())
 
+    // --- Saathi Agent (Phase 5). Every switch is opt-in and off by default. ---
+
+    /** Message watch: read new message notifications and warn only on Careful/Dangerous. */
+    val agentMessageWatch: Flow<Boolean> = bool(AGENT_MESSAGE_WATCH, false)
+
+    /** Call screening: quiet heads-up on an unknown incoming number. Never blocks. */
+    val agentCallScreening: Flow<Boolean> = bool(AGENT_CALL_SCREENING, false)
+
+    /** Epoch millis until which the whole agent is paused. 0 means not paused. */
+    val agentPausedUntil: Flow<Long> = long(AGENT_PAUSED_UNTIL, 0L)
+
+    /** Senders the user trusts: never warned about again. */
+    val trustedSenders: Flow<Set<String>> = stringSet(TRUSTED_SENDERS, emptySet())
+
+    /** Apps the user has muted for the agent. */
+    val mutedApps: Flow<Set<String>> = stringSet(MUTED_APPS, emptySet())
+
+    /** Only ever on if the user asks: silence calls from unknown numbers. */
+    val silenceUnknownCallers: Flow<Boolean> = bool(SILENCE_UNKNOWN_CALLERS, false)
+
     val sensitivity: Flow<Sensitivity> = context.dataStore.data.map {
         runCatching { Sensitivity.valueOf(it[SENSITIVITY] ?: Sensitivity.MEDIUM.name) }
             .getOrDefault(Sensitivity.MEDIUM)
@@ -82,6 +103,16 @@ class SettingsRepository @Inject constructor(
         context.dataStore.edit { it[BLOCKLIST] = value }
     }
 
+    suspend fun setAgentMessageWatch(on: Boolean) = putBoolean(AGENT_MESSAGE_WATCH, on)
+    suspend fun setAgentCallScreening(on: Boolean) = putBoolean(AGENT_CALL_SCREENING, on)
+    suspend fun setAgentPausedUntil(millis: Long) = putLong(AGENT_PAUSED_UNTIL, millis)
+    suspend fun setTrustedSenders(value: Set<String>) = putStringSet(TRUSTED_SENDERS, value)
+    suspend fun setMutedApps(value: Set<String>) = putStringSet(MUTED_APPS, value)
+    suspend fun setSilenceUnknownCallers(on: Boolean) = putBoolean(SILENCE_UNKNOWN_CALLERS, on)
+
+    /** True while the user has paused the agent. */
+    suspend fun isAgentPaused(): Boolean = agentPausedUntil.first() > System.currentTimeMillis()
+
     suspend fun setFamilyContacts(value: Set<String>) {
         context.dataStore.edit { it[FAMILY_CONTACTS] = value }
     }
@@ -109,7 +140,18 @@ class SettingsRepository @Inject constructor(
     private fun stringSet(key: Preferences.Key<Set<String>>, default: Set<String>): Flow<Set<String>> =
         context.dataStore.data.map { it[key] ?: default }
 
+    private fun long(key: Preferences.Key<Long>, default: Long): Flow<Long> =
+        context.dataStore.data.map { it[key] ?: default }
+
     private suspend fun putBoolean(key: Preferences.Key<Boolean>, value: Boolean) {
+        context.dataStore.edit { it[key] = value }
+    }
+
+    private suspend fun putLong(key: Preferences.Key<Long>, value: Long) {
+        context.dataStore.edit { it[key] = value }
+    }
+
+    private suspend fun putStringSet(key: Preferences.Key<Set<String>>, value: Set<String>) {
         context.dataStore.edit { it[key] = value }
     }
 
@@ -127,5 +169,13 @@ class SettingsRepository @Inject constructor(
         private val WATCHED_APPS = stringSetPreferencesKey("watched_apps")
         private val BLOCKLIST = stringSetPreferencesKey("blocklist")
         private val FAMILY_CONTACTS = stringSetPreferencesKey("family_contacts")
+
+        // Saathi Agent
+        private val AGENT_MESSAGE_WATCH = booleanPreferencesKey("agent_message_watch")
+        private val AGENT_CALL_SCREENING = booleanPreferencesKey("agent_call_screening")
+        private val AGENT_PAUSED_UNTIL = longPreferencesKey("agent_paused_until")
+        private val TRUSTED_SENDERS = stringSetPreferencesKey("trusted_senders")
+        private val MUTED_APPS = stringSetPreferencesKey("muted_apps")
+        private val SILENCE_UNKNOWN_CALLERS = booleanPreferencesKey("silence_unknown_callers")
     }
 }

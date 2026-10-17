@@ -89,11 +89,32 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(notificationId, notification)
     }
 
-    fun postCallTip(context: Context, number: String?) {
+    /**
+     * The quiet heads-up for an unknown incoming number. It states the fixed
+     * line the phase requires and adds whichever check fired.
+     */
+    fun postCallTip(
+        context: Context,
+        number: String?,
+        verdict: Verdict,
+        reasonKeys: List<String>
+    ) {
         if (!canNotify(context)) return
         ensureChannels(context)
         val title = context.getString(R.string.call_tip_title)
-        val text = context.getString(R.string.call_tip_body, number ?: context.getString(R.string.call_tip_unknown))
+        val lead = context.getString(R.string.agent_call_tip_lead)
+        val reason = reasonKeys.firstOrNull()?.let { context.getString(agentReasonRes(it)) }.orEmpty()
+        val text = buildString {
+            append(lead)
+            if (reason.isNotBlank()) {
+                append("\n")
+                append(reason)
+            }
+            if (!number.isNullOrBlank()) {
+                append("\n")
+                append(number)
+            }
+        }
 
         val notification = NotificationCompat.Builder(context, CHANNEL_TIPS)
             .setSmallIcon(R.drawable.ic_stat_shield)
@@ -106,6 +127,17 @@ object NotificationHelper {
             .build()
 
         NotificationManagerCompat.from(context).notify(CALL_TIP_ID, notification)
+    }
+
+    private fun agentReasonRes(key: String): Int = when (key) {
+        "agent_reason_blocked" -> R.string.agent_reason_blocked
+        "agent_reason_intl" -> R.string.agent_reason_intl
+        "agent_reason_robo" -> R.string.agent_reason_robo
+        "agent_reason_not_in_contacts" -> R.string.agent_reason_not_in_contacts
+        "agent_reason_trusted_bank" -> R.string.agent_reason_trusted_bank
+        "agent_reason_bank_lookalike" -> R.string.agent_reason_bank_lookalike
+        "agent_reason_private" -> R.string.agent_reason_private
+        else -> R.string.agent_call_tip_lead
     }
 
     private const val CALL_TIP_ID = 70001

@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.bharatsuraksha.saathi.ui.agent.AgentDashboardScreen
+import com.bharatsuraksha.saathi.ui.agent.AgentSettingsScreen
 import com.bharatsuraksha.saathi.ui.common.JyotiBottomBar
 import com.bharatsuraksha.saathi.ui.common.jyotiTabs
 import com.bharatsuraksha.saathi.ui.debug.DebugScreen
@@ -78,6 +80,8 @@ object Routes {
     const val HELPLINES = "helplines"
     const val UPI_SCAN = "upi_scan"
     const val UPI_RESULT = "upi_result"
+    const val AGENT = "agent"
+    const val AGENT_DASHBOARD = "agent_dashboard"
 }
 
 @Composable
@@ -215,7 +219,9 @@ fun AppNavHost(
                     onOpenChakshu = { navController.navigate(Routes.CHAKSHU) },
                     onOpenSimGuide = { navController.navigate(Routes.SIM_GUIDE) },
                     onOpenHelplines = { navController.navigate(Routes.HELPLINES) },
-                    onOpenQr = { navController.navigate(Routes.UPI_SCAN) }
+                    onOpenQr = { navController.navigate(Routes.UPI_SCAN) },
+                    onOpenAgent = { navController.navigate(Routes.AGENT) },
+                    onOpenAgentDashboard = { navController.navigate(Routes.AGENT_DASHBOARD) }
                 )
             }
             composable(Routes.DASHBOARD) { DashboardScreen(onBack = { navController.popBackStack() }) }
@@ -236,6 +242,9 @@ fun AppNavHost(
                     onScanned = { navController.navigate(Routes.UPI_RESULT) }
                 )
             }
+            composable(Routes.AGENT) { AgentSettingsScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.AGENT_DASHBOARD) { AgentDashboardScreen(onBack = { navController.popBackStack() }) }
+
             composable(Routes.UPI_RESULT) {
                 UpiResultScreen(
                     onBack = { navController.popBackStack() },
