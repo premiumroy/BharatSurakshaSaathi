@@ -27,6 +27,22 @@ object ScamCorpusV2 {
 
     val all: List<CorpusItem> = listOf(
 
+        // ===== Phase 6 required messages: MUST be Careful or Dangerous =====
+        w("Hi, मैं राहुल बोल रहा हूँ, आपके पुराने कॉलेज से। नंबर बदल गया है, सेव कर लेना। एक जरूरी हेल्प चाहिए थी, फ्री हो तो बताना?", "family_emergency"),
+        w("आपके अकाउंट में गलती से ₹20,000 आ गए हैं, कृपया वापस भेज दें", "refund_tax_bill"),
+        w("मम्मी, मेरा फोन टूट गया, ये नया नंबर है। अभी UPI से ₹6,000 भेजो, किसी को मत बताना।", "family_emergency"),
+        w("Task complete! आपकी कमाई ₹850 वॉलेट में जुड़ गई। अगला टास्क अनलॉक करने के लिए ₹2,000 जमा करें।", "task_job"),
+        w("आपके नाम से एक अंतरराष्ट्रीय पार्सल कस्टम में पकड़ा गया है। जाँच के लिए तुरंत संपर्क करें।", "courier_delivery"),
+        w("आपको Smart Traders VIP ग्रुप में जोड़ा गया है। 3 दिन में 40% मुनाफा।", "investment"),
+
+        // ===== Phase 6 required messages: MUST stay "No clear warning signs" =====
+        g("OTP 391827 for transaction of Rs 1,500 at Amazon. Do not share this OTP with anyone."),
+        g("Rs 520.00 debited from A/c XX1234 at Big Bazaar. Avl bal Rs 12,340."),
+        g("आपके ₹2,000 के चेक का भुगतान बाउंस हो गया है। कृपया खाते में पर्याप्त राशि रखें।"),
+        g("पापा, मैं कॉलेज से निकल गया हूँ, शाम तक घर पहुँचूँगा।"),
+        g("भाई शाम को फ्री हो तो चलते हैं।"),
+        g("आपकी LIC पॉलिसी का प्रीमियम अगले हफ्ते देय है। रसीद के लिए शाखा से संपर्क करें।"),
+
         // ================= GENUINE (must stay SAFE) — 62 =================
         g("Hi, are we still meeting for lunch at 1pm?"),
         g("Your order #A1234 has been shipped and will reach you tomorrow."),

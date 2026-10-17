@@ -11,6 +11,11 @@
       "version": 2,
       "date": "2026-10-17",
       "note": "Scam families, combination rules, false-positive guards, v2 normalisation (look-alikes, split letters, Devanagari, Roman-Hindi)."
+    },
+    {
+      "version": 2,
+      "date": "2026-10-17",
+      "note": "Phase 6 QA: new-number-changed claim, wrong-transfer trick, VIP group and percent-profit signals, Devanagari amount-to-send; new free-time guard so 'free ho' is not a gift."
     }
   ],
   "thresholds": {
@@ -429,7 +434,9 @@
         "निवेश[^।\n]{0,20}(दोगुना|गारंटी|मुनाफा|रिटर्न)",
         "शेयर\\s*टिप",
         "ट्रेडिंग\\s*टिप",
-        "मुनाफा\\s*गारंटी"
+        "मुनाफा\\s*गारंटी",
+        "\\d+\\s*%[^।\\n]{0,15}(मुनाफा|मुनाफ़ा|प्रॉफिट|रिटर्न|लाभ|ब्याज)",
+        "\\d+\\s*(दिन|दिनों|हफ्ते|हफ़्ते|महीने)[^।\\n]{0,20}\\d+\\s*%"
       ],
       "examples": [],
       "reasonEn": "This is an investment scam. No genuine investment can promise guaranteed or doubled returns.",
@@ -465,7 +472,9 @@
         "\\b(telegram|whatsapp)\\b[^.\\n]{0,20}\\b(trading|stock|invest|profit|signal|vip)\\b",
         "वीआईपी ग्रुप",
         "ट्रेडिंग ग्रुप",
-        "प्रीमियम प्लान"
+        "प्रीमियम प्लान",
+        "(वीआईपी|VIP)[^।\\n]{0,15}(ग्रुप|ग्रुप में|सदस्यता)",
+        "ग्रुप\\s*में\\s*(जोड़|जोड)"
       ],
       "examples": [],
       "reasonEn": "It pushes a VIP investment group. Such groups exist only to take your money.",
@@ -604,7 +613,8 @@
         "\\bpaisa\\b[^.\\n]{0,15}\\b(bhej|transfer|daal|jama)\\b",
         "\\b(bhej|transfer|daal)\\b[^.\\n]{0,15}\\bpaisa\\b",
         "\\b\\d{3,}\\b[^.\\n]{0,15}\\b(bhej\\w*|transfer|send|pay|daal|jama)\\b",
-        "\\b(bhej\\w*|transfer|send|daal)\\b[^.\\n]{0,12}\\b(karo|kar\\s*do|kar\\s*dena|kar\\s*dijiye|de\\s*do)\\b"
+        "\\b(bhej\\w*|transfer|send|daal)\\b[^.\\n]{0,12}\\b(karo|kar\\s*do|kar\\s*dena|kar\\s*dijiye|de\\s*do)\\b",
+        "(₹|रुपये|राशि|पैसे)?\\s?\\d{3,}[^।\\n]{0,10}(भेजो|भेज\\s*दो|भेज\\s*दें|भेजिए|भेजना|ट्रांसफर)"
       ],
       "examples": [],
       "reasonEn": "It asks you to transfer or send money. Once money leaves your account it is almost impossible to get back.",
@@ -702,7 +712,10 @@
         "पापा पैसे",
         "मम्मी पैसे",
         "फ़ोन बंद",
-        "दुर्घटना"
+        "दुर्घटना",
+        "नंबर\\s*बदल",
+        "\\bnumber\\s+(has\\s+|is\\s+)?(changed|badal)\\b",
+        "\\bpurana\\s+number\\b[^\\n]{0,20}\\b(badal|change)\\b"
       ],
       "examples": [],
       "reasonEn": "This looks like a family-emergency impersonation: a \"new number\" plus an urgent money request.",
@@ -786,6 +799,25 @@
       "examples": [],
       "reasonEn": "It offers a job with no interview and daily payouts over WhatsApp/Telegram. That is a task-job scam.",
       "reasonHi": "यह बिना इंटरव्यू, व्हाट्सएप/टेलीग्राम पर रोज़ की कमाई वाली नौकरी दिखाता है। यह टास्क-नौकरी की ठगी है।"
+    },
+    {
+      "id": "wrong_transfer",
+      "family": "refund_tax_bill",
+      "category": "money",
+      "weight": 30,
+      "language": "any",
+      "patterns": [
+        "गलती\\s*से[^।\\n]{0,60}(वापस|आ गए|आ गया|जमा हो गए|credited|transferred)",
+        "\\b(wrongly|by\\s+mistake|accidentally|mistakenly)\\b[^.\\n]{0,60}\\b(credited|transferred|deposited|received|sent|money)\\b",
+        "\\b(send|transfer|return|refund)\\b[^.\\n]{0,25}\\b(it\\s+)?back\\b",
+        "(वापस|लौटा)\\s*(भेज|कर\\s*द|ट्रांसफर|करें)[^।\\n]{0,20}(पैसे|राशि|रुपये|₹|amount|money)"
+      ],
+      "examples": [
+        "गलती से 20000 आ गए हैं वापस भेज दें",
+        "money credited by mistake, please send it back"
+      ],
+      "reasonEn": "It says money reached you by mistake and asks you to send it back. That is a known trick: the transfer is reversed later and your own money is gone.",
+      "reasonHi": "यह कहता है कि पैसे गलती से आ गए हैं और वापस भेजने को कहता है। यह जाना-पहचाना तरीका है: ट्रांसफर बाद में वापस हो जाता है और आपका भेजा पैसा चला जाता है।"
     }
   ],
   "comboRules": [
@@ -1245,6 +1277,19 @@
         "\\bno\\s+action\\s+(is\\s+)?(needed|required)\\b",
         "\\b(bill|payment|recharge|upi\\s+payment|refund|order)\\b[^.\\n]{0,20}\\b(was\\s+)?(successful|paid|completed|done|processed|received)\\b",
         "\\b(bill)\\b[^.\\n]{0,20}\\b(bhar\\s*di\\w*|paid|bhugtan\\s+kar\\s+di\\w*)\\b"
+      ]
+    },
+    {
+      "id": "guard_free_time",
+      "family": "",
+      "suppress": [
+        "too_good_offer"
+      ],
+      "patterns": [
+        "\\bfree\\s+(ho|hona|time)\\b",
+        "(फ्री|फ़्री)\\s*(हो|हूँ|हूं|होना)",
+        "\\bare\\s+you\\s+free\\b",
+        "\\bkhali\\s+(ho|hun)\\b"
       ]
     }
   ],
