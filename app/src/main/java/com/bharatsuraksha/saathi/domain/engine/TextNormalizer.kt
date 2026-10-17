@@ -8,10 +8,10 @@ import java.util.Locale
  * v2 normalisation, in order:
  *  - removes zero-width / direction-control characters used to hide words
  *  - normalises smart quotes, unicode dashes and non-breaking spaces
- *  - folds look-alike Unicode (Cyrillic / Greek / full-width Latin) to plain Latin
- *  - lowercases (Latin)
+ *  - collapses UPPERCASE letters split by spaces/dots/dashes ("K Y C", "K.Y.C", "O-T-P")
+ *  - lowercases (Latin) and folds look-alike Unicode (Cyrillic / Greek / full-width Latin)
  *  - folds Devanagari digits to ASCII and normalises nukta / chandrabindu
- *  - collapses letters split by spaces/dots/dashes ("K Y C", "K.Y.C", "के.वाई.सी")
+ *  - collapses dotted/hyphenated lowercase runs ("k.y.c", "s-b-i") and Devanagari ("के.वाई.सी")
  *  - canonicalises a few Roman-Hindi spelling variants (batao/bataiye/btao -> bata)
  *  - collapses runs of whitespace
  *
@@ -22,8 +22,11 @@ object TextNormalizer {
     private val whitespace = Regex("\\s+")
     private val invisible = Regex("[\\u200B-\\u200F\\u202A-\\u202E\\u2060\\uFEFF]")
 
-    /** Letters split by a space/dot/underscore/dash: "k y c", "k.y.c", "s-b-i". */
-    private val spacedLatin = Regex("(?<![a-z0-9])(?:[a-z][\\s._\\-]+){2,}[a-z](?![a-z0-9])")
+    /** UPPERCASE letters split apart by spaces/dots/dashes: "K Y C", "K.Y.C", "O-T-P". */
+    private val spacedUpper = Regex("(?<![A-Za-z0-9])(?:[A-Z][\\s._\\-]+){2,}[A-Z](?![A-Za-z0-9])")
+
+    /** Lowercase letters split by dots/dashes only: "k.y.c", "s-b-i". */
+    private val dottedLower = Regex("(?<![a-z0-9])(?:[a-z][._\\-]+){2,}[a-z](?![a-z0-9])")
 
     /** Devanagari letters split by a dot/dash: "के.वाई.सी". */
     private val dottedDevanagari = Regex("([\\u0900-\\u097F])[.\\-](?=[\\u0900-\\u097F])")
@@ -62,16 +65,23 @@ object TextNormalizer {
             .replace('\u201C', '"')    // "
             .replace('\u201D', '"')    // "
             .replace('\u00A0', ' ')    // nbsp
-        s = foldLookalikes(s)
+        s = collapseSpacedUpper(s)
         s = s.lowercase(Locale.ROOT)
+        s = foldLookalikes(s)
         s = foldDevanagari(s)
         s = foldDigits(s)
-        s = collapseSpacedLatin(s)
+        s = collapseDottedLower(s)
         s = dottedDevanagari.replace(s, "$1")
         for ((re, replacement) in romanHindi) s = re.replace(s, replacement)
         s = whitespace.replace(s, " ")
         return s.trim()
     }
+
+    private fun collapseSpacedUpper(s: String): String =
+        spacedUpper.replace(s) { m -> m.value.filter { it.isLetterOrDigit() } }
+
+    private fun collapseDottedLower(s: String): String =
+        dottedLower.replace(s) { m -> m.value.filter { it.isLetterOrDigit() } }
 
     private fun foldLookalikes(s: String): String {
         val sb = StringBuilder(s.length)
@@ -86,7 +96,7 @@ object TextNormalizer {
         return sb.toString()
     }
 
-    /** Devanagari digits -> ASCII, drop nukta, unify chandrabindu with anusvara. */
+    /** Drop nukta and unify chandrabindu with anusvara. */
     private fun foldDevanagari(s: String): String {
         val sb = StringBuilder(s.length)
         for (ch in s) {
@@ -106,7 +116,4 @@ object TextNormalizer {
         }
         return sb.toString()
     }
-
-    private fun collapseSpacedLatin(s: String): String =
-        spacedLatin.replace(s) { m -> m.value.filter { it.isLetterOrDigit() } }
 }
