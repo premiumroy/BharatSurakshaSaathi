@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/hero.png" alt="Suraksha Saathi (सुरक्षा साथी) - check any SMS, link or payment QR before you trust it" width="100%">
+<img src="docs/banner.png" alt="Suraksha Saathi (सुरक्षा साथी) - check any SMS, link or payment QR before you trust it" width="100%">
 
 # Suraksha Saathi · सुरक्षा साथी
 
