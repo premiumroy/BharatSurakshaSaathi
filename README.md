@@ -4,8 +4,11 @@
 
 # Suraksha Saathi · सुरक्षा साथी
 
-**Check any SMS, WhatsApp message, link or payment QR before you trust it.**
-Everything runs on your phone. No login. No ads. No tracking. Nothing is uploaded.
+**The message looks real. That is the whole problem.**
+
+Every day in India, someone gets an SMS that says their KYC is expiring, or a WhatsApp call from a man who says he is from the CBI, or a job offer that wants a registration fee first. The message looks official. It has a logo, a reference number, a deadline. And the person reading it has about eight seconds to decide whether it is real.
+
+Suraksha Saathi is for those eight seconds. Paste the message, and it tells you plainly what it looks like and what to do next. All of it happens on the phone, with no account, no server and no network.
 
 [![Android CI](https://github.com/premiumroy/BharatSurakshaSaathi/actions/workflows/android.yml/badge.svg)](https://github.com/premiumroy/BharatSurakshaSaathi/actions/workflows/android.yml)
 [![Release build](https://github.com/premiumroy/BharatSurakshaSaathi/actions/workflows/release.yml/badge.svg)](https://github.com/premiumroy/BharatSurakshaSaathi/actions/workflows/release.yml)
@@ -28,70 +31,126 @@ Everything runs on your phone. No login. No ads. No tracking. Nothing is uploade
 
 ---
 
-## Why this exists
+## Does it actually work?
 
-Digital arrest calls, fake KYC messages, loan-app threats, UPI collect-request fraud and job-fee scams hurt people in India every day. Most of them arrive as a message that *looks* official, and the person has to decide in seconds whether to trust it.
+This is the fair question, so let me answer it with numbers instead of adjectives.
 
-Suraksha Saathi gives that decision a second opinion. Paste the message, and it tells you plainly what it looks like and what to do next. It does this **on the phone**, with no account, no server and no network.
+The scam engine is pure Kotlin with no Android dependency, which means it can be tested properly. There are **228 automated tests**, and they run in seconds on a laptop without an emulator. The centre of that suite is a corpus of **150 labelled messages**: 68 genuine ones and 82 scams, written in English, Hindi and Hinglish, covering every family the app knows about and the tricks people use to slip past a filter.
 
-> This is a helpful check, not a guarantee. No app can catch every scam. **यह गारंटी नहीं है।**
+The engine is scored against that corpus on every commit. It currently reports:
 
-## What it does
+| | |
+|---|---|
+| Messages in the labelled corpus | 150 (68 genuine, 82 scam) |
+| Scam families covered | 11 |
+| Text rules | 33 |
+| Combination rules | 20 |
+| Suppression guards | 8 |
+| False positives on the genuine set | 0 |
+| Scams missed | 0 |
 
-<table>
-<tr><td width="50%" valign="top">
+Two things are worth saying plainly about those numbers.
 
-**Check a message**
-Paste an SMS, WhatsApp message or any text. You get a clear verdict (Safe, Be Careful, Dangerous) with the specific reasons it was reached, and a plain-language "what to do now".
+First, **zero false positives is a deliberate design choice, not a boast**. A safety app that cries wolf teaches people to ignore it, and then it is worse than useless. So the corpus is weighted with ordinary messages: bank alerts, delivery updates, OTPs you actually asked for, bills, a message from your mother asking you to pick up milk. If a rule fires on any of those, the build fails. That guard is the most important test in the repository.
 
-**Check a screenshot or photo**
-Pick an image or take a photo. The text is read on the device by ML Kit and checked by the same engine.
+Second, **the corpus is not the world**. It is 150 messages that I wrote and labelled. It proves the engine behaves as intended on those 150. It does not prove it will catch a scam that nobody has thought of yet, and it does not prove the app behaves well on a cheap phone with a cracked screen and a 2 GB RAM budget. That last part needs real devices and real people, and it is honestly still pending. If you install this and something goes wrong, that is exactly the feedback that makes it better.
 
-**Check a payment QR**
-Scan a UPI QR before paying. It warns about collect requests, pre-filled amounts, look-alike payee names and unknown handles.
+## What it actually does
 
-</td><td width="50%" valign="top">
+### Check a message
 
-**Check a number**
-Type a number and see whether its format looks unusual, offline.
+You paste an SMS, a WhatsApp message, or any text with a link in it. The engine normalises it first, because scammers mangle text on purpose: spaced-out letters, look-alike characters from other alphabets, mixed Hindi and English in the same sentence. Then it scores the message against the rules.
 
-**Voice in and out**
-Speak the message, and hear the answer read aloud.
+You get one of three verdicts, and the reasons behind it:
 
-**If you were scammed**
-The golden hour, 1930, how to freeze your card and UPI, reporting on cybercrime.gov.in, and saving evidence as a PDF.
+- **No clear danger seen.** It did not find the common patterns. It still tells you to stay alert, because it is not promising anything.
+- **Please be careful.** Something is off, but not enough to be certain.
+- **Danger. Stop.** This has the shape of a known scam.
 
-</td></tr>
-<tr><td valign="top">
+Under the verdict you get a confidence level, the specific reasons in plain words, and a "what to do now" list that changes depending on what was found. If an OTP was being asked for, it says never share it. If there is a link, it says do not open it. If money is involved, it gives you 1930 and the freeze steps.
 
-**Learn**
-A daily "Spot the Scam" game, this week's scams, a five-question call triage wizard, a family code word, and a helper wizard for setting up an elder's phone.
+### Check a screenshot or photo
 
-**Safety tools**
-A dashboard of your checks, a shareable warning card, a Chakshu report helper for the Sanchar Saathi portal, a step-by-step guide to seeing how many SIMs are in your name, and a place to save the helplines from your own card.
+The messages that hurt people most are often sent as images, because a picture of an official letter looks more convincing than the same words typed out. You can pick a screenshot or take a photo, and ML Kit reads the text on the device. The same engine then checks it. Nothing is uploaded, and the model is bundled inside the app, so this works in aeroplane mode.
 
-</td><td valign="top">
+### Check a payment QR before you pay
 
-**Saathi Agent** *(optional, off by default)*
-Quiet background message watch, call screening with an offline number check, a daily phone-health check, and a warning if a screen-sharing tool and a money app were used together.
+This one exists because of a specific trick. Someone tells you they are sending you money, sends you a QR code, and says "scan this to receive". What they have actually sent is a *collect request*, which takes money **out** of your account when you approve it. You never need to scan a QR or enter a PIN to receive money. Ever.
 
-**Call Guard** *(started only by you)*
-Live help during a call, with a visible ongoing notice while it listens. It never records audio and keeps no transcript.
+The checker reads the QR on the device and tells you what is actually inside it: whether it is a collect request, whether an amount is already filled in, whether the payee name is copying a bank or a police department, and whether the handle is one it recognises. If the amount is large, it makes you pause and read the payee name again.
 
-</td></tr>
-</table>
+### Check a number
 
-## How a check works
+Type a number and it looks at the format offline. Nothing is looked up anywhere, because there is nowhere to look it up. It flags things like an international prefix, a repeated pattern that looks automated, a short code that is not one you saved. It never calls a number "safe", only "nothing unusual in this".
+
+### If you were scammed
+
+This is the part I hope nobody has to use, and it is written to be usable while your hands are shaking.
+
+The first hour matters most, because that is when money can still be frozen. The screen asks when the money left, and counts the golden hour down. It gives you the four steps in order: call 1930, call your bank on the number printed on your own card, file the complaint at cybercrime.gov.in, and save your evidence. There is a place to record what happened, the amount, the numbers involved, and attach a screenshot, and it can export the whole thing as a PDF.
+
+### Learn
+
+Being told about a scam once does not stick. Being made to spot one does.
+
+- **Spot the Scam** is a daily game with 40 cards. Swipe right if the message is real, left if it is a scam. There is a streak, badges, and a round summary at the end.
+- **This week's scams** is 12 cards showing what is actually circulating right now, each with how it works, the warning signs, and what to do.
+- **Call triage** is five questions about a call you just had. At the end it gives you a verdict and, if it looks bad, the fixed line the whole app is built around: someone asking for money on a video call or a phone is not police, CBI, a customs officer or a judge. Cut the call, dial 1930.
+- **Calm mode** is a 20-second pause with three questions to ask yourself before sending money.
+
+### Family
+
+Scammers target the people least likely to push back. Two tools here are for them.
+
+A **family code word** is one word only your family knows. If someone calls in a panic saying they are your son and they need money now, you ask for the code word first. It is stored encrypted on the phone with a key held in the Android Keystore, and it never leaves the device.
+
+The **helper wizard** walks you through setting the app up on an elder's phone: picking the language they read best, turning on Easy Mode, turning on the message warning, and saving one family number so a dangerous result can be shared in one tap.
+
+### Safety tools
+
+A small drawer of things that matter in the moment: a dashboard of your checks and dangers caught, a shareable warning card with the private details masked, a helper that prepares a summary you can paste into the Sanchar Saathi portal, a step-by-step guide to seeing how many SIMs are registered against your Aadhaar, and a place to save the helplines from the back of your own card. The app deliberately ships no bank numbers, because a wrong helpline is more dangerous than no helpline.
+
+### Saathi Agent (off by default)
+
+The agent is the part that works while you are not looking, and every switch on it starts off.
+
+**Message watch** reads the text of new message notifications from apps you choose, and warns you only when a message looks like a scam. It never reads your SMS store, and it never writes anything to disk.
+
+**Call screening** checks the number of an incoming call on the phone, with no network, and shows a quiet tip for an unknown number. It never records or listens to a call, and it does not block anything unless you ask it to.
+
+**Phone health** runs once a day, when the battery is not low, and looks at three things scammers abuse: unknown accessibility services, apps holding the permissions a takeover needs, and recently downloaded app files. It only looks. It never uninstalls, disables or changes anything. You get a score and up to three plain-language cards.
+
+**Remote-access warning** notices when a screen-sharing tool and a banking or UPI app were used within half an hour of each other. That combination is how a screen-sharing scam usually ends, and it is the one case that gets an urgent notification.
+
+You can pause the whole agent for an hour or for the day, and there is an honest list on screen of what it cannot see.
+
+### Call Guard (started only by you)
+
+During a scam call, the useful thing is to know what is being said to you. Call Guard listens through the phone's microphone, turns speech into text on the device, and matches it against the phrases that matter: CBI, police, customs, digital arrest, "do not disconnect", "tell no one", OTP, safe account, UPI.
+
+It is started by a tap and never any other way. While it runs there is a persistent notification and an on-screen indicator, so there is no way for it to be on without you knowing. It never records audio and never keeps a transcript.
+
+And it is honest about its own limits, on its own screen: Android does not allow any app to record call audio, so this only works on speakerphone, it hears the room as well as the call, and it may stop if the phone is very low on battery.
+
+## How the detection works
 
 <img src="docs/flow.png" alt="Five steps: paste, normalise, match, verdict, act - all on the device" width="100%">
 
-Rules live in versioned JSON (`app/src/main/assets/scam_rules.json`) with an id, a family, a weight, a language, examples and a changelog, so detection can improve without touching Kotlin. The engine also understands evasion tricks: spaced-out letters, look-alike characters, and mixed Hindi and English in the same message.
+The rules are not buried in Kotlin. They live in `app/src/main/assets/scam_rules.json`, in a versioned file you can read and edit:
+
+- **11 families**, each with an English and a Hindi name and its own banner: digital arrest, investment, task and part-time job, family emergency, fake refund or tax or KYC, illegal loan apps, courier and customs, lottery and prize, romance and sextortion, fake customer care, and credential theft.
+- **33 text rules**, each with an id, a family, a weight, a language, a set of regex patterns, and examples.
+- **20 combination rules**, because real scams are rarely one signal. A parcel plus a customs fee plus a deadline is a courier scam; any one of those alone is nothing.
+- **8 suppression guards**, which switch off specific rules in specific contexts. This is how a genuine message from your brother saying he has "free ho gaya" does not get read as a family-emergency scam.
+- **5 link rule groups**: URL shorteners, suspicious TLDs, bank and government brand tokens, the official domains to compare against, and the signals that make a domain look like a copycat.
+
+The thresholds are 25 for "be careful" and 60 for "danger", and they are in the same file.
+
+Because it is a JSON file, the rules can improve without touching a line of code, and every change is reviewable in a diff. If you want to add a rule, add it there and add a matching labelled message to the test corpus. The corpus is what stops a well-meaning rule from creating false alarms.
 
 ## Architecture
 
 <img src="docs/architecture.png" alt="Architecture: UI, domain, data and platform layers, all on device" width="100%">
-
-The domain layer is pure Kotlin with no Android dependency, which is why the scam engine has **228 unit tests** that run in seconds on a laptop with no emulator.
 
 ```
 app/src/main/java/com/bharatsuraksha/saathi/
@@ -102,109 +161,129 @@ app/src/main/java/com/bharatsuraksha/saathi/
 └── ui/              Compose screens, theme, navigation, i18n
 ```
 
-## Privacy
+The rule the codebase tries hardest to keep is that `domain/` never imports anything from Android. That is why the engine, the triage scoring, the UPI parser, the number heuristics and the learn data can all be tested at full speed, and why the 228 tests are fast enough to run on every commit.
 
-This is the part that matters most, so it is stated plainly.
+## Privacy, in plain words
 
-**What stays on your phone, and is never uploaded**
+**Everything you check stays on your phone.** Your history, your saved evidence, your blocklist, your family contacts, your trusted helplines, your code word, your settings. The code word is encrypted with AES-GCM and the key lives in the Android Keystore. There is no account, so there is nothing to log into. There is no analytics SDK, no crash reporting SDK and no advertising ID.
 
-- The messages you check and their verdicts
-- Your history and saved evidence
-- Your blocklist and family contacts
-- Your trusted bank helplines
-- The family code word (encrypted with AES-GCM, key held in the Android Keystore)
-- All settings
+Three things can leave the phone, and all three need you to do something:
 
-**What can leave the phone, only when you act**
+- **Auto-check** reads notification text on the device. It is not sent anywhere.
+- **Online mode** is off by default. If you turn it on, enter a server address you control, and tap "Send it", exactly one message text goes to that address to get a plainer explanation. The app ships no API key. The optional `backend/` folder in this repo is a small self-hosted proxy you can run so that the key lives on your server and never in the app.
+- **Report a wrong result** opens the share sheet with the message text already in it. Nothing is sent until you press send.
 
-- **Auto-check:** notification text is read on the device. It is not sent anywhere.
-- **Online mode:** off by default. If you switch it on, enter your own server address, and tap "Send it", only that single message text goes to the server you configured. The app ships no API key, and the optional `backend/` proxy in this repo is where a key would live if you run one.
-- **Report a wrong result:** opens the share sheet with the text pre-filled. Nothing is sent until you press send.
+The app deliberately does **not** ask for `QUERY_ALL_PACKAGES`, `READ_SMS`, location, or `MANAGE_EXTERNAL_STORAGE`. Every permission it does ask for is explained on screen before the system prompt appears, and each one can be turned off again. The full list, with what each one does, is in [PERMISSIONS.md](PERMISSIONS.md).
 
-**Permissions, each optional and each explained on screen first**
+You can erase everything in one tap: **Settings → Privacy and data → Delete all my data**.
 
-`POST_NOTIFICATIONS` · `RECORD_AUDIO` · `CAMERA` · notification access · `READ_CONTACTS` · usage access · call screening role · `FOREGROUND_SERVICE_MICROPHONE` · `RECEIVE_BOOT_COMPLETED` · `VIBRATE`
-
-The app deliberately **does not** request `QUERY_ALL_PACKAGES`, `READ_SMS`, location or `MANAGE_EXTERNAL_STORAGE`. See [PERMISSIONS.md](PERMISSIONS.md) for what each one does and how to turn it off.
-
-**Delete everything** in one tap: Settings → Privacy and data → Delete all my data.
-
-There is no analytics SDK, no crash reporting SDK, no advertising ID and no account. Read the full [privacy policy](PRIVACY_POLICY.md) (Hindi and English) or the [Play data safety answers](DATA_SAFETY.md).
+Read the [privacy policy](PRIVACY_POLICY.md), which is in Hindi and English, or the [data safety answers](DATA_SAFETY.md) written for the Play Store form.
 
 ## Languages
 
-The interface ships in **32 languages**. Hindi and English are complete and verified. The rest are marked **BETA**, carry a beta badge in the picker, and fall back to Hindi for anything not yet translated. Every beta row has a "report a translation issue" link.
+The interface ships in **32 languages**, which is a slightly awkward thing to say, so here is the honest version.
 
-Scam detection is strongest in Hindi and English. [LANGUAGES.md](LANGUAGES.md) lists every language with its status and detection level, and explains how to add one by editing a single `strings.xml`.
+Hindi and English are complete and checked. Marathi is complete and marked beta. The other 29 are declared, they appear in the picker in their own script, they carry a **बीटा / Beta** badge, and they fall back to Hindi for anything not translated yet. Every beta row has a "report a translation issue" link that opens a pre-filled message, because the fastest way to fix a bad translation is to let the person who noticed it tell you.
 
-`TranslationCompletenessTest` fails the build if any language file is missing a key, changes a placeholder (`%1$s`, `%s`, `%d`), or alters `1930`, `cybercrime.gov.in` or `sancharsaathi.gov.in`. A language cannot ship unless it passes.
+Scam detection is strongest in Hindi and English. The app says this on the language screen rather than pretending otherwise. [LANGUAGES.md](LANGUAGES.md) lists every language with its status and its detection level, and explains how to add one by editing a single plain `strings.xml`.
+
+There is a test, `TranslationCompletenessTest`, that fails the build if any language file is missing a key, changes a placeholder like `%1$s`, or alters `1930`, `cybercrime.gov.in` or `sancharsaathi.gov.in`. A language cannot ship unless it passes.
 
 ## Install
 
-**From a release** (no Play Store needed)
+**On a phone, the short way**
 
 1. Open the **[latest release](https://github.com/premiumroy/BharatSurakshaSaathi/releases/latest)**.
 2. Under **Assets**, tap `SurakshaSaathi-release.apk`. It downloads straight to your phone.
-3. Open the downloaded file. Android will ask you to allow "install unknown apps" for your browser or file manager. Allow it, then tap Install.
-4. When it is installed, turn that permission back off.
+3. Open the downloaded file. Android will ask you to allow "install unknown apps" for your browser or file manager. Allow it, tap Install, then turn that permission back off.
 
-Releases contain **only the APK**. The `.aab` for Google Play is never attached to a public release, so nobody else can upload this app to Play under their own account. Build your own when you need it: `./gradlew :app:bundleRelease`.
+Releases contain only the APK. The `.aab` for Google Play is deliberately never published here, because anyone holding an `.aab` can upload it to Play under their own account. Build your own with `./gradlew :app:bundleRelease` when you need it.
 
-Step-by-step Hindi instructions, including how to check the file, are in [INSTALL_HINDI.md](INSTALL_HINDI.md).
+Step-by-step Hindi instructions are in [INSTALL_HINDI.md](INSTALL_HINDI.md).
 
-**Build from source**
+**From source**
 
 ```bash
 git clone https://github.com/premiumroy/BharatSurakshaSaathi.git
 cd BharatSurakshaSaathi
 
-# unit tests (no emulator needed)
-./gradlew :app:testDebugUnitTest
+./gradlew :app:testDebugUnitTest     # 228 tests, no emulator needed
+./gradlew :app:assembleDebug         # debug APK
 
-# debug APK
-./gradlew :app:assembleDebug
-
-# signed release APK + AAB
-bash scripts/generate_keystore.sh      # once; never commit the output
-./gradlew :app:assembleRelease :app:bundleRelease
+bash scripts/generate_keystore.sh    # once, for your own release key
+./gradlew :app:assembleRelease       # signed release APK
 ```
 
-Requires JDK 17 and the Android SDK with platform 35. The release build uses R8 with resource shrinking and ships `arm64-v8a` and `armeabi-v7a` only.
+You need JDK 17 and the Android SDK with platform 35. The release build runs R8 with resource shrinking and ships `arm64-v8a` and `armeabi-v7a` only, which covers essentially every Android phone in India and keeps the download smaller.
+
+## Questions people actually ask
+
+**Does it work without internet?**
+Yes, all of it. The scam rules, the OCR model, the QR model, the learn cards and the whole interface are inside the app. Online mode is the only thing that ever touches a network, and it is off unless you turn it on.
+
+**Does it read my SMS?**
+No. The auto-check reads the text of *notifications* from apps you choose. It never opens your SMS store. The permission that would allow that is not requested at all.
+
+**Can it record a call?**
+No, and neither can any other Android app. Android does not allow it. Call Guard listens through the microphone, so it works on speakerphone only, and it says so on its own screen.
+
+**Will it tell me something is safe?**
+Never. It only ever says it did not find the common patterns, and it always adds that this is a helpful check and not a guarantee. **यह गारंटी नहीं है।**
+
+**Is this a government app?**
+No. It is independent and it is not affiliated with Sanchar Saathi, I4C, any bank, or any authority. Helpline numbers and portal addresses are shown for convenience only, and the app never submits a report on your behalf.
+
+**Why does it need so many permissions?**
+It does not, really. Only notifications is needed for the core experience. Everything else is for a feature you can leave switched off, and each one is explained before it is requested.
+
+**Why is the release APK signed with a temporary key?**
+Because a real upload key has to be generated and kept by the app's owner, and it is deliberately not in the repository. The published APK installs and works fine for sideloading. To publish on Play you generate your own key first.
 
 ## Contributing
 
-Contributions are welcome, especially translations and new detection rules.
+The two most useful things you can send are **new scam rules** and **translations**, and neither needs you to write Kotlin.
 
-- **Add a scam rule:** edit `app/src/main/assets/scam_rules.json` and add a matching labelled message to `ScamCorpusV2.kt`. The corpus is checked for precision and recall, so a rule that fires on genuine messages will fail the build.
-- **Translate a language:** copy `app/src/main/res/values/strings.xml` into `values-b+<tag>/strings.xml` and translate the values. Keep every placeholder. See [LANGUAGES.md](LANGUAGES.md).
-- **Report a wrong result:** use the "यह नतीजा गलत लगा" button in the app, or open an issue with the message text.
+If you have a scam message that got through, that is the single most valuable thing you can report. Paste it in an issue. If you want to go further, add it to `ScamCorpusV2.kt` as a labelled example, add the rule that catches it to `scam_rules.json`, and run the tests. If your rule also fires on a genuine message, the build will tell you.
 
-Before opening a pull request, run `./gradlew :app:testDebugUnitTest`. All 228 tests must pass. [QA_CHECKLIST.md](QA_CHECKLIST.md) has the manual checklist used before a release.
+For translations, copy `app/src/main/res/values/strings.xml` into `values-b+<tag>/strings.xml`, translate the values, keep every placeholder, and run the tests. [LANGUAGES.md](LANGUAGES.md) has the details.
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. [QA_CHECKLIST.md](QA_CHECKLIST.md) is the manual checklist used before a release, and it is also a good list of the places where a change is most likely to break something.
 
 ## Not a government app
 
-Suraksha Saathi is an independent app. It is **not** a government app, and it is not affiliated with, endorsed by or connected to Sanchar Saathi, I4C, the Cyber Crime Coordination Centre, any bank, or any authority. Helpline numbers and portal addresses are shown for your convenience only.
+Suraksha Saathi is an independent app. It is **not** a government app, and it is not affiliated with, endorsed by or connected to Sanchar Saathi, I4C, the Cyber Crime Coordination Centre, any bank, or any authority.
 
 ## Credits
 
 Made by **Roy Limited** · Owner: **Prashant Dobriyal** · known online as **Premium Roy**
 
-The credit line lives in one place, `ui/about/Credits.kt`.
+The credit line lives in one place, `ui/about/Credits.kt`, so it is easy to change.
 
 ## License
 
-[MIT](LICENSE). Use it, fork it, ship it, and help someone avoid a scam.
+[MIT](LICENSE). Take it, fork it, ship it in your own language, and help someone avoid losing their savings.
 
 ---
 
 <a id="हिन्दी"></a>
 ## हिन्दी
 
-**सुरक्षा साथी** एक मुफ़्त, ऑफ़लाइन सुरक्षा ऐप है। कोई भी संदिग्ध SMS, WhatsApp मेसेज, लिंक या भुगतान QR इससे जाँचें और साफ़ जवाब पाएँ: सुरक्षित, सावधान, या ख़तरा, साथ में कारण और आगे क्या करना है।
+**सुरक्षा साथी** एक मुफ़्त, ऑफ़लाइन सुरक्षा ऐप है।
 
-सारी जाँच आपके फ़ोन में होती है। कोई लॉगिन नहीं, कोई विज्ञापन नहीं, कोई ट्रैकिंग नहीं, और कुछ भी अपलोड नहीं होता। हिंदी और अंग्रेज़ी के अलावा 30 भाषाएँ हैं, जो बीटा हैं और जिनमें जो छूट जाए वह हिंदी में दिख जाता है।
+किसी भी संदिग्ध SMS, WhatsApp मेसेज, लिंक या भुगतान QR को इससे जाँचिए और साफ़ जवाब पाइए: सुरक्षित, सावधान, या ख़तरा। साथ में यह भी कि ऐसा क्यों लगा, और अब क्या करना है।
 
-ठगी हो जाने पर ऐप सबसे ज़रूरी कदम बताता है: 1930, बैंक को सूचना, cybercrime.gov.in पर शिकायत, और सबूत सहेजना।
+सारी जाँच आपके फ़ोन में होती है। कोई लॉगिन नहीं, कोई विज्ञापन नहीं, कोई ट्रैकिंग नहीं, और कुछ भी अपलोड नहीं होता। इंटरनेट बंद हो तो भी यह पूरा काम करता है।
+
+ऐप में यह सब है:
+
+- मेसेज, स्क्रीनशॉट, लिंक, फ़ोन नंबर और UPI QR की जाँच
+- ठगी हो जाने पर सबसे ज़रूरी कदम: 1930, बैंक को सूचना, cybercrime.gov.in पर शिकायत, और सबूत सहेजना
+- सीखने के लिए खेल, इस हफ़्ते की ठगियाँ, और कॉल की जाँच के पाँच सवाल
+- परिवार का कोड वर्ड, और बड़ों का फ़ोन सेट करने का सहायक
+- साथी एजेंट: मेसेज पर नज़र, कॉल स्क्रीनिंग, रोज़ की फ़ोन जाँच (हर स्विच शुरू में बंद)
+- कॉल सुरक्षा: कॉल के दौरान मदद, सिर्फ़ आपके चालू करने पर, साफ़ दिखने वाली सूचना के साथ
+
+हिंदी और अंग्रेज़ी पूरी तरह तैयार हैं। बाकी 30 भाषाएँ बीटा हैं, अपनी लिपि में दिखती हैं, और जो छूट जाए वह हिंदी में दिख जाता है।
 
 **यह मददगार जाँच है, गारंटी नहीं। यह गारंटी नहीं है।**
 
