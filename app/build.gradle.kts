@@ -137,6 +137,11 @@ dependencies {
     implementation(libs.androidx.camera.view)
     implementation(libs.mlkit.barcode.scanning)
 
+    // Phase 5b: the daily phone-health job. WorkManager with the Hilt worker factory.
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
+
     // Unit tests (JVM) — the scam engine is pure Kotlin, so it is fully testable offline.
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

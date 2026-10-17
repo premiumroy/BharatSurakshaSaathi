@@ -8,8 +8,15 @@
       - RECORD_AUDIO       : only while the user taps "Speak"
       - READ_CONTACTS      : optional, so call reminders can skip known callers
       - CAMERA             : only while the user is scanning a UPI QR code
+      - FOREGROUND_SERVICE + FOREGROUND_SERVICE_MICROPHONE : ONLY for Call Guard, which
+                             the user starts by hand during a call and which stops itself
+      - RECEIVE_BOOT_COMPLETED : to put the notification listener and the daily job back
+                             after a restart. No listening is started at boot.
+      - PACKAGE_USAGE_STATS : optional, only to notice whether a remote-access app was
+                             used in the last 30 minutes. The user grants it in Settings.
       - INTERNET           : ONLY for the optional, off-by-default Online mode
       We deliberately do NOT request READ_SMS, CALL_LOG, or any call-recording access.
+      There is NO QUERY_ALL_PACKAGES: we ask about a short, named list of packages only.
     -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -19,6 +26,27 @@
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!--
+      A short, named list. Android 11+ hides other apps unless we ask by name, and
+      QUERY_ALL_PACKAGES is deliberately NOT requested. This only lets us notice that
+      one of these remote-access tools is installed, so we can warn the user.
+    -->
+    <queries>
+        <package android:name="com.anydesk.anydeskandroid" />
+        <package android:name="com.teamviewer.teamviewer.market.mobile" />
+        <package android:name="com.teamviewer.quicksupport.market" />
+        <package android:name="com.rustdesk.rustdesk" />
+        <package android:name="com.sand.airdroid" />
+        <package android:name="com.zoho.assist" />
+        <package android:name="com.google.chromeremotedesktop" />
+    </queries>
 
     <!-- Needed so the app can see speech-recognition services on Android 11+. -->
     <queries>
@@ -111,6 +139,53 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
+        </provider>
+
+        <!--
+          Call Guard. Started ONLY by a tap from the user (notification action or the
+          Quick Settings tile). It stops itself when the call ends or after 30 minutes.
+        -->
+        <service
+            android:name=".service.CallGuardService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+        <!-- A second, user-driven way to start Call Guard. -->
+        <service
+            android:name=".service.CallGuardTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_stat_shield"
+            android:label="@string/agent_guard_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <!--
+          Restores the notification listener and re-schedules the daily job after a
+          restart. It deliberately starts NO listening of any kind.
+        -->
+        <receiver
+            android:name=".service.BootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- WorkManager is configured through Hilt, so the default initializer is off. -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
         </provider>
 
     </application>

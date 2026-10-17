@@ -68,6 +68,12 @@ class SettingsRepository @Inject constructor(
     /** Only ever on if the user asks: silence calls from unknown numbers. */
     val silenceUnknownCallers: Flow<Boolean> = bool(SILENCE_UNKNOWN_CALLERS, false)
 
+    /** Daily phone-health check (WorkManager). Off until the user turns it on. */
+    val agentPhoneHealth: Flow<Boolean> = bool(AGENT_PHONE_HEALTH, false)
+
+    /** Warn when a remote-access tool and a money app were both used just now. */
+    val agentRemoteAlert: Flow<Boolean> = bool(AGENT_REMOTE_ALERT, false)
+
     val sensitivity: Flow<Sensitivity> = context.dataStore.data.map {
         runCatching { Sensitivity.valueOf(it[SENSITIVITY] ?: Sensitivity.MEDIUM.name) }
             .getOrDefault(Sensitivity.MEDIUM)
@@ -109,6 +115,8 @@ class SettingsRepository @Inject constructor(
     suspend fun setTrustedSenders(value: Set<String>) = putStringSet(TRUSTED_SENDERS, value)
     suspend fun setMutedApps(value: Set<String>) = putStringSet(MUTED_APPS, value)
     suspend fun setSilenceUnknownCallers(on: Boolean) = putBoolean(SILENCE_UNKNOWN_CALLERS, on)
+    suspend fun setAgentPhoneHealth(on: Boolean) = putBoolean(AGENT_PHONE_HEALTH, on)
+    suspend fun setAgentRemoteAlert(on: Boolean) = putBoolean(AGENT_REMOTE_ALERT, on)
 
     /** True while the user has paused the agent. */
     suspend fun isAgentPaused(): Boolean = agentPausedUntil.first() > System.currentTimeMillis()
@@ -177,5 +185,7 @@ class SettingsRepository @Inject constructor(
         private val TRUSTED_SENDERS = stringSetPreferencesKey("trusted_senders")
         private val MUTED_APPS = stringSetPreferencesKey("muted_apps")
         private val SILENCE_UNKNOWN_CALLERS = booleanPreferencesKey("silence_unknown_callers")
+        private val AGENT_PHONE_HEALTH = booleanPreferencesKey("agent_phone_health")
+        private val AGENT_REMOTE_ALERT = booleanPreferencesKey("agent_remote_alert")
     }
 }

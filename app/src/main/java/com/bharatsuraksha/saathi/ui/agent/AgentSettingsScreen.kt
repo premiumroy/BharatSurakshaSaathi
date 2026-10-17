@@ -45,6 +45,8 @@ import androidx.lifecycle.viewModelScope
 import com.bharatsuraksha.saathi.R
 import com.bharatsuraksha.saathi.data.prefs.SettingsRepository
 import com.bharatsuraksha.saathi.service.MessageNotificationListener
+import com.bharatsuraksha.saathi.work.PhoneHealthScheduler
+import dagger.hilt.android.qualifiers.ApplicationContext
 import com.bharatsuraksha.saathi.ui.theme.Saffron
 import com.bharatsuraksha.saathi.ui.theme.Sindoor
 import com.bharatsuraksha.saathi.ui.theme.Space2
@@ -60,7 +62,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AgentSettingsViewModel @Inject constructor(
-    private val settings: SettingsRepository
+    private val settings: SettingsRepository,
+    @ApplicationContext private val appContext: Context
 ) : ViewModel() {
 
     val messageWatch: StateFlow<Boolean> =
@@ -81,9 +84,22 @@ class AgentSettingsViewModel @Inject constructor(
     val silenceUnknown: StateFlow<Boolean> =
         settings.silenceUnknownCallers.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
+    val phoneHealth: StateFlow<Boolean> =
+        settings.agentPhoneHealth.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
+
+    val remoteAlert: StateFlow<Boolean> =
+        settings.agentRemoteAlert.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
+
     fun setMessageWatch(on: Boolean) = viewModelScope.launch { settings.setAgentMessageWatch(on) }
     fun setCallScreening(on: Boolean) = viewModelScope.launch { settings.setAgentCallScreening(on) }
     fun setSilenceUnknown(on: Boolean) = viewModelScope.launch { settings.setSilenceUnknownCallers(on) }
+
+    fun setPhoneHealth(on: Boolean) = viewModelScope.launch {
+        settings.setAgentPhoneHealth(on)
+        if (on) PhoneHealthScheduler.schedule(appContext) else PhoneHealthScheduler.cancel(appContext)
+    }
+
+    fun setRemoteAlert(on: Boolean) = viewModelScope.launch { settings.setAgentRemoteAlert(on) }
 
     fun pauseFor(millis: Long) = viewModelScope.launch {
         settings.setAgentPausedUntil(System.currentTimeMillis() + millis)
@@ -125,7 +141,13 @@ private val WATCHED_LABELS = listOf(
  * plain words before it is switched on.
  */
 @Composable
-fun AgentSettingsScreen(onBack: () -> Unit, viewModel: AgentSettingsViewModel = hiltViewModel()) {
+fun AgentSettingsScreen(
+    onBack: () -> Unit,
+    onOpenGuard: () -> Unit = {},
+    onOpenPhoneHealth: () -> Unit = {},
+    onOpenBattery: () -> Unit = {},
+    viewModel: AgentSettingsViewModel = hiltViewModel()
+) {
     val context = LocalContext.current
     val messageWatch by viewModel.messageWatch.collectAsStateWithLifecycle()
     val callScreening by viewModel.callScreening.collectAsStateWithLifecycle()
@@ -133,6 +155,8 @@ fun AgentSettingsScreen(onBack: () -> Unit, viewModel: AgentSettingsViewModel = 
     val muted by viewModel.mutedApps.collectAsStateWithLifecycle()
     val trusted by viewModel.trustedSenders.collectAsStateWithLifecycle()
     val silenceUnknown by viewModel.silenceUnknown.collectAsStateWithLifecycle()
+    val phoneHealth by viewModel.phoneHealth.collectAsStateWithLifecycle()
+    val remoteAlert by viewModel.remoteAlert.collectAsStateWithLifecycle()
 
     var newSender by remember { mutableStateOf("") }
     val paused = pausedUntil > System.currentTimeMillis()
@@ -267,6 +291,69 @@ fun AgentSettingsScreen(onBack: () -> Unit, viewModel: AgentSettingsViewModel = 
                         }
                         Switch(checked = silenceUnknown, onCheckedChange = viewModel::setSilenceUnknown)
                     }
+                }
+            }
+
+            // ---- call guard ----
+            Card(shape = MaterialTheme.shapes.medium, modifier = Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(Space4), verticalArrangement = Arrangement.spacedBy(Space2)) {
+                    Text(
+                        text = stringResource(R.string.agent_guard_title),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                    Text(
+                        text = stringResource(R.string.agent_guard_sub),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    OutlinedButton(
+                        onClick = onOpenGuard,
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)
+                    ) { Text(stringResource(R.string.guard_title)) }
+                }
+            }
+
+            // ---- phone health ----
+            Card(shape = MaterialTheme.shapes.medium, modifier = Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(Space4), verticalArrangement = Arrangement.spacedBy(Space2)) {
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = stringResource(R.string.agent_health_title),
+                            style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Switch(checked = phoneHealth, onCheckedChange = viewModel::setPhoneHealth)
+                    }
+                    Text(
+                        text = stringResource(R.string.agent_health_body),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    OutlinedButton(
+                        onClick = onOpenPhoneHealth,
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)
+                    ) { Text(stringResource(R.string.health_title)) }
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = stringResource(R.string.agent_remote_title),
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Switch(checked = remoteAlert, onCheckedChange = viewModel::setRemoteAlert)
+                    }
+                    Text(
+                        text = stringResource(R.string.agent_remote_body),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    OutlinedButton(
+                        onClick = onOpenBattery,
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)
+                    ) { Text(stringResource(R.string.battery_title)) }
                 }
             }
 

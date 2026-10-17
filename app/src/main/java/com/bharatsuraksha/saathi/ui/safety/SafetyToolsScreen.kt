@@ -28,10 +28,12 @@ import com.bharatsuraksha.saathi.ui.theme.Haldi
 import com.bharatsuraksha.saathi.ui.theme.JyotiBook
 import com.bharatsuraksha.saathi.ui.theme.JyotiCall
 import com.bharatsuraksha.saathi.ui.theme.JyotiCamera
+import com.bharatsuraksha.saathi.ui.theme.JyotiFlame
 import com.bharatsuraksha.saathi.ui.theme.JyotiLamp
 import com.bharatsuraksha.saathi.ui.theme.JyotiShield
 import com.bharatsuraksha.saathi.ui.theme.Neem
 import com.bharatsuraksha.saathi.ui.theme.Saffron
+import com.bharatsuraksha.saathi.ui.theme.Sindoor
 import com.bharatsuraksha.saathi.ui.theme.Space3
 import com.bharatsuraksha.saathi.ui.theme.Space4
 import com.bharatsuraksha.saathi.ui.theme.entrance
@@ -50,7 +52,10 @@ fun SafetyToolsScreen(
     onOpenHelplines: () -> Unit,
     onOpenQr: () -> Unit,
     onOpenAgent: () -> Unit,
-    onOpenAgentDashboard: () -> Unit
+    onOpenAgentDashboard: () -> Unit,
+    onOpenGuard: () -> Unit,
+    onOpenPhoneHealth: () -> Unit,
+    onOpenBattery: () -> Unit
 ) {
     val motion = motionAllowed()
     Scaffold(containerColor = Color.Transparent) { padding ->
@@ -76,6 +81,9 @@ fun SafetyToolsScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
+            Tool(JyotiFlame, Sindoor, R.string.safety_guard, R.string.safety_guard_sub, 0, motion, onOpenGuard)
+            Tool(JyotiShield, Neem, R.string.safety_health, R.string.safety_health_sub, 1, motion, onOpenPhoneHealth)
+            Tool(JyotiLamp, Haldi, R.string.safety_battery, R.string.safety_battery_sub, 0, motion, onOpenBattery)
             Tool(JyotiShield, Neem, R.string.safety_agent, R.string.safety_agent_sub, 0, motion, onOpenAgent)
             Tool(JyotiLamp, Saffron, R.string.safety_agent_dash, R.string.safety_agent_dash_sub, 1, motion, onOpenAgentDashboard)
             Tool(JyotiCamera, Saffron, R.string.safety_qr, R.string.safety_qr_sub, 0, motion, onOpenQr)

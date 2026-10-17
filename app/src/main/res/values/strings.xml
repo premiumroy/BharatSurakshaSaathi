@@ -676,4 +676,121 @@
     <string name="safety_agent_sub">Background message watch and call screening</string>
     <string name="safety_agent_dash">Agent dashboard</string>
     <string name="safety_agent_dash_sub">Today\'s activity and what the agent cannot see</string>
+
+    <!-- Phase 5b: Call Guard -->
+    <string name="guard_title">Call Guard</string>
+    <string name="guard_start_notice">This only works when the call is on speakerphone. It is fair to tell the person on the call that you have switched call safety on.</string>
+    <string name="guard_stopped_note">Not listening. Call Guard starts only when you tap the button.</string>
+    <string name="guard_mic_needed">Without the microphone permission Call Guard cannot work. You can grant it in your phone settings.</string>
+    <string name="guard_waiting_for_speech">Waiting for speech. Keep the call on speaker.</string>
+    <string name="guard_heard_so_far">Heard: %1$s</string>
+    <string name="guard_offline_title">Offline speech</string>
+    <string name="guard_offline_body">Call Guard prefers the on-device speech model so nothing is sent away. If your phone has no offline Hindi or English model, the phone will use its online one instead. You can add the offline model in your phone settings.</string>
+    <string name="guard_offline_open">Open voice input settings</string>
+    <string name="guard_limits_title">What Call Guard cannot do</string>
+    <string name="guard_limit_1">Android does not allow any app to record call audio. This listens through the microphone, so it works only on speakerphone.</string>
+    <string name="guard_limit_2">It hears the room as well as the call, so it can miss words or catch the wrong ones.</string>
+    <string name="guard_limit_3">Background microphone use is restricted by Android, so it may stop if the phone is very low on battery or you leave the call screen.</string>
+    <string name="guard_limit_4">It never records audio and never keeps a transcript. Everything is matched in memory and thrown away.</string>
+    <string name="guard_limit_5">It stops by itself when the call ends, or after thirty minutes, whichever comes first.</string>
+    <string name="guard_limit_6">It is a helper, not a guarantee. If money is being demanded, cut the call and dial 1930.</string>
+    <string name="agent_guard_title">Call Guard</string>
+    <string name="agent_guard_sub">Live help during a call, started only by you</string>
+    <string name="agent_guard_start">Start Call Guard</string>
+    <string name="agent_guard_stop">Stop</string>
+    <string name="agent_guard_listening">Listening</string>
+    <string name="agent_guard_notif_body">Listening through the speakerphone. Nothing is recorded. Tap Stop to end it.</string>
+    <string name="agent_guard_tile_label">Call Guard</string>
+    <string name="agent_guard_on">On</string>
+    <string name="agent_guard_off">Off</string>
+    <string name="agent_guard_alert_title">Careful on this call</string>
+    <string name="agent_guard_alert_body">These are the words that matter on a scam call:</string>
+    <string name="agent_guard_no_engine">No speech recognition is available on this phone.</string>
+    <string name="channel_guard_name">Call Guard</string>
+    <string name="channel_guard_desc">The visible notice while Call Guard is listening.</string>
+    <string name="guard_heard_cbi">Someone claimed to be from the CBI.</string>
+    <string name="guard_heard_police">Someone claimed to be police.</string>
+    <string name="guard_heard_customs">Someone claimed to be customs.</string>
+    <string name="guard_heard_ed">Someone claimed to be from the Enforcement Directorate.</string>
+    <string name="guard_heard_narcotics">Someone mentioned narcotics or drugs.</string>
+    <string name="guard_heard_digital_arrest">The words "digital arrest" were used.</string>
+    <string name="guard_heard_arrest">Arrest or a warrant was mentioned.</string>
+    <string name="guard_heard_case">A court case or an FIR was mentioned.</string>
+    <string name="guard_heard_no_disconnect">You were told not to disconnect the call.</string>
+    <string name="guard_heard_secrecy">You were told to keep it secret.</string>
+    <string name="guard_heard_otp">An OTP was asked for.</string>
+    <string name="guard_heard_pin">A PIN, CVV or password was asked for.</string>
+    <string name="guard_heard_safe_account">Money was asked to be moved to a "safe account".</string>
+    <string name="guard_heard_upi">A UPI transfer or a QR scan was asked for.</string>
+    <string name="guard_heard_urgency">You were pushed to act immediately.</string>
+    <string name="guard_heard_parcel">A parcel or courier was mentioned.</string>
+    <string name="guard_heard_other">Something on this call matched a known scam pattern.</string>
+
+    <!-- Phase 5b: remote access alert -->
+    <string name="remote_alert_title">A remote-access app was just used</string>
+    <string name="remote_alert_body">%1$s was used in the last half hour, and so was a banking or UPI app. If someone asked you to install it or share your screen, stop now. Cut the call, and dial 1930.</string>
+
+    <!-- Phase 5b: phone health -->
+    <string name="health_title">Phone health</string>
+    <string name="health_intro">A daily look at a few settings that scammers abuse. Nothing on your phone is changed.</string>
+    <string name="health_level_good">Looks fine</string>
+    <string name="health_level_watch">Worth a look</string>
+    <string name="health_level_risky">Please check these</string>
+    <string name="health_never_checked">Not checked yet. Tap check now.</string>
+    <string name="health_last_checked">Last checked %1$s</string>
+    <string name="health_usage_access">Usage access: %1$s</string>
+    <string name="health_yes">granted</string>
+    <string name="health_no">not granted</string>
+    <string name="health_action_accessibility_title">Accessibility services</string>
+    <string name="health_action_accessibility_body">An app with accessibility access can read the screen and tap for you. If you do not recognise one below, turn it off in Settings, Accessibility.</string>
+    <string name="health_action_permissions_title">Apps with takeover permissions</string>
+    <string name="health_action_permissions_body">These apps can install other apps or draw over your screen. That is how a takeover usually starts. If you do not recognise one, remove it.</string>
+    <string name="health_action_apk_title">Recently downloaded app files</string>
+    <string name="health_action_apk_body">An .apk file in your downloads is an app waiting to be installed. If someone sent it to you, do not open it.</string>
+    <string name="health_action_clear_title">Nothing to fix</string>
+    <string name="health_action_clear_body">No unknown accessibility service, no takeover permission and no recent app file was found. Keep checking once in a while.</string>
+    <string name="health_remote_title">Remote-access apps</string>
+    <string name="health_remote_none">None of the known remote-access tools are installed.</string>
+    <string name="health_remote_urgent">This was used in the last half hour, along with a money app. Stop and call 1930.</string>
+    <string name="health_open_usage_access">Open usage access settings</string>
+    <string name="health_check_now">Check now</string>
+    <string name="health_limits_title">What this check cannot see</string>
+    <string name="health_limit_1">Android hides other apps from us unless we ask about them by name, so the app lists here are short by design.</string>
+    <string name="health_limit_2">Reading other apps' downloaded files needs a permission we do not ask for, so that check often finds nothing.</string>
+    <string name="health_limit_3">Nothing is ever uninstalled, disabled or changed. These are things for you to look at yourself.</string>
+
+    <!-- Phase 5b: battery guidance -->
+    <string name="battery_title">Keep Saathi running</string>
+    <string name="battery_intro">Some phones stop background apps to save battery. These steps keep the agent awake. Nothing here is changed by the app.</string>
+    <string name="battery_detected">This phone looks like: %1$s</string>
+    <string name="battery_open">Open battery settings</string>
+    <string name="battery_note">These steps are guidance only. यह गारंटी नहीं है।</string>
+    <string name="battery_xiaomi_1">Open Settings, then Apps, then Manage apps.</string>
+    <string name="battery_xiaomi_2">Find Saathi, open it, and turn on Autostart.</string>
+    <string name="battery_xiaomi_3">In Battery saver, choose No restrictions for Saathi.</string>
+    <string name="battery_xiaomi_4">Lock Saathi in the recent-apps list so it is not cleared.</string>
+    <string name="battery_oppo_1">Open Settings, then Battery, then App battery management.</string>
+    <string name="battery_oppo_2">Find Saathi and allow background activity.</string>
+    <string name="battery_oppo_3">Turn off "sleep standby optimisation" for Saathi if it is offered.</string>
+    <string name="battery_vivo_1">Open Settings, then Battery, then Background power consumption management.</string>
+    <string name="battery_vivo_2">Find Saathi and set it to allow high background power.</string>
+    <string name="battery_vivo_3">Turn on Autostart for Saathi.</string>
+    <string name="battery_samsung_1">Open Settings, then Battery and device care, then Battery.</string>
+    <string name="battery_samsung_2">Open Background usage limits and add Saathi to "Never sleeping apps".</string>
+    <string name="battery_samsung_3">Turn off "Put unused apps to sleep" if it is offered.</string>
+    <string name="battery_other_1">Open Settings, then Apps, then Saathi.</string>
+    <string name="battery_other_2">Open Battery and choose Unrestricted.</string>
+    <string name="battery_other_3">Turn on Autostart if your phone offers it.</string>
+
+    <!-- Phase 5b: hub entries -->
+    <string name="safety_guard">Call Guard</string>
+    <string name="safety_guard_sub">Live help during a call, only when you start it</string>
+    <string name="safety_health">Phone health</string>
+    <string name="safety_health_sub">A daily look at settings scammers abuse</string>
+    <string name="safety_battery">Keep Saathi running</string>
+    <string name="safety_battery_sub">Steps for Xiaomi, Oppo, Vivo and Samsung phones</string>
+    <string name="agent_health_title">Daily phone health check</string>
+    <string name="agent_health_body">Once a day, look at a few settings that scammers abuse. It only looks, and it never changes anything.</string>
+    <string name="agent_remote_title">Remote-access warning</string>
+    <string name="agent_remote_body">If a screen-sharing tool and a money app are both used within half an hour, warn me straight away. This needs usage access, which you grant in Settings.</string>
 </resources>

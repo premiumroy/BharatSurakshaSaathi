@@ -13,6 +13,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.bharatsuraksha.saathi.ui.agent.AgentDashboardScreen
 import com.bharatsuraksha.saathi.ui.agent.AgentSettingsScreen
+import com.bharatsuraksha.saathi.ui.agent.BatteryGuidanceScreen
+import com.bharatsuraksha.saathi.ui.agent.CallGuardScreen
+import com.bharatsuraksha.saathi.ui.agent.PhoneHealthScreen
 import com.bharatsuraksha.saathi.ui.common.JyotiBottomBar
 import com.bharatsuraksha.saathi.ui.common.jyotiTabs
 import com.bharatsuraksha.saathi.ui.debug.DebugScreen
@@ -82,6 +85,9 @@ object Routes {
     const val UPI_RESULT = "upi_result"
     const val AGENT = "agent"
     const val AGENT_DASHBOARD = "agent_dashboard"
+    const val GUARD = "call_guard"
+    const val PHONE_HEALTH = "phone_health"
+    const val BATTERY = "battery_guidance"
 }
 
 @Composable
@@ -221,7 +227,10 @@ fun AppNavHost(
                     onOpenHelplines = { navController.navigate(Routes.HELPLINES) },
                     onOpenQr = { navController.navigate(Routes.UPI_SCAN) },
                     onOpenAgent = { navController.navigate(Routes.AGENT) },
-                    onOpenAgentDashboard = { navController.navigate(Routes.AGENT_DASHBOARD) }
+                    onOpenAgentDashboard = { navController.navigate(Routes.AGENT_DASHBOARD) },
+                    onOpenGuard = { navController.navigate(Routes.GUARD) },
+                    onOpenPhoneHealth = { navController.navigate(Routes.PHONE_HEALTH) },
+                    onOpenBattery = { navController.navigate(Routes.BATTERY) }
                 )
             }
             composable(Routes.DASHBOARD) { DashboardScreen(onBack = { navController.popBackStack() }) }
@@ -242,8 +251,18 @@ fun AppNavHost(
                     onScanned = { navController.navigate(Routes.UPI_RESULT) }
                 )
             }
-            composable(Routes.AGENT) { AgentSettingsScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.AGENT) {
+                AgentSettingsScreen(
+                    onBack = { navController.popBackStack() },
+                    onOpenGuard = { navController.navigate(Routes.GUARD) },
+                    onOpenPhoneHealth = { navController.navigate(Routes.PHONE_HEALTH) },
+                    onOpenBattery = { navController.navigate(Routes.BATTERY) }
+                )
+            }
             composable(Routes.AGENT_DASHBOARD) { AgentDashboardScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.GUARD) { CallGuardScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.PHONE_HEALTH) { PhoneHealthScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.BATTERY) { BatteryGuidanceScreen(onBack = { navController.popBackStack() }) }
 
             composable(Routes.UPI_RESULT) {
                 UpiResultScreen(

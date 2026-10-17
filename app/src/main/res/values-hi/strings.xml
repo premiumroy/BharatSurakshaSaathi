@@ -676,4 +676,121 @@
     <string name="safety_agent_sub">पीछे चलती संदेश नज़र और कॉल जाँच</string>
     <string name="safety_agent_dash">एजेंट डैशबोर्ड</string>
     <string name="safety_agent_dash_sub">आज की गतिविधि और एजेंट क्या नहीं देख सकता</string>
+
+    <!-- Phase 5b: Call Guard -->
+    <string name="guard_title">कॉल सुरक्षा</string>
+    <string name="guard_start_notice">यह तभी काम करता है जब कॉल स्पीकर पर हो। सामने वाले को बताना उचित है कि आप कॉल सुरक्षा चालू कर रहे हैं।</string>
+    <string name="guard_stopped_note">सुनाई नहीं दे रहा। कॉल सुरक्षा सिर्फ़ तब चालू होती है जब आप बटन दबाते हैं।</string>
+    <string name="guard_mic_needed">माइक्रोफ़ोन की अनुमति के बिना कॉल सुरक्षा काम नहीं कर सकती। इसे फ़ोन सेटिंग में दे सकते हैं।</string>
+    <string name="guard_waiting_for_speech">बोलने का इंतज़ार। कॉल स्पीकर पर रखें।</string>
+    <string name="guard_heard_so_far">सुनाई दिया: %1$s</string>
+    <string name="guard_offline_title">ऑफ़लाइन आवाज़</string>
+    <string name="guard_offline_body">कॉल सुरक्षा फ़ोन में मौजूद आवाज़ मॉडल को प्राथमिकता देती है ताकि कुछ भी बाहर न जाए। अगर फ़ोन में हिंदी या अंग्रेज़ी का ऑफ़लाइन मॉडल नहीं है, तो फ़ोन अपना ऑनलाइन मॉडल इस्तेमाल करेगा। ऑफ़लाइन मॉडल फ़ोन सेटिंग से जोड़ सकते हैं।</string>
+    <string name="guard_offline_open">आवाज़ इनपुट सेटिंग खोलें</string>
+    <string name="guard_limits_title">कॉल सुरक्षा क्या नहीं कर सकती</string>
+    <string name="guard_limit_1">Android किसी भी ऐप को कॉल ऑडियो रिकॉर्ड करने नहीं देता। यह माइक्रोफ़ोन से सुनती है, इसलिए सिर्फ़ स्पीकर पर काम करती है।</string>
+    <string name="guard_limit_2">यह कमरे की आवाज़ भी सुनती है, इसलिए कुछ शब्द छूट सकते हैं या गलत पकड़े जा सकते हैं।</string>
+    <string name="guard_limit_3">पीछे चलते माइक्रोफ़ोन पर Android की रोक है, इसलिए बैटरी बहुत कम होने या कॉल स्क्रीन छोड़ने पर यह रुक सकती है।</string>
+    <string name="guard_limit_4">यह कभी ऑडियो रिकॉर्ड नहीं करती और न ही ट्रांसक्रिप्ट रखती है। सब कुछ स्मृति में मिलाया जाता है और फेंक दिया जाता है।</string>
+    <string name="guard_limit_5">कॉल खत्म होने पर या तीस मिनट बाद, जो पहले हो, यह खुद बंद हो जाती है।</string>
+    <string name="guard_limit_6">यह मदद है, गारंटी नहीं। पैसे माँगे जा रहे हों तो कॉल काटें और 1930 डायल करें।</string>
+    <string name="agent_guard_title">कॉल सुरक्षा</string>
+    <string name="agent_guard_sub">कॉल के दौरान मदद, सिर्फ़ आपके चालू करने पर</string>
+    <string name="agent_guard_start">कॉल सुरक्षा चालू करें</string>
+    <string name="agent_guard_stop">बंद करें</string>
+    <string name="agent_guard_listening">सुन रहा है</string>
+    <string name="agent_guard_notif_body">स्पीकर से सुन रहा है। कुछ रिकॉर्ड नहीं हो रहा। बंद करने के लिए बंद करें दबाएँ।</string>
+    <string name="agent_guard_tile_label">कॉल सुरक्षा</string>
+    <string name="agent_guard_on">चालू</string>
+    <string name="agent_guard_off">बंद</string>
+    <string name="agent_guard_alert_title">इस कॉल पर सावधान</string>
+    <string name="agent_guard_alert_body">ठगी वाली कॉल में ये शब्द मायने रखते हैं:</string>
+    <string name="agent_guard_no_engine">इस फ़ोन पर आवाज़ पहचान उपलब्ध नहीं है।</string>
+    <string name="channel_guard_name">कॉल सुरक्षा</string>
+    <string name="channel_guard_desc">कॉल सुरक्षा के सुनते समय दिखने वाली सूचना।</string>
+    <string name="guard_heard_cbi">किसी ने खुद को CBI से बताया।</string>
+    <string name="guard_heard_police">किसी ने खुद को पुलिस बताया।</string>
+    <string name="guard_heard_customs">किसी ने खुद को कस्टम बताया।</string>
+    <string name="guard_heard_ed">किसी ने खुद को प्रवर्तन निदेशालय से बताया।</string>
+    <string name="guard_heard_narcotics">नारकोटिक्स या ड्रग की बात हुई।</string>
+    <string name="guard_heard_digital_arrest">डिजिटल अरेस्ट शब्द इस्तेमाल हुआ।</string>
+    <string name="guard_heard_arrest">गिरफ्तारी या वारंट की बात हुई।</string>
+    <string name="guard_heard_case">कोर्ट केस या एफआईआर की बात हुई।</string>
+    <string name="guard_heard_no_disconnect">आपसे कॉल न काटने को कहा गया।</string>
+    <string name="guard_heard_secrecy">आपसे गुप्त रखने को कहा गया।</string>
+    <string name="guard_heard_otp">OTP माँगा गया।</string>
+    <string name="guard_heard_pin">PIN, CVV या पासवर्ड माँगा गया।</string>
+    <string name="guard_heard_safe_account">पैसे सुरक्षित खाते में डालने को कहा गया।</string>
+    <string name="guard_heard_upi">UPI ट्रांसफर या QR स्कैन के लिए कहा गया।</string>
+    <string name="guard_heard_urgency">आपको तुरंत करने का दबाव दिया गया।</string>
+    <string name="guard_heard_parcel">पार्सल या कूरियर की बात हुई।</string>
+    <string name="guard_heard_other">इस कॉल में कुछ जाना-पहचाना ठगी का तरीका मिला।</string>
+
+    <!-- Phase 5b: remote access alert -->
+    <string name="remote_alert_title">अभी एक रिमोट ऐप इस्तेमाल हुआ</string>
+    <string name="remote_alert_body">पिछले आधे घंटे में %1$s इस्तेमाल हुआ, और साथ में बैंक या UPI ऐप भी। अगर किसी ने इसे इंस्टॉल करने या स्क्रीन साझा करने को कहा था, तो अभी रुकें। कॉल काटें, और 1930 डायल करें।</string>
+
+    <!-- Phase 5b: phone health -->
+    <string name="health_title">फ़ोन स्वास्थ्य</string>
+    <string name="health_intro">कुछ ऐसी सेटिंग्स पर रोज़ की नज़र जिनका ठग फ़ायदा उठाते हैं। आपके फ़ोन में कुछ नहीं बदला जाता।</string>
+    <string name="health_level_good">ठीक लग रहा है</string>
+    <string name="health_level_watch">एक नज़र डालें</string>
+    <string name="health_level_risky">कृपया इन्हें देखें</string>
+    <string name="health_never_checked">अभी जाँच नहीं हुई। अभी जाँचें दबाएँ।</string>
+    <string name="health_last_checked">आख़िरी जाँच %1$s</string>
+    <string name="health_usage_access">उपयोग पहुँच: %1$s</string>
+    <string name="health_yes">दी गई</string>
+    <string name="health_no">नहीं दी गई</string>
+    <string name="health_action_accessibility_title">एक्सेसिबिलिटी सेवाएँ</string>
+    <string name="health_action_accessibility_body">एक्सेसिबिलिटी पहुँच वाला ऐप स्क्रीन पढ़ सकता है और आपकी जगह टैप कर सकता है। नीचे कोई पहचान का न हो तो उसे सेटिंग, एक्सेसिबिलिटी में बंद करें।</string>
+    <string name="health_action_permissions_title">कब्ज़ा करने वाली अनुमतियों वाले ऐप</string>
+    <string name="health_action_permissions_body">ये ऐप दूसरे ऐप इंस्टॉल कर सकते हैं या स्क्रीन के ऊपर दिखा सकते हैं। कब्ज़ा आमतौर पर इसी से शुरू होता है। कोई पहचान का न हो तो हटा दें।</string>
+    <string name="health_action_apk_title">हाल में डाउनलोड हुई ऐप फ़ाइलें</string>
+    <string name="health_action_apk_body">डाउनलोड में पड़ी .apk फ़ाइल इंस्टॉल होने का इंतज़ार करती ऐप है। किसी ने भेजी हो तो उसे न खोलें।</string>
+    <string name="health_action_clear_title">कुछ ठीक करने को नहीं</string>
+    <string name="health_action_clear_body">कोई अनजान एक्सेसिबिलिटी सेवा, कोई कब्ज़ा अनुमति और कोई हाल की ऐप फ़ाइल नहीं मिली। समय-समय पर जाँचते रहें।</string>
+    <string name="health_remote_title">रिमोट ऐप</string>
+    <string name="health_remote_none">जाने-पहचाने रिमोट ऐप में से कोई इंस्टॉल नहीं है।</string>
+    <string name="health_remote_urgent">यह पिछले आधे घंटे में इस्तेमाल हुआ, साथ में पैसे वाला ऐप भी। रुकें और 1930 पर कॉल करें।</string>
+    <string name="health_open_usage_access">उपयोग पहुँच सेटिंग खोलें</string>
+    <string name="health_check_now">अभी जाँचें</string>
+    <string name="health_limits_title">यह जाँच क्या नहीं देख सकती</string>
+    <string name="health_limit_1">Android दूसरे ऐप हमसे छिपा देता है जब तक हम नाम लेकर न पूछें, इसलिए यहाँ ऐप की सूची जान-बूझकर छोटी है।</string>
+    <string name="health_limit_2">दूसरे ऐप की डाउनलोड फ़ाइलें पढ़ने के लिए एक अनुमति चाहिए जो हम नहीं माँगते, इसलिए वह जाँच अक्सर कुछ नहीं ढूँढ पाती।</string>
+    <string name="health_limit_3">कुछ भी अनइंस्टॉल, बंद या बदला नहीं जाता। ये चीज़ें आपको खुद देखनी हैं।</string>
+
+    <!-- Phase 5b: battery guidance -->
+    <string name="battery_title">साथी को चालू रखें</string>
+    <string name="battery_intro">कुछ फ़ोन बैटरी बचाने के लिए पीछे चलते ऐप रोक देते हैं। ये कदम एजेंट को जगाए रखते हैं। ऐप खुद कुछ नहीं बदलता।</string>
+    <string name="battery_detected">यह फ़ोन ऐसा लगता है: %1$s</string>
+    <string name="battery_open">बैटरी सेटिंग खोलें</string>
+    <string name="battery_note">ये कदम सिर्फ़ मार्गदर्शन हैं। यह गारंटी नहीं है।</string>
+    <string name="battery_xiaomi_1">सेटिंग खोलें, फिर ऐप्स, फिर ऐप प्रबंधित करें।</string>
+    <string name="battery_xiaomi_2">साथी ढूँढें, खोलें, और ऑटोस्टार्ट चालू करें।</string>
+    <string name="battery_xiaomi_3">बैटरी सेवर में साथी के लिए कोई रोक नहीं चुनें।</string>
+    <string name="battery_xiaomi_4">साथी को हाल के ऐप्स की सूची में लॉक करें ताकि वह हटे नहीं।</string>
+    <string name="battery_oppo_1">सेटिंग खोलें, फिर बैटरी, फिर ऐप बैटरी प्रबंधन।</string>
+    <string name="battery_oppo_2">साथी ढूँढें और पीछे की गतिविधि की अनुमति दें।</string>
+    <string name="battery_oppo_3">साथी के लिए स्लीप स्टैंडबाय ऑप्टिमाइज़ेशन बंद करें, अगर विकल्प हो।</string>
+    <string name="battery_vivo_1">सेटिंग खोलें, फिर बैटरी, फिर बैकग्राउंड पावर खपत प्रबंधन।</string>
+    <string name="battery_vivo_2">साथी ढूँढें और उसे ज़्यादा बैकग्राउंड पावर की अनुमति दें।</string>
+    <string name="battery_vivo_3">साथी के लिए ऑटोस्टार्ट चालू करें।</string>
+    <string name="battery_samsung_1">सेटिंग खोलें, फिर बैटरी और डिवाइस देखभाल, फिर बैटरी।</string>
+    <string name="battery_samsung_2">बैकग्राउंड उपयोग सीमा खोलें और साथी को कभी न सोने वाले ऐप में जोड़ें।</string>
+    <string name="battery_samsung_3">अगर विकल्प हो तो बेकार ऐप को सुलाना बंद करें।</string>
+    <string name="battery_other_1">सेटिंग खोलें, फिर ऐप्स, फिर साथी।</string>
+    <string name="battery_other_2">बैटरी खोलें और बिना रोक चुनें।</string>
+    <string name="battery_other_3">फ़ोन में विकल्प हो तो ऑटोस्टार्ट चालू करें।</string>
+
+    <!-- Phase 5b: hub entries -->
+    <string name="safety_guard">कॉल सुरक्षा</string>
+    <string name="safety_guard_sub">कॉल के दौरान मदद, सिर्फ़ आपके चालू करने पर</string>
+    <string name="safety_health">फ़ोन स्वास्थ्य</string>
+    <string name="safety_health_sub">उन सेटिंग्स पर रोज़ की नज़र जिनका ठग फ़ायदा उठाते हैं</string>
+    <string name="safety_battery">साथी को चालू रखें</string>
+    <string name="safety_battery_sub">Xiaomi, Oppo, Vivo और Samsung फ़ोन के लिए कदम</string>
+    <string name="agent_health_title">रोज़ की फ़ोन स्वास्थ्य जाँच</string>
+    <string name="agent_health_body">दिन में एक बार कुछ ऐसी सेटिंग्स देखना जिनका ठग फ़ायदा उठाते हैं। यह सिर्फ़ देखती है, कुछ बदलती नहीं।</string>
+    <string name="agent_remote_title">रिमोट ऐप चेतावनी</string>
+    <string name="agent_remote_body">अगर स्क्रीन साझा करने वाला ऐप और पैसे वाला ऐप आधे घंटे के भीतर इस्तेमाल हों, तो मुझे तुरंत चेताएँ। इसके लिए उपयोग पहुँच चाहिए, जो आप सेटिंग में देते हैं।</string>
 </resources>
