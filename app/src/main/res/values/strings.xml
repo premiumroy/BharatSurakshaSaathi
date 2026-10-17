@@ -809,6 +809,4 @@
     <string name="language_detect_ui_only">Warnings: UI only</string>
     <string name="language_detection_note">Scam detection is strongest in Hindi and English. Other languages still get the full interface, and fall back to Hindi and English for anything missing.</string>
     <string name="language_pending_note">These are declared and shown in their own script, but the full text is not translated yet, so they currently fall back to Hindi. Volunteers can add them by editing one file.</string>
-    <string name="settings_language">Language</string>
-    <string name="voice_not_available">Voice is not available in this language yet.</string>
 </resources>

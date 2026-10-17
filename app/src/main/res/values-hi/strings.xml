@@ -809,6 +809,4 @@
     <string name="language_detect_ui_only">चेतावनियाँ: सिर्फ़ इंटरफ़ेस</string>
     <string name="language_detection_note">ठगी की पहचान हिंदी और अंग्रेज़ी में सबसे मज़बूत है। बाकी भाषाओं में पूरा इंटरफ़ेस मिलता है, और जो छूट जाए वह हिंदी और अंग्रेज़ी से आ जाता है।</string>
     <string name="language_pending_note">ये भाषाएँ दर्ज हैं और अपनी लिपि में दिखती हैं, पर पूरा टेक्स्ट अभी अनूदित नहीं है, इसलिए फ़िलहाल हिंदी पर आ जाती हैं। स्वयंसेवक एक फ़ाइल बदलकर इन्हें जोड़ सकते हैं।</string>
-    <string name="settings_language">भाषा</string>
-    <string name="voice_not_available">इस भाषा में आवाज़ अभी उपलब्ध नहीं है।</string>
 </resources>
