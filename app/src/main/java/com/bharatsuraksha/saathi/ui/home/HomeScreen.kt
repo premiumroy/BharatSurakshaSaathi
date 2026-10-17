@@ -70,6 +70,7 @@ import com.bharatsuraksha.saathi.ui.theme.Space2
 import com.bharatsuraksha.saathi.ui.theme.Space3
 import com.bharatsuraksha.saathi.ui.theme.Space4
 import com.bharatsuraksha.saathi.ui.theme.Space6
+import com.bharatsuraksha.saathi.ui.theme.Space8
 import com.bharatsuraksha.saathi.ui.theme.entrance
 import com.bharatsuraksha.saathi.ui.theme.latticeRipple
 import com.bharatsuraksha.saathi.ui.theme.motionAllowed
