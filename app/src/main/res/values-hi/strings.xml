@@ -584,4 +584,46 @@
     <string name="safety_helplines">भरोसेमंद बैंक नंबर</string>
     <string name="safety_helplines_sub">अपने कार्ड से हेल्पलाइन सहेजें</string>
     <string name="safety_privacy">यह सब इसी फ़ोन पर चलता है। कोई एनालिटिक्स नहीं, कोई अपलोड नहीं।</string>
+
+    <!-- Phase 4: UPI QR checker -->
+    <string name="home_tool_qr">UPI QR जाँचें</string>
+    <string name="safety_qr">UPI QR जाँचें</string>
+    <string name="safety_qr_sub">पैसे भेजने से पहले QR स्कैन या चुनें</string>
+    <string name="upi_title">UPI QR जाँच</string>
+    <string name="upi_scan_hint">कैमरा भुगतान QR कोड पर रखें।</string>
+    <string name="upi_pick_image">QR की तस्वीर चुनें</string>
+    <string name="upi_type_manual">वापस जाएँ</string>
+    <string name="upi_offline_note">QR इसी फ़ोन पर पढ़ा जाता है। कहीं अपलोड नहीं होता।</string>
+    <string name="upi_never_verified">हम किसी UPI आईडी को सत्यापित नहीं कहते। यह सिर्फ़ एक जाँच है।</string>
+    <string name="upi_perm_title">कैमरा, सिर्फ़ स्कैन के लिए</string>
+    <string name="upi_perm_body">कैमरा सिर्फ़ तब इस्तेमाल होता है जब आप भुगतान QR स्कैन करते हैं। तस्वीर इसी फ़ोन पर पढ़ी जाती है और कहीं नहीं भेजी जाती। आप सहेजी हुई तस्वीर भी चुन सकते हैं।</string>
+    <string name="upi_perm_allow">कैमरा चालू करें</string>
+    <string name="upi_perm_not_now">अभी नहीं</string>
+    <string name="upi_denied_title">कैमरा बंद है</string>
+    <string name="upi_denied_body">कैमरे के बिना QR स्कैन नहीं कर सकते, पर गैलरी से QR की तस्वीर चुन सकते हैं। बाद में फ़ोन सेटिंग से कैमरा चालू कर सकते हैं।</string>
+    <string name="upi_result_title">QR जाँच</string>
+    <string name="upi_never_receive">याद रखें: पैसा लेने के लिए कभी QR स्कैन या PIN नहीं लगता। कोई कहे कि पैसा लेने के लिए स्कैन करो, तो वह ठगी है।</string>
+    <string name="upi_plain_id_note">सादी UPI आईडी में कोई रकम नहीं होती। कुछ भेजने से पहले नाम ध्यान से देखें।</string>
+    <string name="upi_do_not_pay">अभी पैसे न भेजें</string>
+    <string name="upi_pause_seconds">%1$d</string>
+    <string name="upi_pause_body">इतने सेकंड रुकिए। भुगतान पाने वाले का नाम फिर पढ़ें। उस व्यक्ति को उसी पुराने नंबर पर कॉल करें जो आप जानते हैं।</string>
+    <string name="upi_details">इस QR में क्या है</string>
+    <string name="upi_detail_kind">प्रकार</string>
+    <string name="upi_detail_payee">भुगतान पाने वाला</string>
+    <string name="upi_detail_name">नाम</string>
+    <string name="upi_detail_amount">रकम</string>
+    <string name="upi_detail_note">टिप्पणी</string>
+    <string name="upi_detail_ref">संदर्भ</string>
+    <string name="upi_detail_mcc">मर्चेंट कोड</string>
+    <string name="upi_reasons_title">हमने क्या देखा</string>
+    <string name="upi_no_reasons">इस QR में कोई साफ़ खतरा नहीं दिखा।</string>
+    <string name="upi_reason_collect">यह कलेक्ट रिक्वेस्ट है। मंज़ूरी देने पर आपके खाते से पैसा कटेगा, इसलिए यह पैसा लेने का तरीका कभी नहीं हो सकता।</string>
+    <string name="upi_reason_amount">रकम पहले से भरी है, इसलिए स्कैन करने पर वह पैसा चला जाएगा।</string>
+    <string name="upi_reason_large">रकम बड़ी है। भेजने से पहले दो बार जाँचें।</string>
+    <string name="upi_reason_authority">भुगतान पाने वाले का नाम बैंक, पुलिस या सरकार जैसा बनाया गया है।</string>
+    <string name="upi_reason_handle">यह UPI हैंडल हम नहीं पहचानते। अकेले यह ठगी का सबूत नहीं, पर नाम जाँच लें।</string>
+    <string name="upi_reason_missing">इस QR में कोई भुगतान पता नहीं मिला।</string>
+    <string name="upi_reason_plain">यह सादी UPI आईडी है, कोई रकम नहीं।</string>
+    <string name="upi_disclaimer">यह जाँच है, गारंटी नहीं। किसी UPI आईडी को सत्यापित नहीं कहा जा सकता। यह गारंटी नहीं है।</string>
+    <string name="upi_scan_another">दूसरा QR स्कैन करें</string>
 </resources>

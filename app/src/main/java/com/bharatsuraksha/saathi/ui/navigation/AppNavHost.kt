@@ -41,6 +41,8 @@ import com.bharatsuraksha.saathi.ui.safety.ShareWarningCardScreen
 import com.bharatsuraksha.saathi.ui.safety.SimGuideScreen
 import com.bharatsuraksha.saathi.ui.settings.SettingsScreen
 import com.bharatsuraksha.saathi.ui.tips.TipsScreen
+import com.bharatsuraksha.saathi.ui.upi.UpiResultScreen
+import com.bharatsuraksha.saathi.ui.upi.UpiScanScreen
 import com.bharatsuraksha.saathi.ui.voice.VoiceScreen
 import com.bharatsuraksha.saathi.ui.theme.motionAllowed
 
@@ -74,6 +76,8 @@ object Routes {
     const val CHAKSHU = "chakshu"
     const val SIM_GUIDE = "sim_guide"
     const val HELPLINES = "helplines"
+    const val UPI_SCAN = "upi_scan"
+    const val UPI_RESULT = "upi_result"
 }
 
 @Composable
@@ -127,7 +131,8 @@ fun AppNavHost(
                     onOpenSettings = { navController.navigate(Routes.SETTINGS) },
                     onOpenEasy = { navController.navigate(Routes.EASY) },
                     onOpenVoice = { navController.navigate(Routes.VOICE) },
-                    onOpenHelpNow = { navController.navigate(Routes.HELP_NOW) }
+                    onOpenHelpNow = { navController.navigate(Routes.HELP_NOW) },
+                    onOpenQr = { navController.navigate(Routes.UPI_SCAN) }
                 )
             }
 
@@ -209,7 +214,8 @@ fun AppNavHost(
                     onOpenHelpNow = { navController.navigate(Routes.HELP_NOW) },
                     onOpenChakshu = { navController.navigate(Routes.CHAKSHU) },
                     onOpenSimGuide = { navController.navigate(Routes.SIM_GUIDE) },
-                    onOpenHelplines = { navController.navigate(Routes.HELPLINES) }
+                    onOpenHelplines = { navController.navigate(Routes.HELPLINES) },
+                    onOpenQr = { navController.navigate(Routes.UPI_SCAN) }
                 )
             }
             composable(Routes.DASHBOARD) { DashboardScreen(onBack = { navController.popBackStack() }) }
@@ -223,6 +229,19 @@ fun AppNavHost(
             composable(Routes.CHAKSHU) { ChakshuScreen(onBack = { navController.popBackStack() }) }
             composable(Routes.SIM_GUIDE) { SimGuideScreen(onBack = { navController.popBackStack() }) }
             composable(Routes.HELPLINES) { BankHelplinesScreen(onBack = { navController.popBackStack() }) }
+
+            composable(Routes.UPI_SCAN) {
+                UpiScanScreen(
+                    onBack = { navController.popBackStack() },
+                    onScanned = { navController.navigate(Routes.UPI_RESULT) }
+                )
+            }
+            composable(Routes.UPI_RESULT) {
+                UpiResultScreen(
+                    onBack = { navController.popBackStack() },
+                    onScanAnother = { navController.popBackStack(Routes.UPI_SCAN, inclusive = false) }
+                )
+            }
         }
     }
 }

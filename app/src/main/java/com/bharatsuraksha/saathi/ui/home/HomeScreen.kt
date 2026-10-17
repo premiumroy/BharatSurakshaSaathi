@@ -91,6 +91,7 @@ fun HomeScreen(
     onOpenEasy: () -> Unit,
     onOpenVoice: () -> Unit,
     onOpenHelpNow: () -> Unit,
+    onOpenQr: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -339,6 +340,7 @@ fun HomeScreen(
                 ToolRow(20.dp, R.string.home_tool_phone to onOpenPhone, R.string.home_tool_tips to onOpenTips, motion, 8)
                 ToolRow(8.dp, R.string.home_tool_recover to onOpenRecover, R.string.home_tool_settings to onOpenSettings, motion, 9)
                 ToolRow(28.dp, R.string.easy_speak to onOpenVoice, null, motion, 10)
+                ToolRow(14.dp, R.string.home_tool_qr to onOpenQr, null, motion, 11)
 
                 Text(
                     text = stringResource(R.string.home_examples_title),

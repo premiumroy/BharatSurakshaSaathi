@@ -584,4 +584,46 @@
     <string name="safety_helplines">Trusted bank numbers</string>
     <string name="safety_helplines_sub">Save the helplines from your own card</string>
     <string name="safety_privacy">Everything here runs on this phone. No analytics, no uploads.</string>
+
+    <!-- Phase 4: UPI QR checker -->
+    <string name="home_tool_qr">Check a UPI QR</string>
+    <string name="safety_qr">Check a UPI QR</string>
+    <string name="safety_qr_sub">Scan or pick a payment QR before you pay</string>
+    <string name="upi_title">UPI QR checker</string>
+    <string name="upi_scan_hint">Point the camera at the payment QR code.</string>
+    <string name="upi_pick_image">Pick a QR picture</string>
+    <string name="upi_type_manual">Go back</string>
+    <string name="upi_offline_note">The QR is read on this phone. Nothing is uploaded.</string>
+    <string name="upi_never_verified">We never call a UPI ID verified. This is only a check.</string>
+    <string name="upi_perm_title">Camera, only for scanning</string>
+    <string name="upi_perm_body">The camera is used only while you scan a payment QR code. The picture is read on this phone and never sent anywhere. You can also pick a saved picture instead.</string>
+    <string name="upi_perm_allow">Allow camera</string>
+    <string name="upi_perm_not_now">Not now</string>
+    <string name="upi_denied_title">Camera is off</string>
+    <string name="upi_denied_body">Without the camera you cannot scan a QR, but you can still pick a QR picture from your gallery. You can also turn the camera on later in your phone settings.</string>
+    <string name="upi_result_title">QR check</string>
+    <string name="upi_never_receive">Remember: you never need to scan a QR or enter a PIN to RECEIVE money. If someone says scan this to receive, it is a fraud.</string>
+    <string name="upi_plain_id_note">A plain UPI ID carries no amount. Check the name carefully before you send anything.</string>
+    <string name="upi_do_not_pay">Do not send money yet</string>
+    <string name="upi_pause_seconds">%1$d</string>
+    <string name="upi_pause_body">Take these seconds. Read the payee name again. Call the person on a number you already know.</string>
+    <string name="upi_details">What this QR contains</string>
+    <string name="upi_detail_kind">Type</string>
+    <string name="upi_detail_payee">Payee</string>
+    <string name="upi_detail_name">Name</string>
+    <string name="upi_detail_amount">Amount</string>
+    <string name="upi_detail_note">Note</string>
+    <string name="upi_detail_ref">Reference</string>
+    <string name="upi_detail_mcc">Merchant code</string>
+    <string name="upi_reasons_title">What we noticed</string>
+    <string name="upi_no_reasons">No clear warning signs in this QR.</string>
+    <string name="upi_reason_collect">This is a collect request. Approving it takes money from your account, so it can never be a way to receive money.</string>
+    <string name="upi_reason_amount">An amount is already filled in, so scanning will send that money.</string>
+    <string name="upi_reason_large">The amount is large. Check twice before you pay.</string>
+    <string name="upi_reason_authority">The payee name copies a bank, police or government name.</string>
+    <string name="upi_reason_handle">We do not recognise this UPI handle. That alone is not proof of fraud, but check the name.</string>
+    <string name="upi_reason_missing">No payee address was found in this QR.</string>
+    <string name="upi_reason_plain">This is a plain UPI ID with no amount.</string>
+    <string name="upi_disclaimer">This is a check, not a guarantee. A UPI ID can never be called verified. यह गारंटी नहीं है।</string>
+    <string name="upi_scan_another">Scan another QR</string>
 </resources>

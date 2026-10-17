@@ -47,7 +47,8 @@ fun SafetyToolsScreen(
     onOpenHelpNow: () -> Unit,
     onOpenChakshu: () -> Unit,
     onOpenSimGuide: () -> Unit,
-    onOpenHelplines: () -> Unit
+    onOpenHelplines: () -> Unit,
+    onOpenQr: () -> Unit
 ) {
     val motion = motionAllowed()
     Scaffold(containerColor = Color.Transparent) { padding ->
@@ -73,7 +74,8 @@ fun SafetyToolsScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
-            Tool(JyotiShield, Saffron, R.string.safety_dashboard, R.string.safety_dashboard_sub, 0, motion, onOpenDashboard)
+            Tool(JyotiCamera, Saffron, R.string.safety_qr, R.string.safety_qr_sub, 0, motion, onOpenQr)
+            Tool(JyotiShield, Saffron, R.string.safety_dashboard, R.string.safety_dashboard_sub, 1, motion, onOpenDashboard)
             Tool(JyotiCamera, Saffron, R.string.safety_share_card, R.string.safety_share_card_sub, 1, motion, onOpenShareCard)
             Tool(JyotiCall, Neem, R.string.safety_help_now, R.string.safety_help_now_sub, 2, motion, onOpenHelpNow)
             Tool(JyotiBook, Haldi, R.string.safety_chakshu, R.string.safety_chakshu_sub, 3, motion, onOpenChakshu)

@@ -129,6 +129,14 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
 
+    // Phase 4: UPI QR scanning. CameraX plus the BUNDLED ML Kit barcode model,
+    // so scanning works with no network and no Play-services download.
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.mlkit.barcode.scanning)
+
     // Unit tests (JVM) — the scam engine is pure Kotlin, so it is fully testable offline.
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
