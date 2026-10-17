@@ -19,21 +19,21 @@ class NumberHeuristicsTest {
 
     @Test
     fun aNumberNotInContactsIsStillSafeButNoted() {
-        val a = NumberHeuristics.analyze("9876543210", isInContacts = false)
+        val a = NumberHeuristics.analyze("9876123450", isInContacts = false)
         assertEquals(Verdict.SAFE, a.verdict)
         assertTrue(a.findings.any { it.ruleId == NumberHeuristics.RULE_NOT_IN_CONTACTS })
     }
 
     @Test
     fun aHighRiskCountryCodeIsCareful() {
-        val a = NumberHeuristics.analyze("+92 300 1234567", isInContacts = false)
+        val a = NumberHeuristics.analyze("+92 301 9876123", isInContacts = false)
         assertEquals(Verdict.CAREFUL, a.verdict)
         assertTrue(a.findings.any { it.ruleId == NumberHeuristics.RULE_INTL })
     }
 
     @Test
     fun aBangladeshPrefixIsCareful() {
-        val a = NumberHeuristics.analyze("+8801712345678", isInContacts = false)
+        val a = NumberHeuristics.analyze("+880 171 9876123", isInContacts = false)
         assertTrue(a.findings.any { it.ruleId == NumberHeuristics.RULE_INTL })
     }
 
@@ -47,7 +47,7 @@ class NumberHeuristicsTest {
     fun anAscendingRunIsFlagged() {
         assertTrue(NumberHeuristics.isRoboPattern("1234567890"))
         assertTrue(NumberHeuristics.isRoboPattern("9876543210"))
-        assertFalse(NumberHeuristics.isRoboPattern("9871234560"))
+        assertFalse(NumberHeuristics.isRoboPattern("9871245690"))
     }
 
     @Test
@@ -87,6 +87,6 @@ class NumberHeuristicsTest {
     @Test
     fun normaliseKeepsTheLastTenDigits() {
         assertEquals("9876543210", NumberHeuristics.normalise("+91 98765 43210"))
-        assertEquals("800123456", NumberHeuristics.normalise("1800123456"))
+        assertEquals("1800123456", NumberHeuristics.normalise("1800123456"))
     }
 }

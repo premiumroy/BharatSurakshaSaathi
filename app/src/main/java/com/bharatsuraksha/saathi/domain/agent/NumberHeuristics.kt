@@ -77,12 +77,13 @@ object NumberHeuristics {
             findings += Finding(RULE_BANK_LOOKALIKE, 15, REASON_BANK_LOOKALIKE)
         }
 
-        if (!trusted && HIGH_RISK_PREFIXES.any { number.startsWith(it) }) {
+        // A saved contact is trusted: prefix and pattern checks do not apply.
+        if (!trusted && !isInContacts && HIGH_RISK_PREFIXES.any { number.startsWith(it) }) {
             score += 25
             findings += Finding(RULE_INTL, 25, REASON_INTL)
         }
 
-        if (!trusted && isRoboPattern(digits)) {
+        if (!trusted && !isInContacts && isRoboPattern(digits)) {
             score += 20
             findings += Finding(RULE_ROBO, 20, REASON_ROBO)
         }
