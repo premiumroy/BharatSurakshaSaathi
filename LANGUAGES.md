@@ -25,7 +25,7 @@ carries a **बीटा / Beta** badge in the picker.
 |---|---|---|---|---|---|
 | Hindi | hi | Devanagari | VERIFIED | STRONG | yes |
 | English | en | Latin | VERIFIED | STRONG | yes |
-| Marathi | mr | Devanagari | BETA | BASIC | see below |
+| Marathi | mr | Devanagari | BETA | BASIC | yes |
 | Bengali | bn | Bengali | BETA | BASIC | see below |
 | Tamil | ta | Tamil | BETA | BASIC | see below |
 | Telugu | te | Telugu | BETA | BASIC | see below |

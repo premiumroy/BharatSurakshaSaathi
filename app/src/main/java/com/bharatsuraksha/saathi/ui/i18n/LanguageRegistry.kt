@@ -38,7 +38,7 @@ object LanguageRegistry {
         AppLanguage("en", "English", "English", LanguageStatus.VERIFIED, Detection.STRONG, "Latin", hasStrings = true),
 
         // ---- Indian languages with detection packs (BASIC) ----
-        AppLanguage("mr", "मराठी", "Marathi", LanguageStatus.BETA, Detection.BASIC, "Devanagari"),
+        AppLanguage("mr", "मराठी", "Marathi", LanguageStatus.BETA, Detection.BASIC, "Devanagari", hasStrings = true),
         AppLanguage("bn", "বাংলা", "Bengali", LanguageStatus.BETA, Detection.BASIC, "Bengali"),
         AppLanguage("ta", "தமிழ்", "Tamil", LanguageStatus.BETA, Detection.BASIC, "Tamil"),
         AppLanguage("te", "తెలుగు", "Telugu", LanguageStatus.BETA, Detection.BASIC, "Telugu"),
