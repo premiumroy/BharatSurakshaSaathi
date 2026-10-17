@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#0E6E4E</color>
-    <color name="brand_primary">#0E6E4E</color>
-    <color name="brand_secondary">#E8792B</color>
-    <color name="brand_gold">#C9A227</color>
-    <color name="surface_bg">#FFF7EC</color>
+    <color name="ic_launcher_background">#12101F</color>
+    <color name="brand_primary">#12101F</color>
+    <color name="brand_secondary">#FF8A1F</color>
+    <color name="brand_gold">#FF8A1F</color>
+    <color name="surface_bg">#FBF4E8</color>
 </resources>

@@ -3,8 +3,15 @@ package com.bharatsuraksha.saathi.ui.result
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.CubicBezierEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -19,6 +27,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,16 +38,23 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -49,13 +65,12 @@ import com.bharatsuraksha.saathi.domain.model.AnalysisResult
 import com.bharatsuraksha.saathi.domain.model.Confidence
 import com.bharatsuraksha.saathi.domain.model.Verdict
 import com.bharatsuraksha.saathi.ui.common.isHindiLocale
-import com.bharatsuraksha.saathi.ui.theme.BrandGreen
-import com.bharatsuraksha.saathi.ui.theme.CarefulAmber
-import com.bharatsuraksha.saathi.ui.theme.CarefulAmberBg
-import com.bharatsuraksha.saathi.ui.theme.DangerRed
-import com.bharatsuraksha.saathi.ui.theme.DangerRedBg
-import com.bharatsuraksha.saathi.ui.theme.SafeGreen
-import com.bharatsuraksha.saathi.ui.theme.SafeGreenBg
+import com.bharatsuraksha.saathi.ui.theme.ShieldEmblem
+import com.bharatsuraksha.saathi.ui.theme.rememberReduceMotion
+import com.bharatsuraksha.saathi.ui.theme.reveal
+import com.bharatsuraksha.saathi.ui.theme.verdictAccent
+import com.bharatsuraksha.saathi.ui.theme.verdictContainer
+import com.bharatsuraksha.saathi.ui.theme.verdictOnContainer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,165 +83,246 @@ fun ResultScreen(
     val result = viewModel.result
     val hindi = isHindiLocale()
     val context = LocalContext.current
+    val reduce = rememberReduceMotion()
+    val haptics = LocalHapticFeedback.current
     val familyContacts by viewModel.familyContacts.collectAsStateWithLifecycle()
     val onlineMode by viewModel.onlineMode.collectAsStateWithLifecycle()
     val explanation by viewModel.explanation.collectAsStateWithLifecycle()
     val loadingExplanation by viewModel.loading.collectAsStateWithLifecycle()
     var showOnlineConsent by remember { mutableStateOf(false) }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.result_title), fontWeight = FontWeight.Bold) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.action_back)
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = BrandGreen,
-                    titleContentColor = Color.White,
-                    navigationIconContentColor = Color.White
-                )
-            )
+    // One haptic tick when the verdict lands; stronger for Dangerous.
+    LaunchedEffect(result?.verdict) {
+        if (reduce) return@LaunchedEffect
+        when (result?.verdict) {
+            Verdict.DANGEROUS -> haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+            Verdict.CAREFUL -> haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            else -> Unit
         }
-    ) { padding ->
+    }
+
+    Scaffold(containerColor = Color.Transparent) { padding ->
         if (result == null) {
             Column(
                 Modifier.fillMaxSize().padding(padding).padding(20.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(stringResource(R.string.result_no_reasons), style = MaterialTheme.typography.bodyLarge)
-                OutlinedButton(onClick = onCheckAnother) {
+                OutlinedButton(onClick = onCheckAnother, shape = RoundedCornerShape(50)) {
                     Text(stringResource(R.string.result_again_button))
                 }
             }
             return@Scaffold
         }
 
+        val accent by animateColorAsState(
+            targetValue = verdictAccent(result.verdict),
+            animationSpec = tween(700, easing = CubicBezierEasing(0.2f, 0.8f, 0.2f, 1f)),
+            label = "verdictMorph"
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
-                .padding(20.dp),
+                .padding(horizontal = 20.dp)
+                .padding(bottom = 28.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            VerdictBanner(result)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = onBack) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.action_back),
+                        tint = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+                Text(
+                    stringResource(R.string.result_title),
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+
+            // ---- verdict block: morphed shield + big word + sweeping gauge ----
+            Card(
+                shape = MaterialTheme.shapes.extraLarge,
+                colors = CardDefaults.cardColors(containerColor = verdictContainer(result.verdict)),
+                modifier = Modifier.fillMaxWidth().reveal(0, reduce)
+            ) {
+                Row(
+                    Modifier.fillMaxWidth().padding(18.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Box(Modifier.size(104.dp)) {
+                        ShieldEmblem(
+                            Modifier.fillMaxSize(),
+                            tint = accent,
+                            breath = true,
+                            reduceMotion = reduce,
+                            glyph = result.verdict
+                        )
+                    }
+                    Column(Modifier.weight(1f)) {
+                        Text(
+                            stringResource(verdictLabelRes(result.verdict)),
+                            style = MaterialTheme.typography.displayMedium,
+                            color = verdictOnContainer(result.verdict)
+                        )
+                        Text(
+                            stringResource(R.string.verdict_guarantee_note),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    ScoreGauge(score = result.score, tint = accent, reduceMotion = reduce)
+                }
+            }
 
             Text(
-                text = stringResource(R.string.verdict_guarantee_note),
-                style = MaterialTheme.typography.bodyMedium
+                stringResource(
+                    R.string.result_confidence_label,
+                    stringResource(confidenceRes(result.confidence))
+                ),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.reveal(1, reduce)
             )
 
-            // Fixed family warnings (e.g. the digital-arrest banner).
-            result.banners.forEach { banner ->
-                Card(colors = CardDefaults.cardColors(containerColor = DangerRedBg)) {
+            result.banners.forEachIndexed { i, banner ->
+                Card(
+                    shape = MaterialTheme.shapes.medium,
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+                    modifier = Modifier.fillMaxWidth().reveal(2 + i, reduce)
+                ) {
                     Text(
-                        text = banner.text(hindi),
+                        banner.text(hindi),
                         modifier = Modifier.padding(16.dp),
-                        color = DangerRed,
                         style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.ExtraBold
                     )
                 }
             }
 
             Text(
-                text = stringResource(R.string.result_score_label, result.score),
-                style = MaterialTheme.typography.titleMedium
-            )
-            Text(
-                text = stringResource(
-                    R.string.result_confidence_label,
-                    stringResource(confidenceRes(result.confidence))
-                ),
-                style = MaterialTheme.typography.bodyLarge
-            )
-
-            Text(
-                text = stringResource(R.string.result_reasons_title),
+                stringResource(R.string.result_reasons_title),
                 style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.reveal(3, reduce)
             )
             if (result.reasons.isEmpty()) {
-                Text(stringResource(R.string.result_no_reasons), style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    stringResource(R.string.result_no_reasons),
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.reveal(4, reduce)
+                )
             } else {
-                result.reasons.forEach { reason ->
-                    Card {
-                        Text(
-                            text = "• " + reason.text(hindi),
-                            modifier = Modifier.padding(16.dp),
-                            style = MaterialTheme.typography.bodyLarge
-                        )
+                result.reasons.forEachIndexed { i, reason ->
+                    Card(
+                        shape = MaterialTheme.shapes.medium,
+                        modifier = Modifier.fillMaxWidth().reveal(4 + i, reduce)
+                    ) {
+                        Row {
+                            Box(Modifier.size(width = 5.dp, height = 64.dp).background(accent))
+                            Text(
+                                reason.text(hindi),
+                                modifier = Modifier.padding(16.dp),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
                     }
                 }
             }
 
             Text(
-                text = stringResource(R.string.result_what_to_do_title),
+                stringResource(R.string.result_what_to_do_title),
                 style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.reveal(8, reduce)
             )
             viewModel.adviceKeys.forEachIndexed { index, key ->
-                Card {
-                    Text(
-                        text = "${index + 1}. " + adviceText(key),
-                        modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.bodyLarge
-                    )
+                Card(
+                    shape = MaterialTheme.shapes.medium,
+                    modifier = Modifier.fillMaxWidth().reveal(9 + index, reduce)
+                ) {
+                    Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Text(
+                            "${index + 1}",
+                            style = MaterialTheme.typography.titleLarge,
+                            color = accent
+                        )
+                        Text(adviceText(key), style = MaterialTheme.typography.bodyLarge)
+                    }
                 }
             }
 
-            // ---- Family alert (user-initiated, only for Dangerous) ----
             if (result.verdict == Verdict.DANGEROUS && familyContacts.isNotEmpty()) {
-                Text(stringResource(R.string.result_family_alert), fontWeight = FontWeight.Bold)
+                Text(
+                    stringResource(R.string.result_family_alert),
+                    fontWeight = FontWeight.ExtraBold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     OutlinedButton(
                         onClick = { shareFamilySms(context, familyContacts) },
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        shape = RoundedCornerShape(50)
                     ) { Text(stringResource(R.string.family_share_sms)) }
                     OutlinedButton(
                         onClick = { shareFamilyWhatsapp(context, familyContacts) },
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        shape = RoundedCornerShape(50)
                     ) { Text(stringResource(R.string.family_share_whatsapp)) }
                 }
             }
 
-            // ---- Optional online explanation ----
             if (onlineMode) {
                 if (loadingExplanation) {
                     Text(stringResource(R.string.result_online_getting))
                 } else if (explanation != null) {
-                    Card {
+                    Card(shape = MaterialTheme.shapes.medium) {
                         Text(explanation!!, modifier = Modifier.padding(16.dp))
                     }
                 } else {
                     OutlinedButton(
                         onClick = { showOnlineConsent = true },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(50)
                     ) { Text(stringResource(R.string.result_online_explain)) }
                 }
             }
 
-            // ---- Recovery ----
-            OutlinedButton(onClick = onOpenRecover, modifier = Modifier.fillMaxWidth()) {
-                Text(stringResource(R.string.result_recover_button))
-            }
+            OutlinedButton(
+                onClick = onOpenRecover,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(50)
+            ) { Text(stringResource(R.string.result_recover_button)) }
 
-            Text(stringResource(R.string.result_checked_message_title), fontWeight = FontWeight.Bold)
-            Card {
+            Text(
+                stringResource(R.string.result_checked_message_title),
+                fontWeight = FontWeight.ExtraBold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+            Card(shape = MaterialTheme.shapes.medium) {
                 Text(viewModel.message, modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.bodyMedium)
             }
 
-            Text(stringResource(R.string.result_disclaimer), style = MaterialTheme.typography.bodyMedium)
+            Text(
+                stringResource(R.string.result_disclaimer),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
 
             Button(
                 onClick = onCheckAnother,
-                modifier = Modifier.fillMaxWidth().height(64.dp)
+                modifier = Modifier.fillMaxWidth().height(60.dp),
+                shape = RoundedCornerShape(50),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    contentColor = MaterialTheme.colorScheme.onSurface
+                )
             ) {
                 Text(stringResource(R.string.result_again_button), style = MaterialTheme.typography.titleMedium)
             }
@@ -254,32 +350,51 @@ fun ResultScreen(
     }
 }
 
+/** Circular gauge that sweeps to the score with a slight overshoot. */
 @Composable
-private fun VerdictBanner(result: AnalysisResult) {
-    val (bg, fg) = when (result.verdict) {
-        Verdict.SAFE -> SafeGreenBg to SafeGreen
-        Verdict.CAREFUL -> CarefulAmberBg to CarefulAmber
-        Verdict.DANGEROUS -> DangerRedBg to DangerRed
-    }
-    val label = when (result.verdict) {
-        Verdict.SAFE -> R.string.verdict_safe
-        Verdict.CAREFUL -> R.string.verdict_careful
-        Verdict.DANGEROUS -> R.string.verdict_dangerous
-    }
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(bg, RoundedCornerShape(20.dp))
-            .padding(24.dp),
-        horizontalArrangement = Arrangement.Center
-    ) {
+private fun ScoreGauge(score: Int, tint: Color, reduceMotion: Boolean) {
+    val progress by animateFloatAsState(
+        targetValue = score / 100f,
+        animationSpec = if (reduceMotion) tween(0) else spring(dampingRatio = 0.45f, stiffness = 130f),
+        label = "gauge"
+    )
+    val track = MaterialTheme.colorScheme.outline.copy(alpha = 0.35f)
+    Box(Modifier.size(74.dp), contentAlignment = Alignment.Center) {
+        Canvas(Modifier.fillMaxSize()) {
+            val stroke = 7.dp.toPx()
+            val inset = stroke / 2f
+            val arcSize = Size(size.width - stroke, size.height - stroke)
+            drawArc(
+                color = track,
+                startAngle = 135f,
+                sweepAngle = 270f,
+                useCenter = false,
+                topLeft = Offset(inset, inset),
+                size = arcSize,
+                style = Stroke(width = stroke, cap = StrokeCap.Round)
+            )
+            drawArc(
+                color = tint,
+                startAngle = 135f,
+                sweepAngle = 270f * progress.coerceIn(0f, 1f),
+                useCenter = false,
+                topLeft = Offset(inset, inset),
+                size = arcSize,
+                style = Stroke(width = stroke, cap = StrokeCap.Round)
+            )
+        }
         Text(
-            text = stringResource(label),
-            color = fg,
-            style = MaterialTheme.typography.headlineLarge,
-            fontWeight = FontWeight.Bold
+            "$score",
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
+}
+
+private fun verdictLabelRes(verdict: Verdict): Int = when (verdict) {
+    Verdict.SAFE -> R.string.verdict_safe
+    Verdict.CAREFUL -> R.string.verdict_careful
+    Verdict.DANGEROUS -> R.string.verdict_dangerous
 }
 
 private fun confidenceRes(confidence: Confidence): Int = when (confidence) {
@@ -312,8 +427,7 @@ private fun adviceText(key: String): String = stringResource(
     }
 )
 
-private fun familyMessage(context: Context): String =
-    context.getString(R.string.family_message)
+private fun familyMessage(context: Context): String = context.getString(R.string.family_message)
 
 private fun shareFamilySms(context: Context, contacts: Set<String>) {
     val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + contacts.joinToString(","))).apply {

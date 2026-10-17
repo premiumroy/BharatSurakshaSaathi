@@ -2,26 +2,65 @@ package com.bharatsuraksha.saathi.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// ---- Brand: a premium Indian palette — emerald, marigold, antique gold, deep indigo ----
-val BrandGreen = Color(0xFF0E6E4E)      // deep emerald — trust & safety
-val BrandGreenDark = Color(0xFF0A4F39)
-val BrandSaffron = Color(0xFFE8792B)    // marigold
-val BrandGold = Color(0xFFC9A227)       // antique gold
-val BrandIndigo = Color(0xFF1B2447)     // deep navy — premium dark surface
-val BrandIndigoSoft = Color(0xFF2A3768)
+// ---------------------------------------------------------------- identity
+// Dark: "ink" — the primary identity.
+val Ink = Color(0xFF12101F)
+val InkSurface = Color(0xFF1C1932)
+val InkSurfaceHigh = Color(0xFF26224A)
+val InkText = Color(0xFFF4EFE6)
+val InkMuted = Color(0xFFA59FB8)
 
-val SurfaceCream = Color(0xFFFFF7EC)
-val SurfaceIvory = Color(0xFFFFFDF8)
-val SurfaceSand = Color(0xFFF4E7D2)
-val OutlineGold = Color(0xFFC9A227)
+// Light: "paper".
+val Paper = Color(0xFFFBF4E8)
+val PaperSurface = Color(0xFFFFFFFF)
+val PaperText = Color(0xFF1B1730)
+val PaperMuted = Color(0xFF6B6580)
 
-// Verdict colours (high contrast for readability)
-val SafeGreen = Color(0xFF1B7F3B)
-val SafeGreenBg = Color(0xFFE6F4EA)
-val CarefulAmber = Color(0xFF9A5B00)
-val CarefulAmberBg = Color(0xFFFFF3E0)
-val DangerRed = Color(0xFFB3261E)
-val DangerRedBg = Color(0xFFFCE8E6)
+// Accent and verdicts.
+val Saffron = Color(0xFFFF8A1F)
+val Neem = Color(0xFF1FA37A)
+val Haldi = Color(0xFFF2B632)
+val Sindoor = Color(0xFFE5383B)
 
-val TextPrimary = Color(0xFF1A1A1A)
-val TextSecondary = Color(0xFF5A5A5A)
+// Small-text variants that clear WCAG AA on their backgrounds.
+val NeemInk = Color(0xFF14785A)
+val HaldiInk = Color(0xFF8A6100)
+val SindoorInk = Color(0xFFC4232A)
+
+// Soft containers for verdict surfaces.
+val NeemTint = Color(0xFFE4F4EE)
+val HaldiTint = Color(0xFFFDF2D8)
+val SindoorTint = Color(0xFFFCE7E8)
+val NeemTintDark = Color(0xFF14312A)
+val HaldiTintDark = Color(0xFF33290F)
+val SindoorTintDark = Color(0xFF3A1A1D)
+
+// Hairline lattice borders.
+val LatticeOnDark = Color(0x1FF4EFE6)
+val LatticeOnLight = Color(0x141B1730)
+
+// ------------------------------------------------- legacy aliases (kept so
+// every existing screen keeps compiling and stays on-identity).
+val BrandGreen = InkSurfaceHigh          // app-bar / header band
+val BrandGreenDark = Ink
+val BrandSaffron = Saffron
+val BrandGold = Saffron
+
+val SurfaceCream = Paper
+val SurfaceIvory = PaperSurface
+val SurfaceSand = Color(0xFFF2E8D8)
+val OutlineGold = Saffron
+val BrandIndigo = Ink
+val BrandIndigoSoft = InkSurfaceHigh
+
+// Verdicts — the big colour is the pure token; the small-text variants are
+// darkened so body copy passes contrast (see DESIGN.md).
+val SafeGreen = Neem
+val SafeGreenBg = NeemTint
+val CarefulAmber = HaldiInk
+val CarefulAmberBg = HaldiTint
+val DangerRed = Sindoor
+val DangerRedBg = SindoorTint
+
+val TextPrimary = PaperText
+val TextSecondary = PaperMuted
