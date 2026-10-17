@@ -38,7 +38,7 @@ class CodeWordFlowTest {
         val with = CodeWordFlow.assess(
             CodeWordFlow.Situation(hasCodeWord = true, codeWordMatches = true, asksMoney = true)
         )
-        assertEquals(CodeWordFlow.Level.LIKELY_FRAUD, without.level)
+        assertEquals(CodeWordFlow.Level.VERIFY_FIRST, without.level)
         assertEquals(CodeWordFlow.Level.LIKELY_REAL, with.level)
         assertTrue(with.reasonKeys.contains(CodeWordFlow.REASON_MATCHED))
     }
