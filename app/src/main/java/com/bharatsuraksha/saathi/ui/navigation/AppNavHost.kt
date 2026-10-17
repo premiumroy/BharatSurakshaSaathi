@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.bharatsuraksha.saathi.ui.debug.DebugScreen
 import com.bharatsuraksha.saathi.ui.easy.EasyModeScreen
 import com.bharatsuraksha.saathi.ui.history.HistoryScreen
 import com.bharatsuraksha.saathi.ui.home.HomeScreen
@@ -35,6 +36,7 @@ object Routes {
     const val TIPS = "tips"
     const val RECOVER = "recover"
     const val PRIVACY = "privacy"
+    const val DEBUG = "debug"
 }
 
 @Composable
@@ -82,7 +84,8 @@ fun AppNavHost(
                 onBack = { navController.popBackStack() },
                 onOpenNotificationAccess = { navController.navigate(Routes.NOTIFICATION_ACCESS) },
                 onOpenPrivacy = { navController.navigate(Routes.PRIVACY) },
-                onOpenTips = { navController.navigate(Routes.TIPS) }
+                onOpenTips = { navController.navigate(Routes.TIPS) },
+                onOpenDebug = { navController.navigate(Routes.DEBUG) }
             )
         }
 
@@ -116,5 +119,7 @@ fun AppNavHost(
         composable(Routes.RECOVER) { RecoveryScreen(onBack = { navController.popBackStack() }) }
 
         composable(Routes.PRIVACY) { PrivacyScreen(onBack = { navController.popBackStack() }) }
+
+        composable(Routes.DEBUG) { DebugScreen(onBack = { navController.popBackStack() }) }
     }
 }

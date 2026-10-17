@@ -33,10 +33,10 @@
     <string name="home_kids_badge">Kids Safe Mode</string>
 
     <!-- Verdicts -->
-    <string name="verdict_safe">Looks Safe</string>
+    <string name="verdict_safe">No clear warning signs</string>
     <string name="verdict_careful">Be Careful</string>
     <string name="verdict_dangerous">Dangerous</string>
-    <string name="verdict_safe_short">Safe</string>
+    <string name="verdict_safe_short">No clear signs</string>
     <string name="verdict_careful_short">Careful</string>
     <string name="verdict_dangerous_short">Dangerous</string>
 
@@ -311,4 +311,19 @@
     <string name="brand_made_by">Made by Roy Limited</string>
     <string name="brand_owner">Owner: Prashant Dobriyal</string>
     <string name="brand_alias">Known online as “Premium Roy”</string>
+
+    <!-- v2 engine: guarantee line, family advice, hidden debug screen -->
+    <string name="verdict_guarantee_note">यह गारंटी नहीं है। (This is not a guarantee.)</string>
+    <string name="advice_no_guaranteed_returns">Never invest on a promise of guaranteed or doubled returns. Real investments are never risk-free.</string>
+    <string name="advice_job_never_pay">A real job never asks for a registration, security or training fee. Do not pay.</string>
+    <string name="advice_call_back_known_number">Before sending any money, call the person back on their old, saved number.</string>
+    <string name="advice_loan_app_report">Do not pay. Report the loan app to the police and at cybercrime.gov.in.</string>
+    <string name="advice_lottery_never_pay">You cannot win a lottery you never entered. Never pay a tax or fee to claim a prize.</string>
+    <string name="advice_sextortion_dont_pay">Do not pay and do not panic — paying never stops them. Save the evidence and report it.</string>
+    <string name="advice_courier_never_pay">Real couriers never demand a customs or clearance fee over chat. Do not pay.</string>
+    <string name="debug_title">Rule debug</string>
+    <string name="debug_no_result">No check has been run yet.</string>
+    <string name="debug_last_message">Last message checked</string>
+    <string name="debug_matched_rules">Matched rule ids</string>
+    <string name="debug_reasons">Reasons</string>
 </resources>

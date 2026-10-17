@@ -37,8 +37,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.clickable
 import androidx.compose.ui.res.stringResource
-import com.bharatsuraksha.saathi.ui.common.BrandFooter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -49,6 +49,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bharatsuraksha.saathi.R
 import com.bharatsuraksha.saathi.data.prefs.PinManager
 import com.bharatsuraksha.saathi.domain.model.Sensitivity
+import com.bharatsuraksha.saathi.ui.common.BrandFooter
 import com.bharatsuraksha.saathi.ui.theme.BrandGreen
 
 private val WATCHABLE_APPS = listOf(
@@ -66,6 +67,7 @@ fun SettingsScreen(
     onOpenNotificationAccess: () -> Unit,
     onOpenPrivacy: () -> Unit,
     onOpenTips: () -> Unit,
+    onOpenDebug: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
     val easyMode by viewModel.easyMode.collectAsStateWithLifecycle()
@@ -316,7 +318,19 @@ fun SettingsScreen(
                     TextButton(onClick = { showClear = true }, enabled = !locked) {
                         Text(stringResource(R.string.settings_clear_data))
                     }
-                    Text(stringResource(R.string.settings_about), fontWeight = FontWeight.Bold)
+                    // Hidden diagnostic: tap "About" seven times to open the rule-debug screen.
+                    val aboutTaps = remember { mutableStateOf(0) }
+                    Text(
+                        text = stringResource(R.string.settings_about),
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.clickable {
+                            aboutTaps.value += 1
+                            if (aboutTaps.value >= 7) {
+                                aboutTaps.value = 0
+                                onOpenDebug()
+                            }
+                        }
+                    )
                     Text(stringResource(R.string.settings_about_body), style = MaterialTheme.typography.bodyMedium)
                     BrandFooter()
                 }

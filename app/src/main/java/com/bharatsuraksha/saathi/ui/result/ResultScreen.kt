@@ -118,6 +118,24 @@ fun ResultScreen(
             VerdictBanner(result)
 
             Text(
+                text = stringResource(R.string.verdict_guarantee_note),
+                style = MaterialTheme.typography.bodyMedium
+            )
+
+            // Fixed family warnings (e.g. the digital-arrest banner).
+            result.banners.forEach { banner ->
+                Card(colors = CardDefaults.cardColors(containerColor = DangerRedBg)) {
+                    Text(
+                        text = banner.text(hindi),
+                        modifier = Modifier.padding(16.dp),
+                        color = DangerRed,
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+
+            Text(
                 text = stringResource(R.string.result_score_label, result.score),
                 style = MaterialTheme.typography.titleMedium
             )
@@ -283,6 +301,13 @@ private fun adviceText(key: String): String = stringResource(
         "advice_report_1930" -> R.string.advice_report_1930
         "advice_report_cybercrime" -> R.string.advice_report_cybercrime
         "advice_keep_message" -> R.string.advice_keep_message
+        "advice_no_guaranteed_returns" -> R.string.advice_no_guaranteed_returns
+        "advice_job_never_pay" -> R.string.advice_job_never_pay
+        "advice_call_back_known_number" -> R.string.advice_call_back_known_number
+        "advice_loan_app_report" -> R.string.advice_loan_app_report
+        "advice_lottery_never_pay" -> R.string.advice_lottery_never_pay
+        "advice_sextortion_dont_pay" -> R.string.advice_sextortion_dont_pay
+        "advice_courier_never_pay" -> R.string.advice_courier_never_pay
         else -> R.string.advice_verify_official
     }
 )

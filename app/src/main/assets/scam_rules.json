@@ -1,41 +1,160 @@
 {
-  "version": 1,
-  "updated": "2026-01-01",
+  "version": 2,
+  "updated": "2026-10-17",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-01-01",
+      "note": "Initial rule set."
+    },
+    {
+      "version": 2,
+      "date": "2026-10-17",
+      "note": "Scam families, combination rules, false-positive guards, v2 normalisation (look-alikes, split letters, Devanagari, Roman-Hindi)."
+    }
+  ],
   "thresholds": {
     "careful": 25,
     "dangerous": 60
   },
+  "families": [
+    {
+      "id": "digital_arrest",
+      "nameEn": "Digital arrest / fake police",
+      "nameHi": "डिजिटल अरेस्ट / नकली पुलिस",
+      "bannerEn": "Anyone demanding money on a video call or phone is not police, CBI, customs or a judge. Cut the call and dial 1930.",
+      "bannerHi": "वीडियो कॉल या फोन पर पैसे माँगने वाला पुलिस, CBI, कस्टम अधिकारी या जज नहीं है। कॉल काटें, 1930 पर कॉल करें।",
+      "adviceKeys": [
+        "advice_police_no_arrest"
+      ]
+    },
+    {
+      "id": "investment",
+      "nameEn": "Investment / trading scam",
+      "nameHi": "निवेश / ट्रेडिंग ठगी",
+      "adviceKeys": [
+        "advice_no_guaranteed_returns"
+      ]
+    },
+    {
+      "id": "task_job",
+      "nameEn": "Task / part-time job scam",
+      "nameHi": "टास्क / पार्ट-टाइम नौकरी ठगी",
+      "adviceKeys": [
+        "advice_job_never_pay"
+      ]
+    },
+    {
+      "id": "family_emergency",
+      "nameEn": "Family emergency impersonation",
+      "nameHi": "परिवार की आपात स्थिति का नाटक",
+      "adviceKeys": [
+        "advice_call_back_known_number"
+      ]
+    },
+    {
+      "id": "refund_tax_bill",
+      "nameEn": "Fake refund / tax / bill / KYC",
+      "nameHi": "नकली रिफंड / टैक्स / बिल / KYC",
+      "adviceKeys": [
+        "advice_dont_click"
+      ]
+    },
+    {
+      "id": "loan_app",
+      "nameEn": "Illegal loan app",
+      "nameHi": "अवैध लोन ऐप",
+      "adviceKeys": [
+        "advice_loan_app_report"
+      ]
+    },
+    {
+      "id": "courier_delivery",
+      "nameEn": "Courier / customs scam",
+      "nameHi": "कूरियर / कस्टम ठगी",
+      "adviceKeys": [
+        "advice_courier_never_pay"
+      ]
+    },
+    {
+      "id": "lottery_prize",
+      "nameEn": "Lottery / prize scam",
+      "nameHi": "लॉटरी / इनाम ठगी",
+      "adviceKeys": [
+        "advice_lottery_never_pay"
+      ]
+    },
+    {
+      "id": "romance_sextortion",
+      "nameEn": "Romance / sextortion",
+      "nameHi": "रोमांस / सेक्सटॉर्शन",
+      "adviceKeys": [
+        "advice_sextortion_dont_pay"
+      ]
+    },
+    {
+      "id": "fake_customer_care",
+      "nameEn": "Fake customer care",
+      "nameHi": "नकली कस्टमर केयर",
+      "adviceKeys": []
+    },
+    {
+      "id": "credential",
+      "nameEn": "OTP / PIN / card details",
+      "nameHi": "OTP / PIN / कार्ड जानकारी",
+      "adviceKeys": []
+    }
+  ],
   "textRules": [
     {
       "id": "otp_request",
+      "family": "credential",
       "category": "credential",
       "weight": 35,
+      "language": "any",
       "patterns": [
-        "(?<!not\\s)(?<!never\\s)(?<!don't\\s)\\b(share|send|tell|provide|give|forward|confirm|verify|reply|reveal)\\s+(me\\s+|us\\s+)?(your\\s+|the\\s+|ur\\s+|yr\\s+)?(otp|o\\.?t\\.?p|one[ -]?time\\s*password|pin|cvv|mpin|password|upi\\s*pin)\\b",
-        "\\b(otp|pin|cvv|mpin)\\b[^.\\n]{0,20}\\b(batao|bataiye|bata\\s*do|bhejo|bhejiye|bhej\\s*do|share\\s*kar|send\\s*kar|daal\\s*do|de\\s*do|deejiye)\\b",
+        "(?<!not\\s)(?<!never\\s)(?<!don'?t\\s)\\b(share|send|tell|provide|give|forward|confirm|verify|reply|reveal)\\s+(me\\s+|us\\s+)?(your\\s+|the\\s+|ur\\s+|yr\\s+)?(otp|o\\.?t\\.?p|one[ -]?time\\s*password|pin|cvv|mpin|password|upi\\s*pin)\\b",
+        "\\b(otp|pin|cvv|mpin)\\b[^.\\n]{0,20}\\b(bata|bhej|share\\s*kar|send\\s*kar|daal|de\\s*do|deejiye|de|do)\\b",
         "\\b(apna|aapka|apni)\\b[^.\\n]{0,10}\\b(otp|pin|cvv|mpin|password)\\b[^.\\n]{0,15}\\b(bhej|bata|share|send|de|daal|do|dijiye)\\b",
-        "(ओटीपी|पिन|सीवीवी|पासवर्ड|यूपीआई पिन)[^।\\n]{0,25}(बता|भेज|शेयर|दें|दीजिए|डाल|करो)",
+        "(ओटीपी|पिन|सीवीवी|पासवर्ड|यूपीआई पिन)[^।\\n]{0,25}(बता|भेज|शेयर|दें|दीजिए|डाल|करो|करें)",
         "\\b(share|send|tell|give|provide|confirm|enter|type|fill)\\b[^.\\n]{0,25}\\b(cvv|card\\s+number|atm\\s+pin|upi\\s*pin|net\\s*banking|pin)\\b"
+      ],
+      "examples": [
+        "share your otp to complete verification",
+        "cvv batao",
+        "अपना ओटीपी भेज दें"
       ],
       "reasonEn": "It asks you for an OTP / PIN / CVV / password. No bank, company or government office ever asks for these.",
       "reasonHi": "यह आपसे OTP / PIN / CVV / पासवर्ड माँगता है। कोई भी बैंक, कंपनी या सरकारी दफ़्तर ये कभी नहीं माँगता।"
     },
     {
       "id": "digital_arrest",
+      "family": "digital_arrest",
       "category": "digital_arrest",
       "weight": 60,
+      "language": "any",
       "patterns": [
         "\\bdigital\\s*arrest\\b",
         "डिजिटल\\s*अरेस्ट",
-        "\\bdigital\\s+(arrest|custody)\\b"
+        "\\bdigital\\s+(arrest|custody)\\b",
+        "\\b(do not|don'?t|dont)\\s+(disconnect|hang\\s*up|cut)\\b",
+        "\\b(stay|remain)\\s+on\\s+(the\\s+)?(call|video\\s*call|line)\\b",
+        "\\bvideo\\s*call\\s*(par|pe)\\s*(rahiye|raho|rehna|ban[ae])\\b"
       ],
-      "reasonEn": "\"Digital arrest\" is never real. Police and agencies cannot arrest or interrogate you over a call, video call or message.",
-      "reasonHi": "\"डिजिटल अरेस्ट\" जैसी कोई चीज़ नहीं होती। पुलिस या एजेंसी फ़ोन, वीडियो कॉल या संदेश पर आपको गिरफ्तार या पूछताछ नहीं कर सकती।"
+      "examples": [
+        "you are under digital arrest",
+        "do not disconnect the video call",
+        "किसी को न बताएं"
+      ],
+      "reasonEn": "This looks like the \"digital arrest\" scam. Police, CBI, customs and courts never arrest, interrogate or fine you over a phone or video call.",
+      "reasonHi": "यह \"डिजिटल अरेस्ट\" जैसी ठगी का तरीका है। पुलिस, CBI, कस्टम और कोर्ट कभी फ़ोन या वीडियो कॉल पर गिरफ़्तार, पूछताछ या जुर्माना नहीं करते।"
     },
     {
       "id": "legal_threat",
-      "category": "threat",
+      "family": "digital_arrest",
+      "category": "digital_arrest",
       "weight": 30,
+      "language": "any",
       "patterns": [
         "\\barrest\\s*warrant\\b",
         "\\bnon[- ]?bailable\\b",
@@ -45,22 +164,26 @@
         "\\blegal\\s+action\\b",
         "\\bpolice\\s+(case|complaint|station)\\b",
         "\\byou\\s+are\\s+under\\s+(investigation|arrest)\\b",
+        "\\bwarrant\\b",
         "गिरफ्तार",
+        "गिरफ़्तार",
         "मुकदमा",
         "कोर्ट",
         "अदालत",
         "जुर्माना",
         "एफआईआर",
-        "गिरफ़्तार",
-        "\\bwarrant\\b"
+        "मामला दर्ज"
       ],
+      "examples": [],
       "reasonEn": "It threatens you with arrest, a court case or legal action. Genuine notices never arrive this way over SMS or chat.",
       "reasonHi": "यह गिरफ्तारी, मुकदमा या कानूनी कार्रवाई की धमकी देता है। असली नोटिस कभी SMS या चैट से नहीं आते।"
     },
     {
       "id": "authority_impersonation",
-      "category": "impersonation",
+      "family": "digital_arrest",
+      "category": "digital_arrest",
       "weight": 22,
+      "language": "any",
       "patterns": [
         "\\bcbi\\b",
         "\\bncb\\b",
@@ -73,20 +196,45 @@
         "\\bcustoms\\s+(officer|department)\\b",
         "\\bcrime\\s+branch\\b",
         "\\bnarcotics\\b",
+        "\\bcustoms\\b",
         "पुलिस",
         "सीबीआई",
         "आयकर",
         "आरबीआई",
         "ट्राई",
-        "साइबर सेल"
+        "साइबर सेल",
+        "कस्टम"
       ],
+      "examples": [],
       "reasonEn": "It names a police or government agency to frighten you. Real officers do not message you like this.",
       "reasonHi": "यह आपको डराने के लिए पुलिस या सरकारी एजेंसी का नाम लेता है। असली अधिकारी इस तरह संदेश नहीं भेजते।"
     },
     {
+      "id": "safe_account",
+      "family": "digital_arrest",
+      "category": "digital_arrest",
+      "weight": 35,
+      "language": "any",
+      "patterns": [
+        "\\b(safe|secure|government|govt|verification|escrow)\\s+account\\b",
+        "\\b(move|transfer)\\s+(your\\s+)?(savings|money|funds)\\s+to\\s+(a\\s+)?(safe|secure|government)\\b",
+        "\\bfund\\s+regular(isation|ization)\\b",
+        "\\bregularise\\s+your\\s+funds?\\b",
+        "सुरक्षित खाते",
+        "सरकारी खाते",
+        "सेफ अकाउंट",
+        "पैसा सुरक्षित खाते में"
+      ],
+      "examples": [],
+      "reasonEn": "It asks you to move your money to a \"safe account\". There is no such thing — this is how the money is stolen.",
+      "reasonHi": "यह आपसे पैसा \"सुरक्षित खाते\" में डालने को कहता है। ऐसा कुछ नहीं होता — इसी तरह आपका पैसा चोरी होता है।"
+    },
+    {
       "id": "urgency_pressure",
-      "category": "urgency",
+      "family": "",
+      "category": "",
       "weight": 18,
+      "language": "any",
       "patterns": [
         "\\burgent(ly)?\\b",
         "\\bimmediately\\b",
@@ -97,6 +245,10 @@
         "\\bfinal\\s+(warning|notice|reminder)\\b",
         "\\btoday\\s+itself\\b",
         "\\botherwise\\s+(your|we|you|i)\\b",
+        "\\boverdue\\b",
+        "\\bpay\\s+now\\b",
+        "\\bwarna\\b",
+        "\\baaj\\s*hi\\b",
         "तुरंत",
         "तुरन्त",
         "फौरन",
@@ -104,42 +256,66 @@
         "अभी",
         "आज ही",
         "वरना",
-        "\\bwarna\\b",
-        "\\bturant\\b",
-        "\\bjaldi\\b",
-        "\\babhi\\b",
-        "\\boverdue\\b"
+        "तुरंत करें"
       ],
+      "examples": [],
       "reasonEn": "It creates panic and pushes you to act fast. Scammers use hurry and fear so you do not stop and think.",
       "reasonHi": "यह घबराहट बनाकर आपसे जल्दी कुछ करने को कहता है। ठग जल्दबाज़ी और डर का इस्तेमाल करते हैं ताकि आप सोच न पाएँ।"
     },
     {
       "id": "kyc_block",
-      "category": "kyc",
+      "family": "refund_tax_bill",
+      "category": "refund_tax_bill",
       "weight": 28,
+      "language": "any",
       "patterns": [
         "\\bkyc\\b[^.\\n]{0,30}(update|updat|expir|pending|pend|complet|verif|link|submit|re-?kyc|suspend|block|reject|frozen|freeze)",
         "\\b(update|complete|verif|submit|link)[^.\\n]{0,20}\\bkyc\\b",
         "\\baccount\\s+will\\s+be\\s+(block|suspend|clos|frozen|deactivat|freez)",
         "\\b(block|suspend|clos|freez|deactivat)\\w*\\s+(your\\s+|the\\s+)?(account|card|sim)\\b",
         "\\b(card|account|sim|upi)\\b[^.\\n]{0,20}\\b(block|suspend|clos|froze|freez|deactivat)\\w*\\b",
+        "\\baccount\\b[^.\\n]{0,12}\\bband\\b",
+        "\\b(reactivat|re-?activat|unblock)\\w*\\b[^.\\n]{0,15}\\b(account|card|sim)\\b",
+        "\\b(account|card|sim)\\b[^.\\n]{0,15}\\b(reactivat|re-?activat|unblock)\\w*\\b",
         "खाता\\s*(बंद|निलंबित|फ्रीज़|सस्पेंड|ब्लॉक)",
-        "केवाईसी[^।\\n]{0,25}(अपडेट|समाप्त|लंबित|बंद|वेरिफ|करें)",
-        "(अपडेट|पूरा|सत्यापित)[^।\\n]{0,15}केवाईसी",
+        "केवाईसी[^।\n]{0,25}(अपडेट|समाप्त|लंबित|बंद|वेरिफ|करें)",
+        "(अपडेट|पूरा|सत्यापित)[^।\n]{0,15}केवाईसी",
         "के.वाई.सी"
       ],
+      "examples": [],
       "reasonEn": "It says your KYC or account is at risk of being blocked. Banks do not ask you to update KYC through links in messages.",
       "reasonHi": "यह कहता है कि आपका KYC या खाता बंद होने का खतरा है। बैंक संदेश के लिंक से KYC अपडेट करने को नहीं कहते।"
     },
     {
+      "id": "sim_aadhaar_block",
+      "family": "refund_tax_bill",
+      "category": "refund_tax_bill",
+      "weight": 28,
+      "language": "any",
+      "patterns": [
+        "\\bsim\\b[^.\\n]{0,25}\\b(deactivat|block|disconnect|suspend|stop)\\w*\\b",
+        "\\b(deactivat|block|disconnect|suspend)\\w*\\b[^.\\n]{0,15}\\bsim\\b",
+        "\\baadhaar\\b[^.\\n]{0,25}\\b(link|verify|update|block|misuse|suspend)\\w*\\b",
+        "\\b(sim|number)\\b[^.\\n]{0,20}\\b(aadhaar|aadhar)\\b",
+        "सिम[^।\n]{0,20}(बंद|ब्लॉक|निलंबित)",
+        "आधार[^।\n]{0,20}(लिंक|वेरिफ|अपडेट|दुरुपयोग|बंद)"
+      ],
+      "examples": [],
+      "reasonEn": "It says your SIM will be blocked or links it to Aadhaar. Telecom operators never ask you to verify Aadhaar over a call or link.",
+      "reasonHi": "यह कहता है कि आपका सिम बंद हो जाएगा या उसे आधार से जोड़ता है। टेलीकॉम कंपनियाँ कभी कॉल या लिंक से आधार वेरिफाई नहीं करातीं।"
+    },
+    {
       "id": "prize_lottery",
-      "category": "prize",
+      "family": "lottery_prize",
+      "category": "lottery_prize",
       "weight": 35,
+      "language": "any",
       "patterns": [
         "\\b(lottery|lucky\\s+draw|jackpot|prize\\s+money|winning\\s+amount|scratch\\s+card|kbc|kaun\\s+banega|dear\\s+lucky\\s+(customer|winner))\\b",
         "\\byou\\s+(have\\s+)?won\\b",
-        "\\bcongratulations\\b[^.\\n]{0,30}\\b(won|prize|winner|lottery|lakh|crore|reward)\\b",
+        "\\bcongratulations\\b[^.\\n]{0,30}\\b(won|prize|winner|lottery|lakh|crore|reward|selected)\\b",
         "\\bclaim\\s+your\\s+(prize|reward|gift|winnings?)\\b",
+        "\\b(apna|aapka)\\b[^.\\n]{0,20}\\b(inam|inaam|prize|reward)\\b",
         "लॉटरी",
         "लकी ड्रॉ",
         "इनाम",
@@ -149,16 +325,20 @@
         "आपने जीता",
         "किस्मत"
       ],
-      "reasonEn": "It claims you won a prize or lottery. You cannot win a lottery you never entered.",
-      "reasonHi": "यह दावा करता है कि आपने इनाम या लॉटरी जीती है। जिस लॉटरी में आपने भाग नहीं लिया, वह आप नहीं जीत सकते।"
+      "examples": [],
+      "reasonEn": "This is a lottery / prize scam. You cannot win a lottery or lucky draw you never entered.",
+      "reasonHi": "यह लॉटरी या इनाम की ठगी का तरीका है। जिस लॉटरी या लकी ड्रॉ में आपने भाग नहीं लिया, वह आप नहीं जीत सकते।"
     },
     {
       "id": "job_fee",
-      "category": "job",
+      "family": "task_job",
+      "category": "task_job",
       "weight": 28,
+      "language": "any",
       "patterns": [
         "\\b(work\\s+from\\s+home|part[- ]?time\\s+job|online\\s+job|data\\s+entry\\s+job|typing\\s+job|copy\\s+paste\\s+job|home\\s+based\\s+job|earn\\s+money\\s+from\\s+home)\\b",
         "\\b(job|naukri|vacancy|hiring)\\b[^.\\n]{0,30}\\b(fee|deposit|registration|security|charge|pay|payment)\\b",
+        "\\b(job|naukri|vacancy|hiring)\\b[^.\\n]{0,20}\\b(whatsapp|telegram|group)\\b",
         "घर बैठे",
         "पार्ट टाइम",
         "ऑनलाइन जॉब",
@@ -168,112 +348,216 @@
         "घर से काम",
         "टाइपिंग जॉब"
       ],
-      "reasonEn": "It offers easy work-from-home or part-time money. A real job never asks you to pay first.",
-      "reasonHi": "यह घर बैठे या पार्ट टाइम कमाई का लालच देता है। असली नौकरी कभी पहले पैसे नहीं माँगती।"
+      "examples": [],
+      "reasonEn": "This is a task / job scam. A real job never asks you to pay a registration or security fee first.",
+      "reasonHi": "यह टास्क या नौकरी की ठगी का तरीका है। असली नौकरी कभी पहले रजिस्ट्रेशन या सिक्योरिटी फीस नहीं माँगती।"
+    },
+    {
+      "id": "task_scam",
+      "family": "task_job",
+      "category": "task_job",
+      "weight": 30,
+      "language": "any",
+      "patterns": [
+        "\\b(task|tasks)\\b[^.\\n]{0,25}\\b(complete|like|review|unlock|wallet|earn|commission|deposit|hotel|rating)\\b",
+        "\\b(unlock|complete)\\b[^.\\n]{0,15}\\b(next\\s+)?task\\b",
+        "\\b(like\\s+and\\s+subscribe|like\\s*&\\s*subscribe|hotel\\s+rating|app\\s+review)\\b",
+        "\\b(prepaid|paid)\\s+task\\b",
+        "\\bper\\s+task\\b",
+        "\\bearn\\s+per\\s+task\\b",
+        "\\bwallet\\b[^.\\n]{0,20}\\b(recharge|top\\s*up|add\\s+money|deposit|unlock)\\b",
+        "\\b(deposit|depositing|recharge)\\b[^.\\n]{0,20}\\b(wallet|task|unlock)\\b",
+        "टास्क पूरा",
+        "टास्क कर",
+        "अगला टास्क",
+        "वॉलेट रिचार्ज"
+      ],
+      "examples": [],
+      "reasonEn": "This is the \"task\" job scam — small tasks that lead to a deposit you can never withdraw.",
+      "reasonHi": "यह \"टास्क\" वाली नौकरी ठगी है — छोटे-छोटे टास्क के बाद जमा माँगा जाता है जो कभी वापस नहीं मिलता।"
+    },
+    {
+      "id": "deposit_to_unlock",
+      "family": "task_job",
+      "category": "task_job",
+      "weight": 30,
+      "language": "any",
+      "patterns": [
+        "\\b(deposit|depositing|recharge|add)\\b[^.\\n]{0,20}\\b(wallet|task|unlock|account)\\b",
+        "\\b(unlock|activate)\\b[^.\\n]{0,15}\\b(task|wallet|account)\\b[^.\\n]{0,20}\\b(deposit|pay|recharge|\\d{3,})\\b",
+        "\\bwallet\\b[^.\\n]{0,20}\\b(deposit|recharge|top\\s*up|add\\s+money)\\b",
+        "वॉलेट[^।\n]{0,20}(जमा|रिचार्ज|डाल)",
+        "टास्क[^।\n]{0,20}(जमा|पैसे डाल|अनलॉक)"
+      ],
+      "examples": [],
+      "reasonEn": "It asks you to deposit money to unlock a task or wallet. That money is never returned.",
+      "reasonHi": "यह टास्क या वॉलेट अनलॉक करने के लिए पैसे जमा करने को कहता है। वह पैसा कभी वापस नहीं मिलता।"
     },
     {
       "id": "advance_payment",
-      "category": "fee",
+      "family": "",
+      "category": "",
       "weight": 28,
+      "language": "any",
       "patterns": [
-        "\\b(registration|processing|security|activation|verification|refundable|membership|joining|handling|delivery|clearance|customs|release)\\s+(fee|fees|charges?|amount|deposit|money)\\b",
+        "\\b(registration|processing|security|activation|verification|refundable|membership|joining|handling|delivery|clearance|customs|release|unlock)\\s+(fee|fees|charges?|amount|deposit|money)\\b",
         "\\b(pay|deposit|send|transfer)\\b[^.\\n]{0,25}\\b(registration|processing|security|activation|membership|joining|refundable)\\b",
+        "\\bfee\\b[^.\\n]{0,20}\\b(to\\s+)?(claim|receive|get|unlock|withdraw|release|confirm)\\b",
+        "\\b(tax|fee|charge|फीस|शुल्क|टैक्स)\\b[^.\\n]{0,15}\\b(bhej|भेज|pay|deposit|jama|जमा|transfer)\\b",
+        "(टैक्स|फीस|शुल्क|चार्ज|जमा)[^।\n]{0,15}(भेज|जमा|दे|डाल|ट्रांसफर|कर)",
         "(रजिस्ट्रेशन|प्रोसेसिंग|सिक्योरिटी|एक्टिवेशन|सदस्यता|जॉइनिंग|डिलीवरी)\\s*(फीस|शुल्क|चार्ज|जमा|राशि|पैसे)",
-        "(फीस|शुल्क|चार्ज|जमा राशि)[^।\\n]{0,15}(भेज|जमा कर|दे|डाल|ट्रांसफर)"
+        "(फीस|शुल्क|चार्ज|जमा राशि)[^।\n]{0,15}(भेज|जमा कर|दे|डाल|ट्रांसफर)"
       ],
-      "reasonEn": "It asks you to pay a fee or deposit first. That is the most common sign of a scam.",
+      "examples": [],
+      "reasonEn": "It asks you to pay a fee or deposit first. That is the single most common sign of a scam.",
       "reasonHi": "यह पहले फीस या जमा राशि माँगता है। यही धोखे का सबसे आम संकेत है।"
     },
     {
       "id": "investment_doubling",
+      "family": "investment",
       "category": "investment",
       "weight": 32,
+      "language": "any",
       "patterns": [
         "\\b(double\\s+your\\s+(money|investment|capital)|guaranteed\\s+(returns?|profit|income)|assured\\s+returns?|risk[- ]?free\\s+(investment|returns?|profit)|multiply\\s+your\\s+money|sure\\s*shot|fixed\\s+returns?)\\b",
         "\\b\\d+\\s*%\\s*(per|daily|monthly|weekly|guaranteed|return|profit|interest)\\b",
-        "\\b(trading|stock|share|intraday|crypto|forex)\\s+tips\\b",
+        "\\b(trading|stock|share|intraday|crypto|forex)\\s+(tips|signal|group)\\b",
         "\\b(invest|investment)\\b[^.\\n]{0,25}\\b(double|profit|guarantee|daily|monthly|returns?)\\b",
         "पैसा\\s*(दोगुना|डबल)",
         "दोगुना\\s*(कर|हो|करें)",
         "गारंटीड\\s*(रिटर्न|मुनाफा|प्रॉफिट|आय)",
-        "निवेश[^।\\n]{0,20}(दोगुना|गारंटी|मुनाफा|रिटर्न)",
+        "निवेश[^।\n]{0,20}(दोगुना|गारंटी|मुनाफा|रिटर्न)",
         "शेयर\\s*टिप",
         "ट्रेडिंग\\s*टिप",
         "मुनाफा\\s*गारंटी"
       ],
-      "reasonEn": "It promises guaranteed or doubled money. No genuine investment can promise fixed high returns.",
-      "reasonHi": "यह गारंटी या पैसा दोगुना होने का वादा करता है। कोई भी असली निवेश इतना पक्का मुनाफ़ा नहीं दे सकता।"
+      "examples": [],
+      "reasonEn": "This is an investment scam. No genuine investment can promise guaranteed or doubled returns.",
+      "reasonHi": "यह निवेश की ठगी का तरीका है। कोई भी असली निवेश गारंटी या पैसा दोगुना होने का वादा नहीं कर सकता।"
+    },
+    {
+      "id": "investment_withdraw_fee",
+      "family": "investment",
+      "category": "investment",
+      "weight": 30,
+      "language": "any",
+      "patterns": [
+        "\\bwithdraw(al|als)?\\b[^.\\n]{0,25}\\b(tax|fee|charge|deposit|pay|blocked|hold)\\b",
+        "\\b(profit|balance|earning)\\b[^.\\n]{0,25}\\b(withdraw|withdrawal|not\\s+able\\s+to)\\b",
+        "\\bapp\\s+(shows|me)\\s+profit\\b",
+        "\\b(profit|munafa|balance)\\b[^.\\n]{0,25}\\b(nikal\\w*|withdraw\\w*)\\b",
+        "\\b(nikal\\w*|withdraw\\w*)\\b[^.\\n]{0,25}\\b(tax|fee|charge|paisa|paise|deposit|bhej)\\b",
+        "निकासी[^।\n]{0,20}(टैक्स|फीस|शुल्क|जमा|रोक)",
+        "मुनाफा[^।\n]{0,20}(निकाल|निकासी)"
+      ],
+      "examples": [],
+      "reasonEn": "It says you must pay a tax or fee to withdraw your profit. Real profits never need a payment to release.",
+      "reasonHi": "यह कहता है कि मुनाफ़ा निकालने के लिए टैक्स या फीस देनी होगी। असली मुनाफ़े के लिए कभी पहले भुगतान नहीं करना पड़ता।"
+    },
+    {
+      "id": "investment_group",
+      "family": "investment",
+      "category": "investment",
+      "weight": 16,
+      "language": "any",
+      "patterns": [
+        "\\b(vip|premium)\\b[^.\\n]{0,15}\\b(group|plan|membership|signal)\\b",
+        "\\b(telegram|whatsapp)\\b[^.\\n]{0,20}\\b(trading|stock|invest|profit|signal|vip)\\b",
+        "वीआईपी ग्रुप",
+        "ट्रेडिंग ग्रुप",
+        "प्रीमियम प्लान"
+      ],
+      "examples": [],
+      "reasonEn": "It pushes a VIP investment group. Such groups exist only to take your money.",
+      "reasonHi": "यह VIP निवेश ग्रुप की तरफ़ धकेलता है। ऐसे ग्रुप सिर्फ़ पैसा लेने के लिए बनाए जाते हैं।"
     },
     {
       "id": "loan_app_threat",
-      "category": "loan",
+      "family": "loan_app",
+      "category": "loan_app",
       "weight": 35,
+      "language": "any",
       "patterns": [
         "\\b(loan\\s+app|instant\\s+loan|recovery\\s+agent|recovery\\s+team)\\b",
         "\\b(your\\s+contacts?|your\\s+photos?|morphed|photoshop)\\b[^.\\n]{0,30}\\b(send|share|viral|public|expose|leak)\\b",
-        "\\b(viral|leak|expose|defame)\\b[^.\\n]{0,20}\\b(photo|contact|friend|family)\\b",
+        "\\b(viral|leak|expose|defame|badnaam)\\b[^.\\n]{0,20}\\b(photo|contact|friend|family)\\b",
         "\\bpay\\s+now\\s+or\\b",
         "लोन ऐप",
-        "लोन ऐप्स",
         "वसूली",
         "फोटो वायरल",
         "तस्वीरें वायरल",
         "बदनाम",
-        "कॉन्टैक्ट"
+        "कॉन्टैक्ट",
+        "वसूली वाले"
       ],
-      "reasonEn": "It threatens to shame you or contact your family over a loan. Illegal loan apps use this pressure — do not pay.",
-      "reasonHi": "यह लोन के नाम पर आपको बदनाम करने या परिवार से संपर्क करने की धमकी देता है। अवैध लोन ऐप यही दबाव डालते हैं — पैसे न दें।"
+      "examples": [],
+      "reasonEn": "This is an illegal loan-app threat. No legal lender threatens your family or your photos — do not pay.",
+      "reasonHi": "यह अवैध लोन ऐप की धमकी है। कोई भी कानूनी कर्ज़दाता आपके परिवार या फ़ोटो की धमकी नहीं देता — पैसे न दें।"
     },
     {
       "id": "refund_cashback",
-      "category": "refund",
+      "family": "refund_tax_bill",
+      "category": "refund_tax_bill",
       "weight": 18,
+      "language": "any",
       "patterns": [
-        "\\b(refund|cashback|cash\\s+back|reimburs)[^.\\n]{0,25}\\b(claim|receive|get|process|approve|pending|credited|due)\\b",
+        "\\b(refund|cashback|cash\\s+back|reimburs|gst\\s+refund|tax\\s+refund)[^.\\n]{0,25}\\b(claim|receive|get|process|approve|pending|credited|due)\\b",
         "\\b(claim|receive|get)\\b[^.\\n]{0,20}\\b(refund|cashback|reimburs)\\b",
         "\\byour\\s+(refund|cashback)\\b",
         "रिफंड",
         "कैशबैक",
-        "वापसी"
+        "वापसी",
+        "टैक्स वापसी"
       ],
+      "examples": [],
       "reasonEn": "It talks about a refund or cashback you must claim. Fake refunds are used to get your bank details.",
       "reasonHi": "यह किसी रिफंड या कैशबैक का ज़िक्र करता है जो आपको लेना है। नकली रिफंड से आपकी बैंक जानकारी ली जाती है।"
     },
     {
       "id": "electricity_bill",
-      "category": "utility",
+      "family": "refund_tax_bill",
+      "category": "refund_tax_bill",
       "weight": 25,
+      "language": "any",
       "patterns": [
-        "\\b(electricity|power|bijli)\\b[^.\\n]{0,30}\\b(bill|disconnect|disconnection|cut|due|pending|shut|pay)\\b",
+        "\\b(electricity|power|bijli)\\b[^.\\n]{0,30}\\b(disconnect\\w*|cut\\s*off|shut\\s*down|kat\\s*jayeg|band\\s*ho|block\\w*)\\b",
         "\\b(bill|connection)\\b[^.\\n]{0,25}\\b(disconnect|cut\\s+off|shut\\s+down)\\b",
-        "बिजली[^।\\n]{0,25}(बिल|काट|बंद|कनेक्शन|भुगतान)",
+        "\\b(electricity|bijli)\\b[^\\n]{0,25}\\b(tonight|today|aaj)\\b",
+        "बिजली[^।\n]{0,25}(बिल|काट|बंद|कनेक्शन|भुगतान)",
         "बिजली बिल",
         "कनेक्शन काट"
       ],
-      "reasonEn": "It says your electricity will be cut off. Disconnection is never announced by SMS with a link or number to pay.",
+      "examples": [],
+      "reasonEn": "It says your electricity will be cut off. Disconnection is never announced by an SMS with a link or number to pay.",
       "reasonHi": "यह कहता है कि आपकी बिजली काट दी जाएगी। बिजली काटने की सूचना कभी लिंक या नंबर वाले SMS से नहीं दी जाती।"
     },
     {
       "id": "courier_customs",
-      "category": "courier",
+      "family": "courier_delivery",
+      "category": "courier_delivery",
       "weight": 26,
+      "language": "any",
       "patterns": [
-        "\\b(parcel|package|courier|consignment|shipment)\\b[^.\\n]{0,35}\\b(customs|illegal|seized|held|detained|drugs|contraband|clearance|duty)\\b",
+        "\\b(parcel|package|courier|consignment|shipment|delivery)\\b[^\\n]{0,35}\\b(customs|illegal|seized|held|detained|drugs|contraband|clearance|duty|nasha)\\b",
         "\\b(customs|narcotics)\\b[^.\\n]{0,25}\\b(parcel|package|courier|drugs)\\b",
+        "\\b(illegal|drugs|contraband|narcotics|seized)\\b[^.\\n]{0,25}\\b(parcel|package|courier|consignment)\\b",
+        "\\bparcel\\b[^.\\n]{0,25}\\b(fee|charges?|duty|pay|clearance|release)\\b",
         "पार्सल",
         "कूरियर",
         "कस्टम",
         "जब्त",
-        "अवैध सामान",
-        "(illegal|drugs|contraband|narcotics|seized)\\b[^.\\n]{0,25}\\b(parcel|package|courier|consignment)"
+        "अवैध सामान"
       ],
-      "reasonEn": "It claims a parcel in your name holds illegal items. This is a common trick to scare you into paying.",
-      "reasonHi": "यह दावा करता है कि आपके नाम के पार्सल में अवैध सामान है। यह डराकर पैसे लेने की आम चाल है।"
+      "examples": [],
+      "reasonEn": "This is a courier / customs scam. Real couriers never demand a \"clearance\" or \"customs\" fee over chat.",
+      "reasonHi": "यह कूरियर या कस्टम की ठगी का तरीका है। असली कूरियर कभी चैट पर \"क्लीयरेंस\" या \"कस्टम\" फीस नहीं माँगते।"
     },
     {
       "id": "remote_access",
-      "category": "remote_access",
-      "weight": 45,
+      "family": "",
+      "category": "",
+      "weight": 65,
+      "language": "any",
       "patterns": [
         "\\b(anydesk|teamviewer|quicksupport|quick\\s*support|rustdesk|ultraviewer|ammyy|screen\\s*share|share\\s+your\\s+screen|screen\\s+sharing|remote\\s+(access|support))\\b",
         "स्क्रीन शेयर",
@@ -282,105 +566,198 @@
         "एनीडेस्क",
         "टीमव्यूअर"
       ],
+      "examples": [],
       "reasonEn": "It asks you to install a screen-sharing app. That lets a scammer see and control your phone and your bank app.",
       "reasonHi": "यह स्क्रीन शेयर करने वाला ऐप इंस्टॉल करने को कहता है। इससे ठग आपका फ़ोन और बैंक ऐप देख व चला सकता है।"
     },
     {
       "id": "pay_to_receive",
-      "category": "payment",
+      "family": "",
+      "category": "",
       "weight": 32,
+      "language": "any",
       "patterns": [
         "\\bscan\\b[^.\\n]{0,20}\\bqr\\b",
         "\\bqr\\s*code\\b[^.\\n]{0,25}\\b(receive|get|refund|payment|money)\\b",
         "\\b(pay|scan)\\b[^.\\n]{0,20}\\b(to\\s+)?(receive|get)\\s+(money|amount|refund|payment)\\b",
         "\\bto\\s+receive\\s+(the\\s+)?(money|amount|refund|payment)\\b",
-        "पैसे\\s*(पाने|प्राप्त करने|लेने)[^।\\n]{0,20}(स्कैन|भेज|करें|QR)",
+        "पैसे\\s*(पाने|प्राप्त करने|लेने)[^।\n]{0,20}(स्कैन|भेज|करें|QR)",
         "QR स्कैन",
         "पैसे लेने के लिए"
       ],
+      "examples": [],
       "reasonEn": "It asks you to scan a QR code or pay to receive money. You never have to pay or scan to receive money.",
       "reasonHi": "यह पैसे पाने के लिए QR स्कैन या भुगतान करने को कहता है। पैसे पाने के लिए कभी भुगतान या स्कैन नहीं करना पड़ता।"
     },
     {
       "id": "money_transfer",
-      "category": "payment",
+      "family": "",
+      "category": "",
       "weight": 20,
+      "language": "any",
       "patterns": [
-        "\\b(transfer|send|deposit|remit)\\b[^.\\n]{0,20}\\b(money|amount|funds?|rs\\.?|inr|₹|\\d{3,})\\b",
-        "\\b(money|amount|funds?|rs\\.?|inr|₹)\\b[^.\\n]{0,15}\\b(transfer|transferred|send|deposit|remit)\\b",
-        "\\b(pay|transfer|send|deposit|remit)\\b[^.\\n]{0,15}\\b(rs\\.?|inr|₹)?\\s?\\d{3,}\\b",
+        "\\b(transfer|send|deposit|remit)\\b[^.\\n]{0,20}\\b(money|amount|funds?|rs\\.?|inr|\\d{3,})\\b",
+        "\\b(money|amount|funds?|rs\\.?|inr)\\b[^.\\n]{0,15}\\b(transfer|transferred|send|deposit|remit)\\b",
+        "\\b(pay|transfer|send|deposit|remit)\\b[^.\\n]{0,15}\\b(rs\\.?|inr)?\\s?\\d{3,}\\b",
         "पैसे\\s*(भेज|ट्रांसफर|जमा|डाल)",
         "राशि\\s*(भेज|ट्रांसफर|जमा|डाल)",
-        "\\b(paise|paisa|rakam|amount)\\b[^.\\n]{0,15}\\b(bhej|bhejo|bhejiye|transfer|daal|jama|jamaa)\\b",
-        "\\b(bhej|bhejo|transfer|daal)\\b[^.\\n]{0,15}\\b(paise|paisa|rakam|amount)\\b"
+        "\\bpaisa\\b[^.\\n]{0,15}\\b(bhej|transfer|daal|jama)\\b",
+        "\\b(bhej|transfer|daal)\\b[^.\\n]{0,15}\\bpaisa\\b",
+        "\\b\\d{3,}\\b[^.\\n]{0,15}\\b(bhej\\w*|transfer|send|pay|daal|jama)\\b",
+        "\\b(bhej\\w*|transfer|send|daal)\\b[^.\\n]{0,12}\\b(karo|kar\\s*do|kar\\s*dena|kar\\s*dijiye|de\\s*do)\\b"
       ],
+      "examples": [],
       "reasonEn": "It asks you to transfer or send money. Once money leaves your account it is almost impossible to get back.",
       "reasonHi": "यह आपसे पैसे ट्रांसफर या भेजने को कहता है। खाते से पैसे जाने के बाद उन्हें वापस पाना लगभग असंभव है।"
     },
     {
       "id": "click_link",
-      "category": "link",
+      "family": "",
+      "category": "",
       "weight": 15,
+      "language": "any",
       "patterns": [
         "\\b(click|tap|open|visit)\\s+(here|this\\s+link|the\\s+link|below|the\\s+below)\\b",
-        "\\b(click|tap)\\b[^.\\n]{0,20}\\b(link|here)\\b",
+        "\\b(click|tap|open|visit)(ing)?\\b[^.\\n]{0,20}\\b(link|here)\\b",
+        "\\blink\\b[^.\\n]{0,20}\\b(this\\s+message|below|given)\\b",
         "लिंक पर क्लिक",
         "यहाँ क्लिक",
         "लिंक खोलें",
         "नीचे दिए लिंक",
         "\\blink\\s+(par|pe)\\s+(click|tap|khol|open)\\b"
       ],
+      "examples": [],
       "reasonEn": "It asks you to click a link. Do not click links in unexpected messages.",
       "reasonHi": "यह आपसे लिंक पर क्लिक करने को कहता है। अचानक आए संदेशों के लिंक पर क्लिक न करें।"
     },
     {
       "id": "call_number",
-      "category": "call",
+      "family": "",
+      "category": "",
       "weight": 12,
+      "language": "any",
       "patterns": [
         "\\b(call|dial|contact|phone)\\s+(this|the|on\\s+this)\\s+(number|no)\\b",
         "\\b(call|dial)\\s+(us|now)\\s+(immediately|at\\s+once|urgently)\\b",
         "इस नंबर पर (कॉल|संपर्क)",
         "इस नंबर पे कॉल",
-        "नंबर पर कॉल"
+        "नंबर पर कॉल",
+        "\\bis\\s+number\\s+(par|pe)\\s+(call|contact|karo|karein|kar)\\b"
       ],
+      "examples": [],
       "reasonEn": "It pushes you to call a number given in the message. Use only the official number from your card or passbook.",
       "reasonHi": "यह संदेश में दिए नंबर पर कॉल करने का दबाव डालता है। सिर्फ़ अपने कार्ड या पासबुक पर लिखा आधिकारिक नंबर ही इस्तेमाल करें।"
     },
     {
       "id": "join_group",
-      "category": "group",
+      "family": "",
+      "category": "",
       "weight": 18,
+      "language": "any",
       "patterns": [
         "\\b(join|add\\s+you\\s+to|link\\s+to\\s+join)\\b[^.\\n]{0,25}\\b(telegram|whatsapp|group|channel)\\b",
-        "\\b(telegram|whatsapp)\\b[^.\\n]{0,20}\\b(group|channel|link|trading)\\b",
+        "\\b(telegram|whatsapp)\\b[^.\\n]{0,20}\\b(group|channel|link)\\b",
         "टेलीग्राम",
         "व्हाट्सएप ग्रुप",
         "ग्रुप जॉइन",
         "टेलीग्राम ग्रुप"
       ],
+      "examples": [],
       "reasonEn": "It invites you to a Telegram or WhatsApp group. Investment and job scams run through such groups.",
       "reasonHi": "यह आपको टेलीग्राम या व्हाट्सएप ग्रुप में जोड़ने का न्योता देता है। निवेश और नौकरी के धोखे ऐसे ग्रुप से चलते हैं।"
     },
     {
       "id": "share_documents",
-      "category": "documents",
+      "family": "credential",
+      "category": "credential",
       "weight": 25,
+      "language": "any",
       "patterns": [
         "\\b(send|share|upload|provide|attach|enter|fill|type)\\b[^.\\n]{0,25}\\b(aadhaar|aadhar|adhaar|pan\\s+card|passport|voter\\s+id|bank\\s+details|account\\s+number|ifsc|card\\s+number|debit\\s+card|credit\\s+card)\\b",
         "\\b(aadhaar|aadhar|pan\\s+card|bank\\s+details|card\\s+number)\\b[^.\\n]{0,20}\\b(send|share|photo|pic|upload)\\b",
-        "(आधार|पैन कार्ड|बैंक डिटेल|कार्ड नंबर|खाता संख्या)[^।\\n]{0,20}(भेज|शेयर|फोटो|अपलोड|दें|बताएं)",
-        "\\b(aadhaar|aadhar|pan|bank\\s+(account|details)|account\\s+number|card\\s+number|cvv|ifsc)\\b[^.\\n]{0,20}\\b(bhej|bhejo|bhejiye|share|send|de|do|daal|batao|bataye)"
+        "\\b(aadhaar|aadhar|pan|bank\\s+(account|details)|account\\s+number|card\\s+number|cvv|ifsc)\\b[^.\\n]{0,20}\\b(bhej|share|send|de|do|daal|bata)\\b",
+        "(आधार|पैन कार्ड|बैंक डिटेल|कार्ड नंबर|खाता संख्या)[^।\n]{0,20}(भेज|शेयर|फोटो|अपलोड|दें|बताएं)"
       ],
+      "examples": [],
       "reasonEn": "It asks for your Aadhaar, PAN, card or bank details. Never share these with anyone who contacts you first.",
       "reasonHi": "यह आपका आधार, पैन, कार्ड या बैंक विवरण माँगता है। जो पहले संपर्क करे, उसे ये कभी न बताएँ।"
     },
     {
-      "id": "too_good_offer",
-      "category": "offer",
-      "weight": 16,
+      "id": "family_emergency",
+      "family": "family_emergency",
+      "category": "family_emergency",
+      "weight": 30,
+      "language": "any",
       "patterns": [
-        "\\b(earn\\s+(up\\s+to\\s+)?(rs\\.?|inr|₹)?\\s?\\d{3,}|\\d{3,}\\s*(rs|rupees|inr|₹)\\s*(per|/)\\s*(day|hour|week))\\b",
+        "\\b(this|it'?s|its)\\s+(is\\s+)?(my|your\\s+(son|daughter|beta|beti))?\\s*(new|naya|naye)\\s+(number|no)\\b",
+        "\\b(naya|naye|new)\\s+(number|no)\\b",
+        "\\b(phone|mobile)\\b[^.\\n]{0,15}\\b(dead|switched\\s+off|not\\s+working|lost)\\b",
+        "\\b(borrowed|friend'?s|dost\\s+ka)\\s+(phone|mobile)\\b",
+        "\\b(accident|hospital|admit|operation|icu)\\b[^.\\n]{0,30}\\b(money|paisa|paise|upi|pay|jaldi|turant)\\b",
+        "\\b(don'?t|do\\s+not|mat|na)\\s+(tell|batao|batana|batayein|bolna)\\b[^.\\n]{0,15}\\b(mom|dad|mummy|papa|family|ghar)\\b",
+        "\\bupi\\s+request\\b",
+        "नया नंबर",
+        "नए नंबर",
+        "मेरा नंबर बदल",
+        "पापा पैसे",
+        "मम्मी पैसे",
+        "फ़ोन बंद",
+        "दुर्घटना"
+      ],
+      "examples": [],
+      "reasonEn": "This looks like a family-emergency impersonation: a \"new number\" plus an urgent money request.",
+      "reasonHi": "यह परिवार की आपात स्थिति का नाटक लगता है: \"नया नंबर\" और साथ में तुरंत पैसे की माँग।"
+    },
+    {
+      "id": "sextortion",
+      "family": "romance_sextortion",
+      "category": "romance_sextortion",
+      "weight": 45,
+      "language": "any",
+      "patterns": [
+        "\\b(your|aapki?)\\b[^.\\n]{0,15}\\b(video|videos|photo|photos|pic|pics|picture|pictures|clip|clips)\\b[^.\\n]{0,25}\\b(viral|leak|share|bhej|public|expose|social\\s+media|upload)\\b",
+        "\\b(viral\\s+kar|badnaam\\s+kar|share\\s+kar\\s+dunga|upload\\s+kar)\\b",
+        "वायरल\\s*कर",
+        "बदनाम\\s*कर",
+        "वीडियो\\s*वायरल",
+        "तस्वीरें\\s*वायरल",
+        "\\b(intimate|private|nude|objectionable|morphed)\\b[^.\\n]{0,20}\\b(video|clip|photo|picture)\\b",
+        "\\b(sextortion|honey\\s*trap|honey\\s*trapping)\\b",
+        "\\b(video\\s*call|webcam)\\b[^.\\n]{0,25}\\b(record|recording|screen\\s*record)\\b",
+        "अश्लील",
+        "वीडियो वायरल",
+        "तस्वीरें वायरल",
+        "बदनाम कर"
+      ],
+      "examples": [],
+      "reasonEn": "This is a sextortion / blackmail attempt. Paying never stops them — save the evidence and report it.",
+      "reasonHi": "यह सेक्सटॉर्शन यानी ब्लैकमेल की कोशिश है। पैसे देने से ये कभी नहीं रुकते — सबूत रखें और शिकायत करें।"
+    },
+    {
+      "id": "fake_customer_care",
+      "family": "fake_customer_care",
+      "category": "fake_customer_care",
+      "weight": 25,
+      "language": "any",
+      "patterns": [
+        "\\b(customer\\s+care|helpline|toll[- ]?free|support)\\b[^.\\n]{0,20}\\b(number|no\\.?|call|dial|contact)\\b",
+        "\\b(call|dial|contact)\\b[^.\\n]{0,20}\\b(customer\\s+care|helpline|toll[- ]?free)\\b",
+        "\\b(official|bank|company)\\s+(customer\\s+care|helpline)\\b[^.\\n]{0,20}\\b(number|call|dial)\\b",
+        "कस्टमर केयर नंबर",
+        "हेल्पलाइन नंबर"
+      ],
+      "examples": [],
+      "reasonEn": "It points you to a \"customer care\" number. Always use the number printed on your card or the official app.",
+      "reasonHi": "यह आपको \"कस्टमर केयर\" नंबर पर भेजता है। हमेशा अपने कार्ड या असली ऐप पर लिखा नंबर ही इस्तेमाल करें।"
+    },
+    {
+      "id": "too_good_offer",
+      "family": "",
+      "category": "",
+      "weight": 16,
+      "language": "any",
+      "patterns": [
+        "\\b(earn\\s+(up\\s+to\\s+)?(rs\\.?|inr)?\\s?\\d{3,}|\\d{3,}\\s*(rs|rupees|inr)\\s*(per|/)\\s*(day|hour|week))\\b",
         "\\b(free\\s+(gift|recharge|data|iphone|mobile|voucher)|100%\\s*(free|guaranteed)|completely\\s+free|no\\s+cost)\\b",
         "मुफ़्त",
         "मुफ्त",
@@ -389,8 +766,486 @@
         "प्रतिदिन",
         "हर दिन कमाएँ"
       ],
+      "examples": [],
       "reasonEn": "It offers money or gifts that sound too good to be true. That is exactly how these scams hook people.",
       "reasonHi": "यह इतना बढ़िया लाभ या तोहफ़ा दिखाता है जो सच नहीं हो सकता। इन धोखों में लोग ऐसे ही फँसते हैं।"
+    },
+    {
+      "id": "fake_job_offer_whatsapp",
+      "family": "task_job",
+      "category": "task_job",
+      "weight": 22,
+      "language": "any",
+      "patterns": [
+        "\\b(hiring|recruitment|hr|manager)\\b[^.\\n]{0,25}\\b(whatsapp|telegram)\\b",
+        "\\b(daily\\s+income|daily\\s+payout|earn\\s+\\d{3,}\\s*(per|a)\\s*day)\\b",
+        "\\b(no\\s+experience|no\\s+documents?|no\\s+interview)\\b[^.\\n]{0,25}\\b(job|work|earn)\\b",
+        "रोज़ाना कमाई",
+        "डेली इनकम"
+      ],
+      "examples": [],
+      "reasonEn": "It offers a job with no interview and daily payouts over WhatsApp/Telegram. That is a task-job scam.",
+      "reasonHi": "यह बिना इंटरव्यू, व्हाट्सएप/टेलीग्राम पर रोज़ की कमाई वाली नौकरी दिखाता है। यह टास्क-नौकरी की ठगी है।"
+    }
+  ],
+  "comboRules": [
+    {
+      "id": "combo_authority_threat",
+      "family": "digital_arrest",
+      "weight": 25,
+      "requiresAll": [
+        "authority_impersonation",
+        "legal_threat"
+      ],
+      "requiresAny": [
+        "urgency_pressure",
+        "remote_access",
+        "money_transfer",
+        "safe_account",
+        "digital_arrest"
+      ],
+      "reasonEn": "A fake officer plus a threat plus pressure to act — a classic \"digital arrest\" pattern.",
+      "reasonHi": "नकली अधिकारी, धमकी और जल्दी करने का दबाव — यह \"डिजिटल अरेस्ट\" का पक्का तरीका है।"
+    },
+    {
+      "id": "combo_authority_secrecy_money",
+      "family": "digital_arrest",
+      "weight": 30,
+      "requiresAll": [
+        "authority_impersonation"
+      ],
+      "requiresAny": [
+        "safe_account",
+        "money_transfer"
+      ],
+      "requiresGroups": [
+        [
+          "digital_arrest",
+          "safe_account",
+          "legal_threat"
+        ]
+      ],
+      "reasonEn": "A fake authority asking for money to a \"safe account\" is always a scam.",
+      "reasonHi": "नकली अधिकारी का \"सुरक्षित खाते\" में पैसा माँगना हमेशा ठगी है।"
+    },
+    {
+      "id": "combo_family_emergency_money",
+      "family": "family_emergency",
+      "weight": 30,
+      "requiresAll": [
+        "family_emergency"
+      ],
+      "requiresAny": [
+        "money_transfer",
+        "pay_to_receive",
+        "share_documents"
+      ],
+      "reasonEn": "A \"new number\" plus an urgent money request is the family-emergency scam.",
+      "reasonHi": "\"नया नंबर\" और साथ में तुरंत पैसे की माँग परिवार की आपात स्थिति की ठगी है।"
+    },
+    {
+      "id": "combo_investment_pressure",
+      "family": "investment",
+      "weight": 25,
+      "requiresAll": [
+        "investment_doubling"
+      ],
+      "requiresAny": [
+        "join_group",
+        "urgency_pressure",
+        "too_good_offer",
+        "investment_group"
+      ],
+      "reasonEn": "Guaranteed returns pushed through a group with urgency — a textbook investment scam.",
+      "reasonHi": "ग्रुप में जल्दबाज़ी के साथ गारंटीड मुनाफ़ा — यह निवेश ठगी की किताबी मिसाल है।"
+    },
+    {
+      "id": "combo_fee_to_receive",
+      "family": "",
+      "weight": 25,
+      "requiresAll": [],
+      "requiresAny": [
+        "advance_payment",
+        "pay_to_receive"
+      ],
+      "requiresGroups": [
+        [
+          "job_fee",
+          "task_scam",
+          "prize_lottery",
+          "refund_cashback",
+          "courier_customs",
+          "investment_withdraw_fee",
+          "loan_app_threat"
+        ]
+      ],
+      "reasonEn": "A fee or deposit demanded to get a job, prize, refund or loan is always a scam.",
+      "reasonHi": "नौकरी, इनाम, रिफंड या लोन के लिए पहले फीस या जमा माँगना हमेशा ठगी है।"
+    },
+    {
+      "id": "combo_credential_transfer",
+      "family": "credential",
+      "weight": 30,
+      "requiresAll": [],
+      "requiresAny": [
+        "otp_request",
+        "share_documents"
+      ],
+      "requiresGroups": [
+        [
+          "money_transfer",
+          "remote_access",
+          "safe_account",
+          "pay_to_receive",
+          "refund_cashback",
+          "prize_lottery",
+          "job_fee",
+          "loan_app_threat",
+          "kyc_block",
+          "courier_customs",
+          "electricity_bill",
+          "fake_customer_care",
+          "investment_withdraw_fee"
+        ]
+      ],
+      "reasonEn": "Asking for your OTP/PIN/card details together with a money step is always a scam.",
+      "reasonHi": "OTP/PIN/कार्ड जानकारी माँगने के साथ पैसे का कदम — यह हमेशा ठगी है।"
+    },
+    {
+      "id": "combo_prize_claim",
+      "family": "lottery_prize",
+      "weight": 22,
+      "requiresAll": [
+        "prize_lottery"
+      ],
+      "requiresAny": [
+        "share_documents",
+        "advance_payment",
+        "money_transfer",
+        "click_link"
+      ],
+      "reasonEn": "A prize you must pay or share details for is not a prize — it is a scam.",
+      "reasonHi": "जिस इनाम के लिए पैसे या जानकारी देनी पड़े, वह इनाम नहीं — ठगी है।"
+    },
+    {
+      "id": "combo_kyc_link",
+      "family": "refund_tax_bill",
+      "weight": 22,
+      "requiresAll": [
+        "kyc_block"
+      ],
+      "requiresAny": [
+        "link_lookalike_brand",
+        "link_shortener",
+        "link_suspicious_tld",
+        "click_link"
+      ],
+      "reasonEn": "A KYC/account-block warning with a link is the classic KYC phishing scam.",
+      "reasonHi": "KYC या खाता बंद होने की चेतावनी के साथ लिंक — यह KYC फिशिंग की पुरानी चाल है।"
+    },
+    {
+      "id": "combo_job_deposit",
+      "family": "task_job",
+      "weight": 25,
+      "requiresAll": [
+        "job_fee"
+      ],
+      "requiresAny": [
+        "advance_payment",
+        "join_group",
+        "too_good_offer"
+      ],
+      "reasonEn": "A job offer that needs a deposit or group join is a task-job scam.",
+      "reasonHi": "जिस नौकरी में जमा या ग्रुप जॉइन करना पड़े, वह टास्क-नौकरी की ठगी है।"
+    },
+    {
+      "id": "combo_sextortion_threat",
+      "family": "romance_sextortion",
+      "weight": 20,
+      "requiresAll": [
+        "sextortion"
+      ],
+      "requiresAny": [
+        "money_transfer",
+        "call_number"
+      ],
+      "reasonEn": "Threatening to leak a video/photo and demanding money is sextortion — never pay.",
+      "reasonHi": "वीडियो/फोटो वायरल करने की धमकी और पैसा माँगना सेक्सटॉर्शन है — पैसे न दें।"
+    },
+    {
+      "id": "combo_investment_withdraw",
+      "family": "investment",
+      "weight": 35,
+      "requiresAll": [
+        "investment_withdraw_fee"
+      ],
+      "requiresAny": [],
+      "reasonEn": "A \"profit\" you can only release by paying a tax or fee is always a scam.",
+      "reasonHi": "\"मुनाफ़ा\" जो टैक्स या फीस देने पर ही निकले — वह हमेशा ठगी है।"
+    },
+    {
+      "id": "combo_task_deposit",
+      "family": "task_job",
+      "weight": 30,
+      "requiresAll": [
+        "task_scam"
+      ],
+      "requiresAny": [
+        "advance_payment",
+        "money_transfer",
+        "join_group",
+        "too_good_offer",
+        "pay_to_receive"
+      ],
+      "reasonEn": "Task jobs that ask for a deposit to \"unlock\" work are a scam.",
+      "reasonHi": "काम \"अनलॉक\" करने के लिए जमा माँगने वाली टास्क नौकरी ठगी है।"
+    },
+    {
+      "id": "combo_loan_threat",
+      "family": "loan_app",
+      "weight": 25,
+      "requiresAll": [
+        "loan_app_threat"
+      ],
+      "requiresAny": [
+        "urgency_pressure",
+        "sextortion",
+        "call_number",
+        "money_transfer"
+      ],
+      "reasonEn": "An illegal loan app threatening you or your family is a serious crime — do not pay.",
+      "reasonHi": "अवैध लोन ऐप का आपको या परिवार को धमकाना गंभीर अपराध है — पैसे न दें।"
+    },
+    {
+      "id": "combo_sim_kyc",
+      "family": "refund_tax_bill",
+      "weight": 22,
+      "requiresAll": [
+        "sim_aadhaar_block"
+      ],
+      "requiresAny": [
+        "kyc_block",
+        "urgency_pressure",
+        "call_number"
+      ],
+      "reasonEn": "A SIM-block or Aadhaar warning with pressure to act is a scam.",
+      "reasonHi": "सिम बंद होने या आधार की चेतावनी के साथ जल्दबाज़ी — यह ठगी है।"
+    },
+    {
+      "id": "combo_utility_threat",
+      "family": "refund_tax_bill",
+      "weight": 20,
+      "requiresAll": [
+        "electricity_bill"
+      ],
+      "requiresAny": [
+        "urgency_pressure",
+        "call_number",
+        "advance_payment",
+        "money_transfer",
+        "fake_customer_care"
+      ],
+      "reasonEn": "A disconnection threat with a number or link to pay is the classic bill scam.",
+      "reasonHi": "बिजली काटने की धमकी और भुगतान का नंबर या लिंक — यह बिल ठगी की पुरानी चाल है।"
+    },
+    {
+      "id": "combo_kyc_block_context",
+      "family": "refund_tax_bill",
+      "weight": 25,
+      "requiresAll": [
+        "kyc_block"
+      ],
+      "requiresAny": [
+        "click_link",
+        "call_number",
+        "urgency_pressure",
+        "otp_request",
+        "share_documents",
+        "link_lookalike_brand",
+        "link_shortener",
+        "link_suspicious_tld"
+      ],
+      "reasonEn": "A KYC/account-block warning with a link, number or pressure is a scam.",
+      "reasonHi": "KYC या खाता बंद होने की चेतावनी के साथ लिंक, नंबर या जल्दबाज़ी — यह ठगी है।"
+    },
+    {
+      "id": "combo_fake_care",
+      "family": "fake_customer_care",
+      "weight": 25,
+      "requiresAll": [
+        "fake_customer_care"
+      ],
+      "requiresAny": [
+        "urgency_pressure",
+        "call_number",
+        "otp_request",
+        "share_documents",
+        "kyc_block"
+      ],
+      "reasonEn": "A \"customer care\" number with pressure to act is the fake-helpline scam.",
+      "reasonHi": "\"कस्टमर केयर\" नंबर और जल्दी करने का दबाव — यह नकली हेल्पलाइन ठगी है।"
+    },
+    {
+      "id": "combo_legal_threat_context",
+      "family": "digital_arrest",
+      "weight": 25,
+      "requiresAll": [
+        "legal_threat"
+      ],
+      "requiresAny": [
+        "authority_impersonation",
+        "money_transfer",
+        "urgency_pressure",
+        "advance_payment",
+        "safe_account"
+      ],
+      "reasonEn": "A legal threat with a demand for money or urgent action is a scam.",
+      "reasonHi": "कानूनी धमकी के साथ पैसे या जल्दी करने की माँग — यह ठगी है।"
+    },
+    {
+      "id": "combo_refund_claim",
+      "family": "refund_tax_bill",
+      "weight": 25,
+      "requiresAll": [
+        "refund_cashback"
+      ],
+      "requiresAny": [
+        "share_documents",
+        "click_link",
+        "advance_payment",
+        "money_transfer",
+        "otp_request",
+        "link_lookalike_brand",
+        "link_shortener",
+        "link_suspicious_tld"
+      ],
+      "reasonEn": "A refund you must claim by sharing details, clicking a link or paying a fee is a scam.",
+      "reasonHi": "जिस रिफंड के लिए जानकारी, लिंक या फीस देनी पड़े — वह ठगी है।"
+    },
+    {
+      "id": "combo_courier_threat",
+      "family": "courier_delivery",
+      "weight": 25,
+      "requiresAll": [
+        "courier_customs"
+      ],
+      "requiresAny": [
+        "money_transfer",
+        "advance_payment",
+        "authority_impersonation",
+        "legal_threat",
+        "urgency_pressure",
+        "call_number"
+      ],
+      "reasonEn": "A customs/parcel story with a payment or threat is a courier scam.",
+      "reasonHi": "कस्टम या पार्सल की कहानी के साथ भुगतान या धमकी — यह कूरियर ठगी है।"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_do_not_share_otp",
+      "family": "credential",
+      "suppress": [
+        "otp_request",
+        "share_documents"
+      ],
+      "patterns": [
+        "\\b(do\\s+not|don'?t|dont|never|not\\s+to)\\s+(share|give|tell|reveal|forward|disclose)\\b[^.\\n]{0,25}\\b(otp|pin|cvv|password|mpin)\\b",
+        "\\b(otp|pin|cvv|password|mpin)\\b[^.\\n]{0,25}\\b(do\\s+not|don'?t|dont|never|not\\s+to)\\s+(share|give|tell|reveal)\\b",
+        "\\b(otp|pin|cvv|password|mpin)\\b[^.\\n]{0,30}\\b(kisi\\s+ko\\s+na|kabhi\\s+nahi|na\\s+bata|nahi\\s+bata|share\\s+na|na\\s+karein|na\\s+de)\\b",
+        "\\b(kisi\\s+ko\\s+na|kabhi\\s+nahi|na\\s+bata|nahi\\s+bata)\\b[^.\\n]{0,25}\\b(otp|pin|cvv|password|mpin)\\b",
+        "\\bbank\\b[^.\\n]{0,20}\\b(never|kabhi\\s+nahi|nahi)\\b[^.\\n]{0,20}\\b(otp|pin|cvv|password|maangta|maangte|asks?)\\b",
+        "\\b(never|kabhi\\s+nahi|nahi)\\b[^.\\n]{0,20}\\b(ask|asks|maangta|maangte)\\b[^.\\n]{0,20}\\b(otp|pin|cvv|password)\\b",
+        "(ओटीपी|पिन|सीवीवी|पासवर्ड)[^।\\n]{0,30}(किसी को न|कभी नहीं|न बता|न बताएँ|शेयर न|न दें)"
+      ]
+    },
+    {
+      "id": "guard_transaction_alert",
+      "family": "",
+      "suppress": [
+        "otp_request",
+        "share_documents",
+        "money_transfer",
+        "pay_to_receive",
+        "advance_payment"
+      ],
+      "patterns": [
+        "\\b(debited|credited|withdrawn|spent|paid)\\b[^.\\n]{0,30}\\b(a/c|account|card|rs\\.?|inr)\\b",
+        "\\b(a/c|account|card)\\b[^.\\n]{0,20}\\b(debited|credited|spent|withdrawn)\\b",
+        "\\bavail(able)?\\s+bal(ance)?\\b",
+        "\\bnot\\s+you\\b[^.\\n]{0,20}\\b(call|contact|report)\\b",
+        "\\b(trxn|txn|transaction)\\b[^.\\n]{0,20}\\b(debited|credited|of)\\b"
+      ]
+    },
+    {
+      "id": "guard_otp_delivery",
+      "family": "credential",
+      "suppress": [
+        "otp_request"
+      ],
+      "patterns": [
+        "\\byour\\s+otp\\b[^.\\n]{0,20}\\b(is|for)\\b",
+        "\\b(otp|code)\\b[^.\\n]{0,15}\\bis\\s+\\d{3,}",
+        "\\b(login|verification|transaction)\\b[^.\\n]{0,20}\\botp\\b",
+        "\\botp\\b[^.\\n]{0,10}\\d{3,}"
+      ]
+    },
+    {
+      "id": "guard_bill_reminder",
+      "family": "",
+      "suppress": [
+        "money_transfer",
+        "advance_payment",
+        "electricity_bill"
+      ],
+      "patterns": [
+        "\\b(pay|paid)\\s+via\\s+(the\\s+)?(official|bank)\\s+app\\b",
+        "\\b(in\\s+the\\s+app|through\\s+the\\s+app|official\\s+app)\\b",
+        "\\b(bill|recharge|premium)\\b[^.\\n]{0,25}\\b(ready|generated|available|due)\\b[^.\\n]{0,25}\\b(app|portal|website)\\b"
+      ]
+    },
+    {
+      "id": "guard_delivery_update",
+      "family": "",
+      "suppress": [
+        "courier_customs",
+        "advance_payment"
+      ],
+      "patterns": [
+        "\\b(out\\s+for\\s+delivery|will\\s+be\\s+delivered|reached\\s+you|delivery\\s+agent\\s+will)\\b",
+        "\\b(shipped|dispatched)\\b[^.\\n]{0,25}\\b(reach|deliver)\\b"
+      ]
+    },
+    {
+      "id": "guard_normal_family_chat",
+      "family": "family_emergency",
+      "suppress": [
+        "family_emergency",
+        "money_transfer"
+      ],
+      "patterns": [
+        "\\b(free\\s+ho|available|khana|dinner|lunch|reached\\s+(home|college|office)|late\\s+(today|aaj))\\b"
+      ]
+    },
+    {
+      "id": "guard_completion_notice",
+      "family": "",
+      "suppress": [
+        "kyc_block",
+        "sim_aadhaar_block",
+        "electricity_bill",
+        "money_transfer",
+        "advance_payment",
+        "refund_cashback",
+        "task_scam",
+        "investment_withdraw_fee"
+      ],
+      "patterns": [
+        "\\b(kyc|aadhaar|aadhar|verification|update|link|card|number|request|claim)\\b[^.\\n]{0,25}\\b(is|has\\s+been|was|are)\\s+(complete\\w*|done|verified|up\\s*to\\s*date|successful|processed|linked|active)\\b",
+        "\\bno\\s+action\\s+(is\\s+)?(needed|required)\\b",
+        "\\b(bill|payment|recharge|upi\\s+payment|refund|order)\\b[^.\\n]{0,20}\\b(was\\s+)?(successful|paid|completed|done|processed|received)\\b",
+        "\\b(bill)\\b[^.\\n]{0,20}\\b(bhar\\s*di\\w*|paid|bhugtan\\s+kar\\s+di\\w*)\\b"
+      ]
     }
   ],
   "linkRules": {
@@ -559,6 +1414,12 @@
         "weight": 10,
         "reasonEn": "The message contains several links, which is unusual for a genuine message.",
         "reasonHi": "संदेश में कई लिंक हैं, जो असली संदेश के लिए असामान्य है।"
+      },
+      {
+        "id": "apk_download",
+        "weight": 35,
+        "reasonEn": "The link downloads an app file (apk). Sideloaded apps are used to steal money.",
+        "reasonHi": "लिंक एक ऐप फ़ाइल (apk) डाउनलोड करता है। ऐसे ऐप से पैसा चोरी होता है।"
       }
     ]
   }

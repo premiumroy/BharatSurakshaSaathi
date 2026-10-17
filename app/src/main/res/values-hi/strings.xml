@@ -33,10 +33,10 @@
     <string name="home_kids_badge">बच्चों का सुरक्षित मोड</string>
 
     <!-- Verdicts -->
-    <string name="verdict_safe">सुरक्षित लगता है</string>
+    <string name="verdict_safe">कोई साफ़ चेतावनी संकेत नहीं</string>
     <string name="verdict_careful">सावधान रहें</string>
     <string name="verdict_dangerous">खतरनाक</string>
-    <string name="verdict_safe_short">सुरक्षित</string>
+    <string name="verdict_safe_short">कोई साफ़ संकेत नहीं</string>
     <string name="verdict_careful_short">सावधान</string>
     <string name="verdict_dangerous_short">खतरनाक</string>
 
@@ -311,4 +311,19 @@
     <string name="brand_made_by">निर्माता: Roy Limited</string>
     <string name="brand_owner">स्वामी: प्रशांत डोबरियाल</string>
     <string name="brand_alias">ऑनलाइन “Premium Roy” के नाम से जाने जाते हैं</string>
+
+    <!-- v2 engine: guarantee line, family advice, hidden debug screen -->
+    <string name="verdict_guarantee_note">यह गारंटी नहीं है।</string>
+    <string name="advice_no_guaranteed_returns">गारंटीड या दोगुने मुनाफ़े के वादे पर कभी निवेश न करें। असली निवेश कभी जोखिम-मुक्त नहीं होते।</string>
+    <string name="advice_job_never_pay">असली नौकरी कभी रजिस्ट्रेशन, सिक्योरिटी या ट्रेनिंग फीस नहीं माँगती। पैसे न दें।</string>
+    <string name="advice_call_back_known_number">पैसे भेजने से पहले उस व्यक्ति को उसके पुराने, सेव किए नंबर पर कॉल करके पुष्टि करें।</string>
+    <string name="advice_loan_app_report">पैसे न दें। लोन ऐप की शिकायत पुलिस और cybercrime.gov.in पर करें।</string>
+    <string name="advice_lottery_never_pay">जिस लॉटरी में आपने भाग नहीं लिया, वह आप नहीं जीत सकते। इनाम पाने के लिए कभी टैक्स या फीस न दें।</string>
+    <string name="advice_sextortion_dont_pay">पैसे न दें और घबराएँ नहीं — पैसे देने से ये कभी नहीं रुकते। सबूत रखें और शिकायत करें।</string>
+    <string name="advice_courier_never_pay">असली कूरियर कभी चैट पर कस्टम या क्लीयरेंस फीस नहीं माँगते। पैसे न दें।</string>
+    <string name="debug_title">नियम डीबग</string>
+    <string name="debug_no_result">अभी कोई जाँच नहीं हुई है।</string>
+    <string name="debug_last_message">आख़िरी जाँचा गया संदेश</string>
+    <string name="debug_matched_rules">मैच हुए नियम आईडी</string>
+    <string name="debug_reasons">कारण</string>
 </resources>
