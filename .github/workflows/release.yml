@@ -1,6 +1,8 @@
 name: Release build
 
-# Builds a signed release APK and AAB, and publishes the APK to GitHub Releases
+# Builds a signed release APK and publishes it to GitHub Releases.
+# The .aab is deliberately never built or published here: anyone holding an
+# .aab can upload it to Google Play under their own account.
 # when a tag like v1.0.0 is pushed.
 on:
   push:
@@ -69,16 +71,11 @@ jobs:
           GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx2g"
         run: ./gradlew :app:assembleRelease --no-daemon --max-workers=2
 
-      - name: Build release AAB
-        env:
-          GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx2g"
-        run: ./gradlew :app:bundleRelease --no-daemon --max-workers=2
-
       - name: Report artifact sizes
         run: |
           {
             echo "### Release artifact sizes"
-            find app/build/outputs -name '*.apk' -o -name '*.aab' | while read -r f; do
+            find app/build/outputs -name '*.apk' | while read -r f; do
               echo "- $f : $(du -h "$f" | cut -f1)"
             done
           } >> "$GITHUB_STEP_SUMMARY"
@@ -87,7 +84,6 @@ jobs:
         run: |
           mkdir -p release-files
           cp app/build/outputs/apk/release/*.apk release-files/SurakshaSaathi-release.apk
-          cp app/build/outputs/bundle/release/*.aab release-files/SurakshaSaathi-release.aab
           ( cd release-files && sha256sum * > SHA256SUMS.txt )
           cat release-files/SHA256SUMS.txt
 
@@ -98,12 +94,6 @@ jobs:
           path: app/build/outputs/apk/release/*.apk
           if-no-files-found: error
 
-      - name: Upload AAB
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-aab
-          path: app/build/outputs/bundle/release/*.aab
-          if-no-files-found: error
 
       - name: Publish the APK to GitHub Releases
         if: startsWith(github.ref, 'refs/tags/v')
@@ -121,10 +111,12 @@ jobs:
             or file manager. Allow it, install, then turn that permission back off.
             Step-by-step Hindi instructions are in INSTALL_HINDI.md.
 
-            `SurakshaSaathi-release.aab` is for uploading to Google Play. Do not
-            install it on a phone.
-
             `SHA256SUMS.txt` lets you check that the file arrived intact.
+
+            Only the APK is published. The `.aab` for Google Play is never
+            attached to a public release, so nobody else can upload this app to
+            Play under their own account. Build your own when you need it:
+            `./gradlew :app:bundleRelease`
 
             This is a helpful check, not a guarantee. No app can catch every scam.
             यह गारंटी नहीं है।

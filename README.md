@@ -148,7 +148,7 @@ Scam detection is strongest in Hindi and English. [LANGUAGES.md](LANGUAGES.md) l
 3. Open the downloaded file. Android will ask you to allow "install unknown apps" for your browser or file manager. Allow it, then tap Install.
 4. When it is installed, turn that permission back off.
 
-A `.aab` file is also attached to each release. That one is for uploading to Google Play, not for installing on a phone.
+Releases contain **only the APK**. The `.aab` for Google Play is never attached to a public release, so nobody else can upload this app to Play under their own account. Build your own when you need it: `./gradlew :app:bundleRelease`.
 
 Step-by-step Hindi instructions, including how to check the file, are in [INSTALL_HINDI.md](INSTALL_HINDI.md).
 
