@@ -22,20 +22,8 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
       - name: Set up Android SDK
-        run: |
-          set -e
-          SDK="${ANDROID_HOME:-$ANDROID_SDK_ROOT}"
-          if [ -z "$SDK" ]; then SDK=/usr/local/lib/android/sdk; fi
-          echo "ANDROID_HOME=$SDK" >> "$GITHUB_ENV"
-          echo "ANDROID_SDK_ROOT=$SDK" >> "$GITHUB_ENV"
-          SM=$(ls "$SDK"/cmdline-tools/*/bin/sdkmanager 2>/dev/null | head -1)
-          echo "Using sdkmanager: $SM"
-          yes | "$SM" --sdk_root="$SDK" --licenses > /dev/null 2>&1 || true
-          "$SM" --sdk_root="$SDK" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+        uses: android-actions/setup-android@v3
 
       - name: Cache Gradle
         uses: actions/cache@v4
@@ -95,6 +83,14 @@ jobs:
             done
           } >> "$GITHUB_STEP_SUMMARY"
 
+      - name: Prepare release files
+        run: |
+          mkdir -p release-files
+          cp app/build/outputs/apk/release/*.apk release-files/SurakshaSaathi-release.apk
+          cp app/build/outputs/bundle/release/*.aab release-files/SurakshaSaathi-release.aab
+          ( cd release-files && sha256sum * > SHA256SUMS.txt )
+          cat release-files/SHA256SUMS.txt
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
@@ -113,11 +109,25 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: app/build/outputs/apk/release/*.apk
+          files: release-files/*
           generate_release_notes: true
           body: |
-            Suraksha Saathi release build.
+            ## Suraksha Saathi
 
-            Install it from outside Play by allowing "install unknown apps" for
-            your browser or file manager. यह गारंटी नहीं है। This is a helpful
-            check, not a guarantee.
+            **On a phone?** Tap **SurakshaSaathi-release.apk** below. It downloads
+            straight to your phone, then open it to install.
+
+            Android will ask you to allow "install unknown apps" for your browser
+            or file manager. Allow it, install, then turn that permission back off.
+            Step-by-step Hindi instructions are in INSTALL_HINDI.md.
+
+            `SurakshaSaathi-release.aab` is for uploading to Google Play. Do not
+            install it on a phone.
+
+            `SHA256SUMS.txt` lets you check that the file arrived intact.
+
+            This is a helpful check, not a guarantee. No app can catch every scam.
+            यह गारंटी नहीं है।
+
+            Suraksha Saathi is an independent app. It is not a government app and
+            is not affiliated with Sanchar Saathi, I4C, any bank, or any authority.

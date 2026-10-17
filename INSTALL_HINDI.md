@@ -4,7 +4,17 @@
 
 ## 1. फ़ाइल डाउनलोड करें
 
-GitHub Releases पेज से `SurakshaSaathi-release.apk` डाउनलोड करें। फ़ाइल का आकार लगभग 30-40 MB होगा। अगर कोई आपको WhatsApp पर APK भेजे, तो उसे न खोलें — हमेशा आधिकारिक पेज से डाउनलोड करें।
+सीधा लिंक, मोबाइल पर खोलें:
+
+**https://github.com/premiumroy/BharatSurakshaSaathi/releases/latest/download/SurakshaSaathi-release.apk**
+
+या Releases पेज खोलें और Assets में `SurakshaSaathi-release.apk` पर टैप करें:
+
+**https://github.com/premiumroy/BharatSurakshaSaathi/releases/latest**
+
+फ़ाइल का आकार लगभग 34 MB है। डाउनलोड अपने आप शुरू हो जाएगा और फ़ोन के Downloads फ़ोल्डर में सेव होगा।
+
+अगर कोई आपको WhatsApp पर APK भेजे, तो उसे न खोलें — हमेशा इसी आधिकारिक पेज से डाउनलोड करें।
 
 ## 2. फ़ाइल जाँचें (ज़रूरी)
 
