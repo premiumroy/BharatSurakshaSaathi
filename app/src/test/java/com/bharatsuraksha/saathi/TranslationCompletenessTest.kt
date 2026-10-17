@@ -16,28 +16,28 @@ import java.io.File
  */
 class TranslationCompletenessTest {
 
-    private val source = readStrings(File(resDir(), "values/strings.xml"))
+    private val source = readStrings(sourceFile())
 
     @Test
     fun everyLanguageFileHasExactlyTheSameKeys() {
         val sourceKeys = source.keys
-        shippedLocaleFolders().forEach { folder ->
-            val strings = readStrings(File(resDir(), "$folder/strings.xml"))
+        shippedTags().forEach { tag ->
+            val strings = readStrings(fileFor(tag))
             val missing = sourceKeys - strings.keys
             val extra = strings.keys - sourceKeys
-            assertTrue("$folder is missing ${missing.size} keys: ${missing.take(10)}", missing.isEmpty())
-            assertTrue("$folder has ${extra.size} unknown keys: ${extra.take(10)}", extra.isEmpty())
+            assertTrue("$tag is missing ${missing.size} keys: ${missing.take(10)}", missing.isEmpty())
+            assertTrue("$tag has ${extra.size} unknown keys: ${extra.take(10)}", extra.isEmpty())
         }
     }
 
     @Test
     fun everyPlaceholderIsPreserved() {
-        shippedLocaleFolders().forEach { folder ->
-            val strings = readStrings(File(resDir(), "$folder/strings.xml"))
+        shippedTags().forEach { tag ->
+            val strings = readStrings(fileFor(tag))
             source.forEach { (key, value) ->
                 val expected = placeholders(value)
                 val actual = placeholders(strings[key].orEmpty())
-                assertEquals("$folder / $key placeholders differ", expected, actual)
+                assertEquals("$tag / $key placeholders differ", expected, actual)
             }
         }
     }
@@ -46,13 +46,13 @@ class TranslationCompletenessTest {
     fun safetyCriticalValuesAreNeverTranslated() {
         // These must survive translation exactly, in every language.
         val mustSurvive = listOf("1930", "cybercrime.gov.in", "sancharsaathi.gov.in")
-        shippedLocaleFolders().forEach { folder ->
-            val strings = readStrings(File(resDir(), "$folder/strings.xml"))
+        shippedTags().forEach { tag ->
+            val strings = readStrings(fileFor(tag))
             source.forEach { (key, value) ->
                 mustSurvive.forEach { token ->
                     if (value.contains(token)) {
                         assertTrue(
-                            "$folder / $key lost the token '$token'",
+                            "$tag / $key lost the token '$token'",
                             strings[key].orEmpty().contains(token)
                         )
                     }
@@ -62,17 +62,16 @@ class TranslationCompletenessTest {
     }
 
     @Test
-    fun everyShippedFolderIsDeclaredInTheRegistry() {
+    fun everyShippedLanguageIsDeclaredInTheRegistry() {
         val declared = LanguageRegistry.ALL.map { it.tag }.toSet()
-        shippedLocaleFolders().forEach { folder ->
-            val tag = folder.removePrefix("values-b+").removePrefix("values-")
-            assertTrue("$folder is not declared in LanguageRegistry", tag in declared)
+        shippedTags().forEach { tag ->
+            assertTrue("$tag ships a strings.xml but is not declared in LanguageRegistry", tag in declared)
         }
     }
 
     @Test
     fun everyLanguageClaimingStringsActuallyHasAFolder() {
-        val shipped = shippedLocaleFolders().map { it.removePrefix("values-b+").removePrefix("values-") }.toSet()
+        val shipped = shippedTags().toSet()
         LanguageRegistry.ALL.filter { it.hasStrings }.forEach { language ->
             assertTrue(
                 "${language.tag} claims hasStrings but no resource folder ships",
@@ -89,15 +88,29 @@ class TranslationCompletenessTest {
 
     // ------------------------------------------------------------------ helpers
 
-    /** Every locale folder that ships a full strings.xml (hi, en live in values*). */
-    private fun shippedLocaleFolders(): List<String> {
-        val res = resDir()
-        return res.listFiles()
+    /**
+     * BCP-47 tags that ship a complete strings.xml. English lives in the default
+     * `values/` folder, so it is added explicitly rather than found by name.
+     */
+    private fun shippedTags(): List<String> {
+        val folders = resDir().listFiles()
             ?.filter { it.isDirectory }
             ?.map { it.name }
-            ?.filter { it == "values-hi" || it.startsWith("values-b+") }
-            ?.sorted()
             ?: emptyList()
+        val fromFolders = folders
+            .filter { it == "values-hi" || it.startsWith("values-b+") }
+            .map { it.removePrefix("values-b+").removePrefix("values-") }
+        return (fromFolders + "en").distinct().sorted()
+    }
+
+    private fun sourceFile(): File = File(resDir(), "values/strings.xml")
+
+    /** Hindi ships as values-hi; newer languages ship as values-b+<tag>. */
+    private fun fileFor(tag: String): File {
+        if (tag == "en") return sourceFile()
+        val short = File(resDir(), "values-$tag/strings.xml")
+        if (short.isFile) return short
+        return File(resDir(), "values-b+$tag/strings.xml")
     }
 
     private fun resDir(): File {
