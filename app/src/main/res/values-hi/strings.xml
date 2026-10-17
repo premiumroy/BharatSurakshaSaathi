@@ -846,6 +846,5 @@
     <string name="privacy_data_delete_confirm_body">इस ऐप ने इस फ़ोन में जो कुछ सहेजा है, वह सब मिट जाएगा। इसे वापस नहीं लाया जा सकता।</string>
     <string name="privacy_data_delete_yes">हाँ, मिटाएँ</string>
     <string name="privacy_data_deleted">सारा स्थानीय डेटा मिटा दिया गया।</string>
-    <string name="settings_about">ऐप के बारे में</string>
     <string name="settings_privacy_data">गोपनीयता और डेटा</string>
 </resources>

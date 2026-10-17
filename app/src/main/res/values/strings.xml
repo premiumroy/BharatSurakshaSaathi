@@ -846,6 +846,5 @@
     <string name="privacy_data_delete_confirm_body">Everything this app has stored on this phone will be erased. This cannot be undone.</string>
     <string name="privacy_data_delete_yes">Yes, delete</string>
     <string name="privacy_data_deleted">All local data has been erased.</string>
-    <string name="settings_about">About</string>
     <string name="settings_privacy_data">Privacy and data</string>
 </resources>
