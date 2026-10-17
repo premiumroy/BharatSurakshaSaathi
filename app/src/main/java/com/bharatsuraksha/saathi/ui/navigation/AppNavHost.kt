@@ -23,6 +23,7 @@ import com.bharatsuraksha.saathi.ui.easy.EasyModeScreen
 import com.bharatsuraksha.saathi.ui.family.CodeWordScreen
 import com.bharatsuraksha.saathi.ui.family.FamilyScreen
 import com.bharatsuraksha.saathi.ui.family.HelperWizardScreen
+import com.bharatsuraksha.saathi.ui.i18n.LanguageScreen
 import com.bharatsuraksha.saathi.ui.history.HistoryScreen
 import com.bharatsuraksha.saathi.ui.home.HomeScreen
 import com.bharatsuraksha.saathi.ui.image.ImageCheckScreen
@@ -88,6 +89,7 @@ object Routes {
     const val GUARD = "call_guard"
     const val PHONE_HEALTH = "phone_health"
     const val BATTERY = "battery_guidance"
+    const val LANGUAGE = "language"
 }
 
 @Composable
@@ -184,6 +186,7 @@ fun AppNavHost(
                     onOpenPrivacy = { navController.navigate(Routes.PRIVACY) },
                     onOpenTips = { navController.navigate(Routes.TIPS) },
                     onOpenSafety = { navController.navigate(Routes.SAFETY) },
+                    onOpenLanguage = { navController.navigate(Routes.LANGUAGE) },
                     onOpenDebug = { navController.navigate(Routes.DEBUG) }
                 )
             }
@@ -263,6 +266,7 @@ fun AppNavHost(
             composable(Routes.GUARD) { CallGuardScreen(onBack = { navController.popBackStack() }) }
             composable(Routes.PHONE_HEALTH) { PhoneHealthScreen(onBack = { navController.popBackStack() }) }
             composable(Routes.BATTERY) { BatteryGuidanceScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.LANGUAGE) { LanguageScreen(onBack = { navController.popBackStack() }) }
 
             composable(Routes.UPI_RESULT) {
                 UpiResultScreen(

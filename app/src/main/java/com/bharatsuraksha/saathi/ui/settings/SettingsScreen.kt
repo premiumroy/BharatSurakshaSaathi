@@ -68,6 +68,7 @@ fun SettingsScreen(
     onOpenPrivacy: () -> Unit,
     onOpenTips: () -> Unit,
     onOpenSafety: () -> Unit = {},
+    onOpenLanguage: () -> Unit = {},
     onOpenDebug: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
@@ -317,6 +318,7 @@ fun SettingsScreen(
                     }
                     TextButton(onClick = onOpenTips) { Text(stringResource(R.string.settings_tips)) }
                     TextButton(onClick = onOpenSafety) { Text(stringResource(R.string.safety_title)) }
+                    TextButton(onClick = onOpenLanguage) { Text(stringResource(R.string.settings_language)) }
                     TextButton(onClick = { showClear = true }, enabled = !locked) {
                         Text(stringResource(R.string.settings_clear_data))
                     }

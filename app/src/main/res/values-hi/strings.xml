@@ -793,4 +793,22 @@
     <string name="agent_health_body">दिन में एक बार कुछ ऐसी सेटिंग्स देखना जिनका ठग फ़ायदा उठाते हैं। यह सिर्फ़ देखती है, कुछ बदलती नहीं।</string>
     <string name="agent_remote_title">रिमोट ऐप चेतावनी</string>
     <string name="agent_remote_body">अगर स्क्रीन साझा करने वाला ऐप और पैसे वाला ऐप आधे घंटे के भीतर इस्तेमाल हों, तो मुझे तुरंत चेताएँ। इसके लिए उपयोग पहुँच चाहिए, जो आप सेटिंग में देते हैं।</string>
+
+    <!-- Phase 7: language picker -->
+    <string name="language_title">भाषा / Language</string>
+    <string name="language_intro">पूरे ऐप के लिए भाषा चुनें। यह बिना रीस्टार्ट तुरंत बदल जाती है।</string>
+    <string name="language_search">भाषा खोजें</string>
+    <string name="language_group_translated">पूरी तरह अनूदित</string>
+    <string name="language_group_beta">समुदाय / बीटा</string>
+    <string name="language_beta_badge">बीटा / Beta</string>
+    <string name="language_report">अनुवाद की समस्या बताएँ</string>
+    <string name="language_report_subject">अनुवाद की समस्या: %1$s</string>
+    <string name="language_report_body">भाषा: %1$s (%2$s)\n\nक्या गलत लगा, और उसकी जगह क्या होना चाहिए?\n\nस्क्रीन: \n\nसुझाया शब्द: </string>
+    <string name="language_detect_strong">चेतावनियाँ: मज़बूत</string>
+    <string name="language_detect_basic">चेतावनियाँ: बुनियादी</string>
+    <string name="language_detect_ui_only">चेतावनियाँ: सिर्फ़ इंटरफ़ेस</string>
+    <string name="language_detection_note">ठगी की पहचान हिंदी और अंग्रेज़ी में सबसे मज़बूत है। बाकी भाषाओं में पूरा इंटरफ़ेस मिलता है, और जो छूट जाए वह हिंदी और अंग्रेज़ी से आ जाता है।</string>
+    <string name="language_pending_note">ये भाषाएँ दर्ज हैं और अपनी लिपि में दिखती हैं, पर पूरा टेक्स्ट अभी अनूदित नहीं है, इसलिए फ़िलहाल हिंदी पर आ जाती हैं। स्वयंसेवक एक फ़ाइल बदलकर इन्हें जोड़ सकते हैं।</string>
+    <string name="settings_language">भाषा</string>
+    <string name="voice_not_available">इस भाषा में आवाज़ अभी उपलब्ध नहीं है।</string>
 </resources>

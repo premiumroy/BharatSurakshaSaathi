@@ -1,5 +1,6 @@
 package com.bharatsuraksha.saathi.ui.theme
 
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
@@ -237,4 +238,33 @@ fun Modifier.inkSpread(
 fun motionAllowed(): Boolean {
     val calm by CalmMode.enabled.collectAsState()
     return !calm && !rememberReduceMotion()
+}
+
+/**
+ * The language swap: when the locale tag changes, the new text fades in with a
+ * small upward slide over 250ms. A true two-layer cross-fade would compose the
+ * whole navigation tree twice, so this is a fade-and-slide on one tree instead.
+ */
+@Composable
+fun Modifier.languageSwapFade(tag: String, motion: Boolean = true): Modifier {
+    var seen by remember { mutableStateOf(tag) }
+    val progress = remember { androidx.compose.animation.core.Animatable(1f) }
+    LaunchedEffect(tag) {
+        if (tag != seen) {
+            seen = tag
+            if (motion) {
+                progress.snapTo(0f)
+                progress.animateTo(
+                    targetValue = 1f,
+                    animationSpec = tween(MotionTokens.Quick + 50, easing = MotionTokens.Entrance)
+                )
+            } else {
+                progress.snapTo(1f)
+            }
+        }
+    }
+    return this.graphicsLayer {
+        alpha = 0.2f + 0.8f * progress.value
+        translationY = (1f - progress.value) * 14.dp.toPx()
+    }
 }

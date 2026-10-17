@@ -793,4 +793,22 @@
     <string name="agent_health_body">Once a day, look at a few settings that scammers abuse. It only looks, and it never changes anything.</string>
     <string name="agent_remote_title">Remote-access warning</string>
     <string name="agent_remote_body">If a screen-sharing tool and a money app are both used within half an hour, warn me straight away. This needs usage access, which you grant in Settings.</string>
+
+    <!-- Phase 7: language picker -->
+    <string name="language_title">Language / भाषा</string>
+    <string name="language_intro">Choose the language for the whole app. It changes at once, without a restart.</string>
+    <string name="language_search">Search a language</string>
+    <string name="language_group_translated">Fully translated</string>
+    <string name="language_group_beta">Community / beta</string>
+    <string name="language_beta_badge">बीटा / Beta</string>
+    <string name="language_report">Report a translation issue</string>
+    <string name="language_report_subject">Translation issue: %1$s</string>
+    <string name="language_report_body">Language: %1$s (%2$s)\n\nWhat looks wrong, and what should it say instead?\n\nScreen: \n\nSuggested wording: </string>
+    <string name="language_detect_strong">Warnings: strong</string>
+    <string name="language_detect_basic">Warnings: basic</string>
+    <string name="language_detect_ui_only">Warnings: UI only</string>
+    <string name="language_detection_note">Scam detection is strongest in Hindi and English. Other languages still get the full interface, and fall back to Hindi and English for anything missing.</string>
+    <string name="language_pending_note">These are declared and shown in their own script, but the full text is not translated yet, so they currently fall back to Hindi. Volunteers can add them by editing one file.</string>
+    <string name="settings_language">Language</string>
+    <string name="voice_not_available">Voice is not available in this language yet.</string>
 </resources>

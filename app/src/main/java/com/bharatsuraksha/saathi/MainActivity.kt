@@ -3,10 +3,14 @@ package com.bharatsuraksha.saathi
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.core.content.IntentCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -23,10 +27,11 @@ import com.bharatsuraksha.saathi.ui.session.SoundPref
 import com.bharatsuraksha.saathi.ui.session.IncomingTextStore
 import com.bharatsuraksha.saathi.ui.settings.SettingsViewModel
 import com.bharatsuraksha.saathi.ui.theme.SaathiTheme
+import com.bharatsuraksha.saathi.ui.theme.languageSwapFade
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +64,14 @@ class MainActivity : ComponentActivity() {
                             else -> Routes.HOME
                         }
                     }
-                    AppNavHost(startDestination = start)
+                    // A language change fades the new text in over 250ms.
+                    val configuration = LocalConfiguration.current
+                    val languageTag = remember(configuration) {
+                        configuration.locales[0]?.toLanguageTag().orEmpty()
+                    }
+                    Box(Modifier.fillMaxSize().languageSwapFade(languageTag)) {
+                        AppNavHost(startDestination = start)
+                    }
                 }
             }
         }

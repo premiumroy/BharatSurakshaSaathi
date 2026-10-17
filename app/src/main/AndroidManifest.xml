@@ -65,6 +65,7 @@
         android:name=".BharatSurakshaApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:localeConfig="@xml/locales_config"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -76,6 +77,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:configChanges="locale|layoutDirection|uiMode|fontScale|density|screenSize|smallestScreenSize|orientation|screenLayout|keyboardHidden"
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTask"
