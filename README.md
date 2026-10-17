@@ -18,6 +18,10 @@ Everything runs on your phone. No login. No ads. No tracking. Nothing is uploade
 ![Tests](https://img.shields.io/badge/tests-228%20passing-1FA37A)
 ![License](https://img.shields.io/badge/license-MIT-FF8A1F)
 
+<a href="https://github.com/premiumroy/BharatSurakshaSaathi/releases/latest">
+  <img src="https://img.shields.io/badge/%E2%AC%87%20Download%20APK-latest%20release-FF8A1F?style=for-the-badge" alt="Download the APK" height="44">
+</a>
+
 **[हिन्दी में पढ़ें](#हिन्दी)** &nbsp;·&nbsp; [Privacy policy](PRIVACY_POLICY.md) &nbsp;·&nbsp; [Install guide](INSTALL_HINDI.md) &nbsp;·&nbsp; [Languages](LANGUAGES.md)
 
 </div>
@@ -139,9 +143,12 @@ Scam detection is strongest in Hindi and English. [LANGUAGES.md](LANGUAGES.md) l
 
 **From a release** (no Play Store needed)
 
-1. Download the APK from [Releases](https://github.com/premiumroy/BharatSurakshaSaathi/releases).
-2. Allow "install unknown apps" for your browser or file manager.
-3. Open the file and install.
+1. Open the **[latest release](https://github.com/premiumroy/BharatSurakshaSaathi/releases/latest)**.
+2. Under **Assets**, tap `SurakshaSaathi-release.apk`. It downloads straight to your phone.
+3. Open the downloaded file. Android will ask you to allow "install unknown apps" for your browser or file manager. Allow it, then tap Install.
+4. When it is installed, turn that permission back off.
+
+A `.aab` file is also attached to each release. That one is for uploading to Google Play, not for installing on a phone.
 
 Step-by-step Hindi instructions, including how to check the file, are in [INSTALL_HINDI.md](INSTALL_HINDI.md).
 
