@@ -809,4 +809,43 @@
     <string name="language_detect_ui_only">चेतावनियाँ: सिर्फ़ इंटरफ़ेस</string>
     <string name="language_detection_note">ठगी की पहचान हिंदी और अंग्रेज़ी में सबसे मज़बूत है। बाकी भाषाओं में पूरा इंटरफ़ेस मिलता है, और जो छूट जाए वह हिंदी और अंग्रेज़ी से आ जाता है।</string>
     <string name="language_pending_note">ये भाषाएँ दर्ज हैं और अपनी लिपि में दिखती हैं, पर पूरा टेक्स्ट अभी अनूदित नहीं है, इसलिए फ़िलहाल हिंदी पर आ जाती हैं। स्वयंसेवक एक फ़ाइल बदलकर इन्हें जोड़ सकते हैं।</string>
+
+    <!-- Phase 8: release readiness -->
+    <string name="report_wrong_result">यह नतीजा गलत लगा / Report a wrong result</string>
+    <string name="report_wrong_result_subject">सुरक्षा साथी में गलत नतीजा</string>
+    <string name="report_wrong_result_body">नीचे दिया जाँच का नतीजा मुझे गलत लगा।\n\nक्या गलत लगा:\n\nमेसेज यह था:\n%1$s\n\nजब तक आप भेजें नहीं दबाते, कुछ नहीं भेजा जाता।</string>
+    <string name="disclosure_stays">यह आपके फ़ोन में ही रहता है। कुछ भी अपलोड नहीं होता।</string>
+    <string name="disclosure_change_mind">आप इसे सेटिंग में कभी भी बंद कर सकते हैं, और इसके बिना भी ऐप पूरा चलता रहेगा।</string>
+    <string name="disclosure_notif_title">सूचना पहुँच</string>
+    <string name="disclosure_notif_body">आपके चुने ऐप से आने वाली नई मेसेज सूचनाओं का टेक्स्ट पढ़ता है, ताकि ठगी लगने पर चेता सके। यह आपका SMS संग्रह कभी नहीं पढ़ता।</string>
+    <string name="disclosure_notif_off">सेटिंग, फिर सूचना पहुँच में बंद करें।</string>
+    <string name="disclosure_mic_title">माइक्रोफ़ोन</string>
+    <string name="disclosure_mic_body">सिर्फ़ तब इस्तेमाल होता है जब आप बोलें बटन दबाए रखते हैं, या जब आप खुद कॉल सुरक्षा चालू करते हैं। आवाज़ इसी फ़ोन में टेक्स्ट बनती है।</string>
+    <string name="disclosure_mic_off">कॉल सुरक्षा खुद बंद हो जाती है, और आप फ़ोन सेटिंग में माइक्रोफ़ोन की अनुमति हटा सकते हैं।</string>
+    <string name="disclosure_camera_title">कैमरा</string>
+    <string name="disclosure_camera_body">सिर्फ़ तब इस्तेमाल होता है जब आप भुगतान QR स्कैन करते हैं। तस्वीर इसी फ़ोन में पढ़ी जाती है।</string>
+    <string name="disclosure_camera_off">स्कैनर बंद करें, या फ़ोन सेटिंग में कैमरा की अनुमति हटा दें।</string>
+    <string name="disclosure_call_title">कॉल स्क्रीनिंग भूमिका</string>
+    <string name="disclosure_call_body">आने वाली कॉल का नंबर बिना इंटरनेट, फ़ोन में ही जाँचने देती है और एक शांत सलाह दिखाती है। यह कॉल कभी रिकॉर्ड या सुनता नहीं।</string>
+    <string name="disclosure_call_off">एजेंट सेटिंग में कॉल स्क्रीनिंग बंद करें, या फ़ोन सेटिंग में भूमिका वापस कर दें।</string>
+    <string name="disclosure_usage_title">उपयोग पहुँच</string>
+    <string name="disclosure_usage_body">सिर्फ़ वैकल्पिक फ़ोन स्वास्थ्य जाँच इस्तेमाल करती है, ताकि पता चले कि स्क्रीन साझा करने वाला ऐप और पैसे वाला ऐप करीब-करीब एक साथ इस्तेमाल हुए।</string>
+    <string name="disclosure_usage_off">फ़ोन सेटिंग, फिर उपयोग पहुँच में बंद करें।</string>
+    <string name="about_title">ऐप के बारे में</string>
+    <string name="about_version">संस्करण %1$s (बिल्ड %2$d)</string>
+    <string name="about_non_affiliation_title">यह सरकारी ऐप नहीं है</string>
+    <string name="about_credits_title">श्रेय</string>
+    <string name="about_privacy_policy">गोपनीयता नीति</string>
+    <string name="about_privacy_data">गोपनीयता और डेटा</string>
+    <string name="privacy_data_title">गोपनीयता और डेटा</string>
+    <string name="privacy_data_intro">हर अनुमति क्या करती है, डेटा इसी फ़ोन में रहता है, और उसे बंद कैसे करें। यहाँ से कुछ अपलोड नहीं होता, और कोई खाता नहीं है।</string>
+    <string name="privacy_data_perms_title">अनुमतियाँ, और वे क्या करती हैं</string>
+    <string name="privacy_data_delete_all">मेरा सारा डेटा मिटाएँ</string>
+    <string name="privacy_data_delete_note">यह आपका इतिहास, सहेजे सबूत, ब्लॉकलिस्ट, संपर्क और सेटिंग इस फ़ोन से मिटा देता है। इसे वापस नहीं लाया जा सकता।</string>
+    <string name="privacy_data_delete_confirm_title">सारा डेटा मिटाएँ?</string>
+    <string name="privacy_data_delete_confirm_body">इस ऐप ने इस फ़ोन में जो कुछ सहेजा है, वह सब मिट जाएगा। इसे वापस नहीं लाया जा सकता।</string>
+    <string name="privacy_data_delete_yes">हाँ, मिटाएँ</string>
+    <string name="privacy_data_deleted">सारा स्थानीय डेटा मिटा दिया गया।</string>
+    <string name="settings_about">ऐप के बारे में</string>
+    <string name="settings_privacy_data">गोपनीयता और डेटा</string>
 </resources>

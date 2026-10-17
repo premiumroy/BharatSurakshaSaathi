@@ -75,6 +75,7 @@ import com.bharatsuraksha.saathi.ui.theme.inkSpread
 import com.bharatsuraksha.saathi.ui.theme.motionAllowed
 import com.bharatsuraksha.saathi.ui.theme.rememberLowRam
 import com.bharatsuraksha.saathi.ui.theme.rememberReduceMotion
+import com.bharatsuraksha.saathi.ui.common.shareWrongResult
 import com.bharatsuraksha.saathi.ui.theme.reveal
 import com.bharatsuraksha.saathi.ui.theme.verdictAccent
 import com.bharatsuraksha.saathi.ui.theme.verdictContainer
@@ -121,6 +122,13 @@ fun ResultScreen(
                 Text(stringResource(R.string.result_no_reasons), style = MaterialTheme.typography.bodyLarge)
                 OutlinedButton(onClick = onCheckAnother, shape = RoundedCornerShape(50)) {
                     Text(stringResource(R.string.result_again_button))
+                }
+                // Nothing is sent unless the user taps here and then presses send.
+                OutlinedButton(
+                    onClick = { shareWrongResult(context, viewModel.message) },
+                    shape = RoundedCornerShape(50)
+                ) {
+                    Text(stringResource(R.string.report_wrong_result))
                 }
             }
             return@Scaffold

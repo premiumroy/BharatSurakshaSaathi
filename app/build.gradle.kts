@@ -25,11 +25,19 @@ android {
         applicationId = "com.bharatsuraksha.saathi"
         minSdk = 26
         targetSdk = 35
-        versionCode = 4
+        // First public release. Bump versionCode for every Play upload.
+        versionCode = 1
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
+
+        // Ship only arm64-v8a and armeabi-v7a. Together these cover essentially
+        // every Android phone in India, and dropping x86 keeps the download
+        // smaller for everyone.
+        ndk {
+            abiFilters += listOf("arm64-v8a", "armeabi-v7a")
+        }
 
         // Hindi + English are bundled. Add more by dropping a values-<code>/strings.xml.
     }
@@ -60,6 +68,17 @@ android {
         debug {
             applicationIdSuffix = ".debug"
         }
+    }
+
+    // The Play upload artifact. R8 already runs in the release build type.
+    bundle {
+        language {
+            // Ship every language we bundle, rather than splitting by device
+            // language, so a user can switch language without a new download.
+            enableSplit = false
+        }
+        density { enableSplit = true }
+        abi { enableSplit = true }
     }
 
     compileOptions {

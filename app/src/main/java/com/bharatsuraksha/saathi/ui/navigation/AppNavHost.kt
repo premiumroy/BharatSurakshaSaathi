@@ -22,8 +22,10 @@ import com.bharatsuraksha.saathi.ui.debug.DebugScreen
 import com.bharatsuraksha.saathi.ui.easy.EasyModeScreen
 import com.bharatsuraksha.saathi.ui.family.CodeWordScreen
 import com.bharatsuraksha.saathi.ui.family.FamilyScreen
+import com.bharatsuraksha.saathi.ui.about.AboutScreen
 import com.bharatsuraksha.saathi.ui.family.HelperWizardScreen
 import com.bharatsuraksha.saathi.ui.i18n.LanguageScreen
+import com.bharatsuraksha.saathi.ui.privacy.PrivacyDataScreen
 import com.bharatsuraksha.saathi.ui.history.HistoryScreen
 import com.bharatsuraksha.saathi.ui.home.HomeScreen
 import com.bharatsuraksha.saathi.ui.image.ImageCheckScreen
@@ -90,6 +92,8 @@ object Routes {
     const val PHONE_HEALTH = "phone_health"
     const val BATTERY = "battery_guidance"
     const val LANGUAGE = "language"
+    const val ABOUT = "about"
+    const val PRIVACY_DATA = "privacy_data"
 }
 
 @Composable
@@ -187,6 +191,8 @@ fun AppNavHost(
                     onOpenTips = { navController.navigate(Routes.TIPS) },
                     onOpenSafety = { navController.navigate(Routes.SAFETY) },
                     onOpenLanguage = { navController.navigate(Routes.LANGUAGE) },
+                    onOpenAbout = { navController.navigate(Routes.ABOUT) },
+                    onOpenPrivacyData = { navController.navigate(Routes.PRIVACY_DATA) },
                     onOpenDebug = { navController.navigate(Routes.DEBUG) }
                 )
             }
@@ -267,6 +273,14 @@ fun AppNavHost(
             composable(Routes.PHONE_HEALTH) { PhoneHealthScreen(onBack = { navController.popBackStack() }) }
             composable(Routes.BATTERY) { BatteryGuidanceScreen(onBack = { navController.popBackStack() }) }
             composable(Routes.LANGUAGE) { LanguageScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.ABOUT) {
+                AboutScreen(
+                    onBack = { navController.popBackStack() },
+                    onOpenPrivacy = { navController.navigate(Routes.PRIVACY) },
+                    onOpenPrivacyData = { navController.navigate(Routes.PRIVACY_DATA) }
+                )
+            }
+            composable(Routes.PRIVACY_DATA) { PrivacyDataScreen(onBack = { navController.popBackStack() }) }
 
             composable(Routes.UPI_RESULT) {
                 UpiResultScreen(
