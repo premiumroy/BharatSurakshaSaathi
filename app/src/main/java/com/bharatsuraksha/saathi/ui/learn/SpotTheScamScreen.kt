@@ -125,7 +125,7 @@ fun SpotTheScamScreen(onBack: () -> Unit, prefs: LearnPrefsViewModel = hiltViewM
 
     fun advance() {
         feedback = null
-        offsetX.snapTo(0f)
+        scope.launch { offsetX.snapTo(0f) }
         if (index + 1 >= round.size) {
             GameStatsStore.save(context, StreakLogic.finishRound(GameStatsStore.stats.value))
             done = true
@@ -160,7 +160,7 @@ fun SpotTheScamScreen(onBack: () -> Unit, prefs: LearnPrefsViewModel = hiltViewM
             if (done) {
                 RoundDone(
                     stats = GameStatsStore.stats.value,
-                    onAgain = { index = 0; done = false; offsetX.snapTo(0f) },
+                    onAgain = { index = 0; done = false; scope.launch { offsetX.snapTo(0f) } },
                     onBack = onBack
                 )
                 return@Column
