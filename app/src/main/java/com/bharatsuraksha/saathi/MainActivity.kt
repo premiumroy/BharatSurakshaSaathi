@@ -13,6 +13,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bharatsuraksha.saathi.ui.navigation.AppNavHost
 import com.bharatsuraksha.saathi.ui.navigation.Routes
 import com.bharatsuraksha.saathi.ui.session.CalmMode
+import com.bharatsuraksha.saathi.ui.session.CodeWordStore
+import com.bharatsuraksha.saathi.ui.session.GameStatsStore
 import com.bharatsuraksha.saathi.ui.session.IncomingImageStore
 import com.bharatsuraksha.saathi.ui.session.SoundPref
 import com.bharatsuraksha.saathi.ui.session.IncomingTextStore
@@ -29,6 +31,8 @@ class MainActivity : ComponentActivity() {
         // UI-layer preferences (display only; no data leaves the phone).
         CalmMode.load(applicationContext)
         SoundPref.load(applicationContext)
+        GameStatsStore.load(applicationContext)
+        CodeWordStore.load(applicationContext)
 
         // Text or image shared into us from any other app (share-sheet target).
         handleShareIntent(intent)

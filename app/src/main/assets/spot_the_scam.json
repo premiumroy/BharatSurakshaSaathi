@@ -1,0 +1,322 @@
+[
+  {
+    "id": "s01",
+    "label": "scam",
+    "family": "kyc",
+    "text": "आपका KYC अपडेट नहीं हुआ। 24 घंटे में खाता बंद हो जाएगा। यहाँ क्लिक करें: bit.ly/kyc-upd",
+    "whyHi": "जल्दबाज़ी और बंद होने की धमकी है। असली बैंक लिंक कभी bit.ly से नहीं भेजता।",
+    "whyEn": "It rushes you and threatens closure. A real bank never sends a bit.ly link."
+  },
+  {
+    "id": "s02",
+    "label": "scam",
+    "family": "kyc",
+    "text": "Dear customer, your SBI account will be blocked. Update KYC at http://sbi-kyc.xyz",
+    "whyHi": "डोमेन sbi-kyc.xyz नकली है। असली बैंक का पता sbi.co.in जैसा होता है।",
+    "whyEn": "The domain sbi-kyc.xyz is fake. A real bank address looks like sbi.co.in."
+  },
+  {
+    "id": "s03",
+    "label": "scam",
+    "family": "digital_arrest",
+    "text": "You are under digital arrest. Do not disconnect the video call. CBI is watching.",
+    "whyHi": "पुलिस या CBI वीडियो कॉल पर गिरफ्तार नहीं करती। यह डराने का तरीका है।",
+    "whyEn": "Police and CBI do not arrest over a video call. This is a scare tactic."
+  },
+  {
+    "id": "s04",
+    "label": "scam",
+    "family": "courier",
+    "text": "आपके नाम से पार्सल कस्टम में पकड़ा गया है। तुरंत 9876543210 पर संपर्क करें।",
+    "whyHi": "अनजान नंबर पर कॉल कराने की जल्दी है। कस्टम ऐसे मैसेज नहीं भेजता।",
+    "whyEn": "It pushes you to call an unknown number. Customs does not message like this."
+  },
+  {
+    "id": "s05",
+    "label": "scam",
+    "family": "lottery",
+    "text": "Congratulations! You won KBC lottery of Rs 25,00,000. Pay Rs 4,999 processing fee to claim.",
+    "whyHi": "इनाम पाने के लिए पहले पैसा माँगना ठगी की पहचान है।",
+    "whyEn": "Asking you to pay before receiving a prize is the classic scam."
+  },
+  {
+    "id": "s06",
+    "label": "scam",
+    "family": "investment",
+    "text": "Smart Traders VIP group में आपको जोड़ा गया है। 3 दिन में 40% मुनाफा।",
+    "whyHi": "गारंटीड और बहुत तेज़ मुनाफा ठगी है। असली निवेश में ऐसा वादा नहीं होता।",
+    "whyEn": "Guaranteed, very fast profit is a scam. Real investing never promises this."
+  },
+  {
+    "id": "s07",
+    "label": "scam",
+    "family": "task_job",
+    "text": "Task complete! ₹850 वॉलेट में जुड़ गए। अगला टास्क अनलॉक करने के लिए ₹2,000 जमा करें।",
+    "whyHi": "कमाई दिखाकर पहले जमा कराना टास्क ठगी है।",
+    "whyEn": "Showing earnings first and then asking a deposit is task-job fraud."
+  },
+  {
+    "id": "s08",
+    "label": "scam",
+    "family": "family_emergency",
+    "text": "मम्मी, मेरा फोन टूट गया, ये नया नंबर है। UPI से ₹6,000 भेजो, किसी को मत बताना।",
+    "whyHi": "नया नंबर, पैसे की माँग और गुप्त रखने की बात। तीनों मिलकर ठगी बनते हैं।",
+    "whyEn": "A new number, a money request and secrecy together. That is fraud."
+  },
+  {
+    "id": "s09",
+    "label": "scam",
+    "family": "family_emergency",
+    "text": "Hi, मैं राहुल बोल रहा हूँ, नंबर बदल गया है। फ्री हो तो बताना, ज़रूरी हेल्प चाहिए।",
+    "whyHi": "नंबर बदलने की बात और फिर मदद की माँग। पुराने नंबर पर पुष्टि करें।",
+    "whyEn": "A changed number followed by a help request. Confirm on the old number."
+  },
+  {
+    "id": "s10",
+    "label": "scam",
+    "family": "electricity",
+    "text": "Your electricity will be disconnected today. Pay immediately via this UPI: saathi@ybl",
+    "whyHi": "आज ही काटने की धमकी और निजी UPI माँगना ठगी है।",
+    "whyEn": "A same-day disconnection threat with a personal UPI ID is fraud."
+  },
+  {
+    "id": "s11",
+    "label": "scam",
+    "family": "remote_access",
+    "text": "AnyDesk इंस्टॉल करें, हमारी टीम आपकी मदद करेगी। बैंक अधिकारी बोल रहे हैं।",
+    "whyHi": "रिमोट ऐप इंस्टॉल कराना ठगी है। असली बैंक कभी ऐसा नहीं कहता।",
+    "whyEn": "Asking you to install a remote-access app is fraud. No bank does this."
+  },
+  {
+    "id": "s12",
+    "label": "scam",
+    "family": "refund",
+    "text": "आपके अकाउंट में गलती से ₹20,000 आ गए हैं, कृपया वापस भेज दें।",
+    "whyHi": "गलती से पैसे आने की बात झूठी होती है। बैंक से जाँच कराएँ।",
+    "whyEn": "The extra-money story is false. Ask your bank to check."
+  },
+  {
+    "id": "s13",
+    "label": "scam",
+    "family": "loan",
+    "text": "Your loan is approved! Download this app and pay ₹1,500 processing charge first.",
+    "whyHi": "अनजान ऐप और पहले फीस माँगना लोन ऐप ठगी है।",
+    "whyEn": "An unknown app and an upfront fee is loan-app fraud."
+  },
+  {
+    "id": "s14",
+    "label": "scam",
+    "family": "credential",
+    "text": "Refund ₹4,999 approved. Share OTP 4821 to receive it.",
+    "whyHi": "पैसा लेने के लिए OTP कभी नहीं लगता। OTP बाँटना सबसे बड़ा खतरा है।",
+    "whyEn": "You never need an OTP to receive money. Sharing one is the biggest risk."
+  },
+  {
+    "id": "s15",
+    "label": "scam",
+    "family": "sextortion",
+    "text": "I have your private photos. Pay Rs 50,000 or I will send them to your family.",
+    "whyHi": "यह डराने वाली ठगी है। पैसा देने से वे कभी नहीं रुकते।",
+    "whyEn": "This is blackmail. Paying never makes them stop."
+  },
+  {
+    "id": "s16",
+    "label": "scam",
+    "family": "credential",
+    "text": "गैस सब्सिडी ₹2,000 का फायदा उठाएँ। इस लिंक पर अपना आधार और ATM PIN डालें।",
+    "whyHi": "PIN कभी किसी लिंक पर नहीं डालते। यह सीधा खाता खाली करने का तरीका है।",
+    "whyEn": "You never enter a PIN on a link. This empties your account."
+  },
+  {
+    "id": "s17",
+    "label": "scam",
+    "family": "sim_block",
+    "text": "Your SIM will be deactivated. Call 8800112233 to verify Aadhaar.",
+    "whyHi": "SIM बंद करने की धमकी और अनजान नंबर पर कॉल। ठगी है।",
+    "whyEn": "A SIM-deactivation threat and a call to an unknown number. Fraud."
+  },
+  {
+    "id": "s18",
+    "label": "scam",
+    "family": "investment",
+    "text": "Investment double in 15 days. Send ₹10,000 to this account, no risk.",
+    "whyHi": "पैसा दुगना और कोई जोखिम नहीं, यह असंभव वादा है।",
+    "whyEn": "Double the money with no risk is an impossible promise."
+  },
+  {
+    "id": "s19",
+    "label": "scam",
+    "family": "investment",
+    "text": "आपका पैसा डबल होगा। WhatsApp पर मैसेज करें, सीमित सीटें हैं।",
+    "whyHi": "जल्दी करने का दबाव और बड़ा मुनाफा। दोनों ठगी के संकेत हैं।",
+    "whyEn": "Pressure to hurry plus a big profit. Both are fraud signals."
+  },
+  {
+    "id": "s20",
+    "label": "scam",
+    "family": "task_job",
+    "text": "Amazon job: like 5 videos daily, earn ₹3,000. Join telegram t.me/quickjobs",
+    "whyHi": "ऐसी आसान नौकरी नहीं होती। टेलीग्राम ग्रुप पर पैसा माँगा जाएगा।",
+    "whyEn": "No such easy job exists. The Telegram group will ask for money."
+  },
+  {
+    "id": "s21",
+    "label": "scam",
+    "family": "upi",
+    "text": "उधार दिया हुआ पैसा वापस करो वरना पुलिस में शिकायत कर दूँगा। यहाँ भेजो: pay@upi",
+    "whyHi": "अनजान नंबर से धमकी और निजी UPI माँगना ठगी है।",
+    "whyEn": "A threat from an unknown number with a personal UPI ID is fraud."
+  },
+  {
+    "id": "s22",
+    "label": "scam",
+    "family": "kyc",
+    "text": "Your card is blocked. Click here and enter CVV to reactivate: rbi-secure.top",
+    "whyHi": "CVV कभी किसी लिंक पर नहीं डालते। डोमेन भी नकली है।",
+    "whyEn": "You never enter a CVV on a link. The domain is fake too."
+  },
+  {
+    "id": "r01",
+    "label": "real",
+    "family": "otp",
+    "text": "OTP 391827 for transaction of Rs 1,500 at Amazon. Do not share this OTP with anyone.",
+    "whyHi": "यह असली OTP है। इसमें OTP शेयर न करने की चेतावनी है, माँग नहीं।",
+    "whyEn": "This is a genuine OTP. It warns you not to share, it does not ask for it."
+  },
+  {
+    "id": "r02",
+    "label": "real",
+    "family": "bank_alert",
+    "text": "Rs 520.00 debited from A/c XX1234 at Big Bazaar. Avl bal Rs 12,340.",
+    "whyHi": "सामान्य बैंक अलर्ट है। कोई लिंक नहीं, कोई माँग नहीं।",
+    "whyEn": "A normal bank alert. No link, no request."
+  },
+  {
+    "id": "r03",
+    "label": "real",
+    "family": "bank_alert",
+    "text": "आपके ₹2,000 के चेक का भुगतान बाउंस हो गया है। कृपया खाते में पर्याप्त राशि रखें।",
+    "whyHi": "यह बैंक की सूचना है। इसमें कुछ माँगा नहीं गया।",
+    "whyEn": "This is a bank notice. Nothing is being asked of you."
+  },
+  {
+    "id": "r04",
+    "label": "real",
+    "family": "family_chat",
+    "text": "पापा, मैं कॉलेज से निकल गया हूँ, शाम तक घर पहुँचूँगा।",
+    "whyHi": "सामान्य घर की बात है। कोई पैसा या OTP नहीं माँगा।",
+    "whyEn": "An ordinary message home. No money or OTP is asked for."
+  },
+  {
+    "id": "r05",
+    "label": "real",
+    "family": "family_chat",
+    "text": "भाई शाम को फ्री हो तो चलते हैं।",
+    "whyHi": "यहाँ फ्री का मतलब खाली समय है, इनाम नहीं।",
+    "whyEn": "Here free means free time, not a prize."
+  },
+  {
+    "id": "r06",
+    "label": "real",
+    "family": "insurance",
+    "text": "आपकी LIC पॉलिसी का प्रीमियम अगले हफ्ते देय है। रसीद के लिए शाखा से संपर्क करें।",
+    "whyHi": "असली सूचना है। शाखा जाने को कहा गया, कोई लिंक नहीं।",
+    "whyEn": "A genuine reminder. It points to a branch, not a link."
+  },
+  {
+    "id": "r07",
+    "label": "real",
+    "family": "delivery",
+    "text": "Your order from Flipkart is out for delivery today between 2 pm and 6 pm.",
+    "whyHi": "सामान्य डिलीवरी अपडेट है। कोई भुगतान नहीं माँगा।",
+    "whyEn": "A normal delivery update. No payment is requested."
+  },
+  {
+    "id": "r08",
+    "label": "real",
+    "family": "bill",
+    "text": "Your electricity bill of Rs 1,240 is due on 25 Oct. Pay via the official app or branch.",
+    "whyHi": "बिल की सूचना है। भुगतान का रास्ता आधिकारिक ऐप या शाखा बताया गया है।",
+    "whyEn": "A bill notice. It sends you to the official app or a branch."
+  },
+  {
+    "id": "r09",
+    "label": "real",
+    "family": "travel",
+    "text": "ट्रेन 12951 25 मिनट देरी से चल रही है। कृपया प्लेटफ़ॉर्म पर ध्यान दें।",
+    "whyHi": "यात्रा की सामान्य सूचना है। कोई माँग नहीं।",
+    "whyEn": "A routine travel update. Nothing is requested."
+  },
+  {
+    "id": "r10",
+    "label": "real",
+    "family": "bank_alert",
+    "text": "Reminder: your SIP of Rs 5,000 is due on 5 Nov. Insufficient balance may cause a failed debit.",
+    "whyHi": "असली रिमाइंडर है। इसमें कोई लिंक या OTP माँग नहीं।",
+    "whyEn": "A genuine reminder. No link and no OTP request."
+  },
+  {
+    "id": "r11",
+    "label": "real",
+    "family": "family_chat",
+    "text": "डॉक्टर ने कहा है कि दवा सुबह खाने के बाद लेनी है।",
+    "whyHi": "घर की सामान्य बातचीत है। कोई पैसा नहीं माँगा।",
+    "whyEn": "Ordinary family talk. No money is asked for."
+  },
+  {
+    "id": "r12",
+    "label": "real",
+    "family": "govt",
+    "text": "Your Aadhaar update appointment is confirmed for 22 Oct, 11 am at the centre.",
+    "whyHi": "अपॉइंटमेंट की पुष्टि है। कोई भुगतान या OTP नहीं माँगा।",
+    "whyEn": "An appointment confirmation. No payment or OTP requested."
+  },
+  {
+    "id": "r13",
+    "label": "real",
+    "family": "family_chat",
+    "text": "बेटा, पड़ोसी का फोन नंबर भेज दो, उन्हें बुलाना है।",
+    "whyHi": "नंबर माँगा गया है, पैसा नहीं। घर की सामान्य बात है।",
+    "whyEn": "A number is asked for, not money. Ordinary family talk."
+  },
+  {
+    "id": "r14",
+    "label": "real",
+    "family": "bill",
+    "text": "Your FASTag balance is low. Recharge via the official bank app.",
+    "whyHi": "असली सूचना है और आधिकारिक ऐप बताया गया है।",
+    "whyEn": "A genuine notice that points to the official bank app."
+  },
+  {
+    "id": "r15",
+    "label": "real",
+    "family": "work",
+    "text": "मीटिंग 4 बजे शिफ्ट हो गई है, कृपया कैलेंडर देख लें।",
+    "whyHi": "काम की सामान्य सूचना है। कोई ठगी का संकेत नहीं।",
+    "whyEn": "A routine work update. No fraud signals."
+  },
+  {
+    "id": "r16",
+    "label": "real",
+    "family": "insurance",
+    "text": "Your insurance premium of Rs 12,000 is due. Log in to the official portal to pay.",
+    "whyHi": "प्रीमियम की सूचना है। आधिकारिक पोर्टल बताया गया है।",
+    "whyEn": "A premium reminder that points to the official portal."
+  },
+  {
+    "id": "r17",
+    "label": "real",
+    "family": "family_chat",
+    "text": "सोसाइटी की मीटिंग रविवार शाम 6 बजे है, सभी को आना है।",
+    "whyHi": "सोसाइटी की सूचना है। कोई पैसा नहीं माँगा।",
+    "whyEn": "A society notice. No money is requested."
+  },
+  {
+    "id": "r18",
+    "label": "real",
+    "family": "travel",
+    "text": "Your ticket for the train has been booked. PNR 4829103. Happy journey!",
+    "whyHi": "बुकिंग की पुष्टि है। कोई भुगतान या OTP नहीं माँगा।",
+    "whyEn": "A booking confirmation. No payment or OTP requested."
+  }
+]

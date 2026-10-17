@@ -1,0 +1,134 @@
+[
+  {
+    "id": "digital_arrest",
+    "titleHi": "डिजिटल अरेस्ट",
+    "titleEn": "Digital arrest",
+    "howHi": "कॉल पर खुद को पुलिस, CBI या कस्टम बताते हैं। कहते हैं आपके नाम पर पार्सल या केस है। वीडियो कॉल पर बिठाकर डराते हैं और पैसे मँगवाते हैं।",
+    "howEn": "They call as police, CBI or customs and claim a parcel or case in your name. They keep you on video and scare you into paying.",
+    "signsHi": "वीडियो कॉल पर गिरफ्तारी, कॉल काटने की मनाही, किसी को न बताने की बात, पैसे सुरक्षित खाते में डालने की माँग।",
+    "signsEn": "Arrest over video, orders not to hang up, tell no one, move money to a safe account.",
+    "doHi": "कॉल काटें। कोई भी सच्चा अधिकारी वीडियो कॉल पर पैसे नहीं माँगता। 1930 पर शिकायत करें।",
+    "doEn": "Hang up. No real officer asks for money on a video call. Report on 1930."
+  },
+  {
+    "id": "fake_kyc",
+    "titleHi": "नकली KYC",
+    "titleEn": "Fake KYC",
+    "howHi": "बैंक बनकर मैसेज भेजते हैं कि खाता बंद हो जाएगा। लिंक पर डालकर KYC अपडेट कराने की बात कहते हैं।",
+    "howEn": "They pose as your bank, warn the account will close, and send a link to update KYC.",
+    "signsHi": "जल्दी करने का दबाव, बंद होने की धमकी, छोटा या अजीब लिंक।",
+    "signsEn": "Urgency, a closure threat, and a short or odd link.",
+    "doHi": "लिंक न खोलें। बैंक की आधिकारिक ऐप या शाखा से ही KYC कराएँ।",
+    "doEn": "Do not open the link. Do KYC through the official app or branch."
+  },
+  {
+    "id": "task_job",
+    "titleHi": "टास्क वाली नौकरी",
+    "titleEn": "Task job",
+    "howHi": "घर बैठे कमाई का वादा करते हैं। छोटा टास्क कराकर कुछ पैसे दिखाते हैं, फिर बड़ा टास्क अनलॉक करने के लिए जमा माँगते हैं।",
+    "howEn": "They promise work-from-home pay. A small task pays a little, then they ask a deposit to unlock a bigger task.",
+    "signsHi": "पहले कमाई दिखाना, फिर जमा माँगना, टेलीग्राम ग्रुप पर बात।",
+    "signsEn": "Earnings shown first, then a deposit, and talk only on Telegram.",
+    "doHi": "जमा कभी न करें। ऐसी नौकरी नहीं होती। नंबर ब्लॉक करें।",
+    "doEn": "Never pay a deposit. No real job works this way. Block the number."
+  },
+  {
+    "id": "investment_group",
+    "titleHi": "निवेश ग्रुप",
+    "titleEn": "Investment group",
+    "howHi": "WhatsApp या टेलीग्राम ग्रुप में जोड़ते हैं। गारंटीड मुनाफा दिखाते हैं। ऐप पर मुनाफा दिखता है पर निकालने पर टैक्स या फीस माँगते हैं।",
+    "howEn": "They add you to a WhatsApp or Telegram group, show guaranteed profit, then demand a tax or fee before you can withdraw.",
+    "signsHi": "गारंटीड रिटर्न, बहुत तेज़ मुनाफा, निकालने के लिए फीस।",
+    "signsEn": "Guaranteed returns, very fast profit, and a fee to withdraw.",
+    "doHi": "एक रुपया भी न भेजें। SEBI पंजीकरण जाँचें।",
+    "doEn": "Do not send a rupee. Check for SEBI registration."
+  },
+  {
+    "id": "fake_parcel",
+    "titleHi": "नकली पार्सल",
+    "titleEn": "Fake parcel",
+    "howHi": "कहते हैं आपके नाम से पार्सल में नशीला पदार्थ मिला है। कस्टम फीस भरने को कहते हैं और डराते हैं।",
+    "howEn": "They claim a parcel in your name held drugs, then demand a customs fee and threaten you.",
+    "signsHi": "पार्सल में ड्रग की बात, तुरंत फीस, अनजान नंबर पर कॉल।",
+    "signsEn": "A drugs claim, an instant fee, and a call to an unknown number.",
+    "doHi": "फीस न भरें। पार्सल की जानकारी आधिकारिक ट्रैकिंग से देखें।",
+    "doEn": "Do not pay. Check the parcel on official tracking."
+  },
+  {
+    "id": "upi_qr",
+    "titleHi": "UPI QR की चाल",
+    "titleEn": "UPI QR trick",
+    "howHi": "कहते हैं पैसे भेजने हैं, QR स्कैन करने को कहते हैं। स्कैन करने पर पैसे जाते हैं, आते नहीं।",
+    "howEn": "They say they are sending money and ask you to scan a QR. Scanning sends money, it never receives.",
+    "signsHi": "पैसा लेने के लिए QR या PIN माँगना।",
+    "signsEn": "A QR or PIN to receive money.",
+    "doHi": "पैसा लेने के लिए कभी QR स्कैन या PIN नहीं लगता।",
+    "doEn": "You never scan a QR or enter a PIN to receive money."
+  },
+  {
+    "id": "loan_app",
+    "titleHi": "लोन ऐप",
+    "titleEn": "Loan app",
+    "howHi": "तुरंत लोन का वादा करते हैं। ऐप इंस्टॉल कराते हैं, फीस लेते हैं, और संपर्कों की जानकारी लेकर ब्लैकमेल करते हैं।",
+    "howEn": "They promise an instant loan, take a fee, and use your contacts to blackmail you.",
+    "signsHi": "पहले फीस, अनजान ऐप, संपर्क और फोटो की अनुमति।",
+    "signsEn": "An upfront fee, an unknown app, and contacts or photo permissions.",
+    "doHi": "ऐप इंस्टॉल न करें। RBI पंजीकृत संस्था से ही लोन लें।",
+    "doEn": "Do not install it. Borrow only from an RBI-registered lender."
+  },
+  {
+    "id": "electricity_bill",
+    "titleHi": "बिजली बिल",
+    "titleEn": "Electricity bill",
+    "howHi": "कहते हैं आज बिजली कट जाएगी। निजी UPI पर तुरंत भुगतान माँगते हैं।",
+    "howEn": "They say power will be cut today and demand instant payment to a personal UPI ID.",
+    "signsHi": "आज ही काटने की धमकी, निजी UPI, कोई ग्राहक संख्या नहीं।",
+    "signsEn": "A same-day cut-off threat, a personal UPI, and no consumer number.",
+    "doHi": "निजी UPI पर भुगतान न करें। बिजली बोर्ड की ऐप या शाखा से भरें।",
+    "doEn": "Do not pay a personal UPI. Pay on the board app or at a branch."
+  },
+  {
+    "id": "family_emergency",
+    "titleHi": "परिवार की मुसीबत",
+    "titleEn": "Family emergency",
+    "howHi": "नए नंबर से बेटा या रिश्तेदार बनकर मैसेज करते हैं। मुसीबत बताकर तुरंत पैसे माँगते हैं और किसी को न बताने को कहते हैं।",
+    "howEn": "A new number pretends to be your child or relative, claims an emergency, asks for money at once, and says tell no one.",
+    "signsHi": "नया नंबर, जल्दी में पैसा, गुप्त रखने की बात।",
+    "signsEn": "A new number, urgent money, and secrecy.",
+    "doHi": "पुराने नंबर पर कॉल करके पुष्टि करें। कोड शब्द पूछें।",
+    "doEn": "Call back on the old number to confirm. Ask for the code word."
+  },
+  {
+    "id": "tax_refund",
+    "titleHi": "टैक्स रिफंड",
+    "titleEn": "Tax refund",
+    "howHi": "आयकर विभाग बनकर रिफंड की बात करते हैं। लिंक पर बैंक जानकारी और OTP डलवाते हैं।",
+    "howEn": "They pose as the income tax department, promise a refund, and take your bank details and OTP on a link.",
+    "signsHi": "रिफंड के लिए लिंक, बैंक जानकारी, OTP की माँग।",
+    "signsEn": "A refund link, bank details, and an OTP request.",
+    "doHi": "रिफंड कभी OTP या लिंक से नहीं मिलता। incometax.gov.in पर जाँचें।",
+    "doEn": "Refunds never come through an OTP or a link. Check incometax.gov.in."
+  },
+  {
+    "id": "lottery",
+    "titleHi": "लॉटरी और इनाम",
+    "titleEn": "Lottery and prize",
+    "howHi": "कहते हैं बड़ा इनाम लगा है। पहले प्रोसेसिंग फीस या टैक्स माँगते हैं।",
+    "howEn": "They say you won a big prize and ask a processing fee or tax first.",
+    "signsHi": "बिना खरीदे इनाम, पहले फीस, जल्दी करने का दबाव।",
+    "signsEn": "A prize you never entered, a fee first, and pressure to hurry.",
+    "doHi": "फीस न भरें। कोई असली इनाम पहले पैसा नहीं माँगता।",
+    "doEn": "Do not pay. No real prize asks for money first."
+  },
+  {
+    "id": "fake_care",
+    "titleHi": "नकली कस्टमर केयर",
+    "titleEn": "Fake customer care",
+    "howHi": "गूगल पर फ़र्ज़ी हेल्पलाइन नंबर डालते हैं। कॉल पर रिमोट ऐप इंस्टॉल कराते हैं और खाता खाली कर देते हैं।",
+    "howEn": "They post a fake helpline number online, then get you to install a remote app and drain the account.",
+    "signsHi": "गूगल से मिला नंबर, रिमोट ऐप, स्क्रीन साझा करने की बात।",
+    "signsEn": "A number found on Google, a remote app, and screen sharing.",
+    "doHi": "कंपनी की आधिकारिक ऐप या वेबसाइट से ही नंबर लें।",
+    "doEn": "Take the number only from the company official app or website."
+  }
+]

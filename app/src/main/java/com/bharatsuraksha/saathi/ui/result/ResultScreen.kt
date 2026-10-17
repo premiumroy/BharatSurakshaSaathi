@@ -69,6 +69,7 @@ import com.bharatsuraksha.saathi.ui.theme.JyotiHero
 import com.bharatsuraksha.saathi.ui.theme.JyotiState
 import com.bharatsuraksha.saathi.ui.theme.OdometerNumber
 import com.bharatsuraksha.saathi.ui.theme.dangerEdgePulse
+import com.bharatsuraksha.saathi.ui.learn.CalmTimerCard
 import com.bharatsuraksha.saathi.ui.theme.inkSpread
 import com.bharatsuraksha.saathi.ui.theme.motionAllowed
 import com.bharatsuraksha.saathi.ui.theme.rememberLowRam
@@ -187,6 +188,11 @@ fun ResultScreen(
                     }
                     ScoreGauge(score = result.score, tint = accent, motion = motion)
                 }
+            }
+
+            // रुको-सोचो-करो: a calm pause before anything else, always skippable.
+            if (result.verdict != Verdict.SAFE) {
+                CalmTimerCard(motion = motion, modifier = Modifier.reveal(1, reduce))
             }
 
             Text(

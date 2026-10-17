@@ -15,11 +15,16 @@ import com.bharatsuraksha.saathi.ui.common.JyotiBottomBar
 import com.bharatsuraksha.saathi.ui.common.jyotiTabs
 import com.bharatsuraksha.saathi.ui.debug.DebugScreen
 import com.bharatsuraksha.saathi.ui.easy.EasyModeScreen
+import com.bharatsuraksha.saathi.ui.family.CodeWordScreen
 import com.bharatsuraksha.saathi.ui.family.FamilyScreen
+import com.bharatsuraksha.saathi.ui.family.HelperWizardScreen
 import com.bharatsuraksha.saathi.ui.history.HistoryScreen
 import com.bharatsuraksha.saathi.ui.home.HomeScreen
 import com.bharatsuraksha.saathi.ui.image.ImageCheckScreen
 import com.bharatsuraksha.saathi.ui.learn.LearnScreen
+import com.bharatsuraksha.saathi.ui.learn.SpotTheScamScreen
+import com.bharatsuraksha.saathi.ui.learn.TriageScreen
+import com.bharatsuraksha.saathi.ui.learn.WeeklyScamsScreen
 import com.bharatsuraksha.saathi.ui.link.LinkCheckScreen
 import com.bharatsuraksha.saathi.ui.notifications.NotificationAccessScreen
 import com.bharatsuraksha.saathi.ui.onboarding.OnboardingScreen
@@ -50,6 +55,11 @@ object Routes {
     const val RECOVER = "recover"
     const val PRIVACY = "privacy"
     const val DEBUG = "debug"
+    const val SPOT_GAME = "spot_game"
+    const val TRIAGE = "triage"
+    const val WEEKLY = "weekly"
+    const val CODE_WORD = "code_word"
+    const val HELPER = "helper"
 }
 
 @Composable
@@ -106,8 +116,25 @@ fun AppNavHost(
                 )
             }
 
-            composable(Routes.LEARN) { LearnScreen() }
-            composable(Routes.FAMILY) { FamilyScreen() }
+            composable(Routes.LEARN) {
+                LearnScreen(
+                    onOpenGame = { navController.navigate(Routes.SPOT_GAME) },
+                    onOpenTriage = { navController.navigate(Routes.TRIAGE) },
+                    onOpenWeekly = { navController.navigate(Routes.WEEKLY) }
+                )
+            }
+            composable(Routes.FAMILY) {
+                FamilyScreen(
+                    onOpenCodeWord = { navController.navigate(Routes.CODE_WORD) },
+                    onOpenHelper = { navController.navigate(Routes.HELPER) }
+                )
+            }
+
+            composable(Routes.SPOT_GAME) { SpotTheScamScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.TRIAGE) { TriageScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.WEEKLY) { WeeklyScamsScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.CODE_WORD) { CodeWordScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.HELPER) { HelperWizardScreen(onBack = { navController.popBackStack() }) }
 
             composable(Routes.RESULT) {
                 ResultScreen(
