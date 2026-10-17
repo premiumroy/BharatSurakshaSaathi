@@ -33,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.geometry.toIntSize
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.layer.drawLayer
@@ -42,6 +41,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.bharatsuraksha.saathi.R
@@ -113,7 +113,7 @@ fun ShareWarningCardScreen(onBack: () -> Unit) {
                             layer.record(
                                 density = this,
                                 layoutDirection = this.layoutDirection,
-                                size = this.size.toIntSize(),
+                                size = IntSize(this.size.width.toInt(), this.size.height.toInt()),
                                 block = { this@drawWithContent.drawContent() }
                             )
                             drawLayer(layer)
