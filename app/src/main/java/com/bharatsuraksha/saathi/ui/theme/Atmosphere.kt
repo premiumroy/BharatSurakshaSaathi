@@ -1,8 +1,6 @@
 package com.bharatsuraksha.saathi.ui.theme
 
 import android.provider.Settings
-import androidx.compose.animation.core.CubicBezierEasing
-import androidx.compose.animation.core.Easing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -40,9 +38,6 @@ import com.bharatsuraksha.saathi.domain.model.Verdict
 import kotlinx.coroutines.delay
 import kotlin.math.cos
 import kotlin.math.sin
-
-/** The shared ease used by every entrance in the app. */
-val SaathiEase: Easing = CubicBezierEasing(0.2f, 0.8f, 0.2f, 1f)
 
 /**
  * Honours the system "remove animations" setting (Animator duration scale = 0).

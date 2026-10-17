@@ -33,12 +33,12 @@
     <string name="home_kids_badge">बच्चों का सुरक्षित मोड</string>
 
     <!-- Verdicts -->
-    <string name="verdict_safe">कोई साफ़ चेतावनी संकेत नहीं</string>
-    <string name="verdict_careful">सावधान रहें</string>
-    <string name="verdict_dangerous">खतरनाक</string>
-    <string name="verdict_safe_short">कोई साफ़ संकेत नहीं</string>
+    <string name="verdict_safe">कोई साफ़ खतरा नहीं दिखा</string>
+    <string name="verdict_careful">सावधान रहिए</string>
+    <string name="verdict_dangerous">ख़तरा है, रुकिए</string>
+    <string name="verdict_safe_short">साफ़ खतरा नहीं</string>
     <string name="verdict_careful_short">सावधान</string>
-    <string name="verdict_dangerous_short">खतरनाक</string>
+    <string name="verdict_dangerous_short">ख़तरा</string>
 
     <!-- Result -->
     <string name="result_title">जाँच का नतीजा</string>
@@ -331,4 +331,18 @@
     <string name="home_checking_1">लिंक देख रहे हैं…</string>
     <string name="home_checking_2">शब्द परख रहे हैं…</string>
     <string name="home_checking_3">चालें जाँच रहे हैं…</string>
+
+    <!-- Phase 1: tabs, placeholders, calm mode -->
+    <string name="tab_home">घर</string>
+    <string name="tab_learn">सीखें</string>
+    <string name="tab_family">परिवार</string>
+    <string name="tab_history">इतिहास</string>
+    <string name="coming_soon_tag">जल्द आ रहा है</string>
+    <string name="learn_coming_soon">जल्द आ रहा है</string>
+    <string name="learn_coming_body">ठगी पहचानने का खेल, और हर हफ़्ते एक असली ठगी की चेतावनी। बन रहा है।</string>
+    <string name="family_coming_soon">जल्द आ रहा है</string>
+    <string name="family_coming_body">परिवार का गुप्त कोड शब्द, और बड़ों का फ़ोन सेट करने का आसान तरीका। बन रहा है।</string>
+    <string name="calm_mode">शांत मोड (कम हलचल)</string>
+    <string name="sound_toggle">आवाज़</string>
+    <string name="home_pull_hint">नीचे खींचें, दीया जलाएँ।</string>
 </resources>

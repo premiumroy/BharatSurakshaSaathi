@@ -65,7 +65,13 @@ import com.bharatsuraksha.saathi.domain.model.AnalysisResult
 import com.bharatsuraksha.saathi.domain.model.Confidence
 import com.bharatsuraksha.saathi.domain.model.Verdict
 import com.bharatsuraksha.saathi.ui.common.isHindiLocale
-import com.bharatsuraksha.saathi.ui.theme.ShieldEmblem
+import com.bharatsuraksha.saathi.ui.theme.JyotiHero
+import com.bharatsuraksha.saathi.ui.theme.JyotiState
+import com.bharatsuraksha.saathi.ui.theme.OdometerNumber
+import com.bharatsuraksha.saathi.ui.theme.dangerEdgePulse
+import com.bharatsuraksha.saathi.ui.theme.inkSpread
+import com.bharatsuraksha.saathi.ui.theme.motionAllowed
+import com.bharatsuraksha.saathi.ui.theme.rememberLowRam
 import com.bharatsuraksha.saathi.ui.theme.rememberReduceMotion
 import com.bharatsuraksha.saathi.ui.theme.reveal
 import com.bharatsuraksha.saathi.ui.theme.verdictAccent
@@ -84,6 +90,8 @@ fun ResultScreen(
     val hindi = isHindiLocale()
     val context = LocalContext.current
     val reduce = rememberReduceMotion()
+    val motion = motionAllowed()
+    val lowRam = rememberLowRam()
     val haptics = LocalHapticFeedback.current
     val familyContacts by viewModel.familyContacts.collectAsStateWithLifecycle()
     val onlineMode by viewModel.onlineMode.collectAsStateWithLifecycle()
@@ -124,6 +132,8 @@ fun ResultScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .inkSpread(motion)
+                .then(if (result.verdict == Verdict.DANGEROUS) Modifier.dangerEdgePulse(motion) else Modifier)
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 20.dp)
@@ -157,12 +167,10 @@ fun ResultScreen(
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Box(Modifier.size(104.dp)) {
-                        ShieldEmblem(
-                            Modifier.fillMaxSize(),
-                            tint = accent,
-                            breath = true,
-                            reduceMotion = reduce,
-                            glyph = result.verdict
+                        JyotiHero(
+                            state = jyotiStateFor(result.verdict),
+                            motion = motion,
+                            lowRam = lowRam
                         )
                     }
                     Column(Modifier.weight(1f)) {
@@ -177,7 +185,7 @@ fun ResultScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
-                    ScoreGauge(score = result.score, tint = accent, reduceMotion = reduce)
+                    ScoreGauge(score = result.score, tint = accent, motion = motion)
                 }
             }
 
@@ -352,10 +360,10 @@ fun ResultScreen(
 
 /** Circular gauge that sweeps to the score with a slight overshoot. */
 @Composable
-private fun ScoreGauge(score: Int, tint: Color, reduceMotion: Boolean) {
+private fun ScoreGauge(score: Int, tint: Color, motion: Boolean) {
     val progress by animateFloatAsState(
         targetValue = score / 100f,
-        animationSpec = if (reduceMotion) tween(0) else spring(dampingRatio = 0.45f, stiffness = 130f),
+        animationSpec = if (motion) spring(dampingRatio = 0.45f, stiffness = 130f) else tween(0),
         label = "gauge"
     )
     val track = MaterialTheme.colorScheme.outline.copy(alpha = 0.35f)
@@ -383,12 +391,19 @@ private fun ScoreGauge(score: Int, tint: Color, reduceMotion: Boolean) {
                 style = Stroke(width = stroke, cap = StrokeCap.Round)
             )
         }
-        Text(
-            "$score",
+        OdometerNumber(
+            value = score,
+            motion = motion,
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
     }
+}
+
+private fun jyotiStateFor(verdict: Verdict): JyotiState = when (verdict) {
+    Verdict.SAFE -> JyotiState.Clear
+    Verdict.CAREFUL -> JyotiState.Careful
+    Verdict.DANGEROUS -> JyotiState.Dangerous
 }
 
 private fun verdictLabelRes(verdict: Verdict): Int = when (verdict) {

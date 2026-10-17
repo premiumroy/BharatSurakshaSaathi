@@ -33,12 +33,12 @@
     <string name="home_kids_badge">Kids Safe Mode</string>
 
     <!-- Verdicts -->
-    <string name="verdict_safe">No clear warning signs</string>
-    <string name="verdict_careful">Be Careful</string>
-    <string name="verdict_dangerous">Dangerous</string>
-    <string name="verdict_safe_short">No clear signs</string>
+    <string name="verdict_safe">No clear danger seen</string>
+    <string name="verdict_careful">Please be careful</string>
+    <string name="verdict_dangerous">Danger. Stop.</string>
+    <string name="verdict_safe_short">No clear danger</string>
     <string name="verdict_careful_short">Careful</string>
-    <string name="verdict_dangerous_short">Dangerous</string>
+    <string name="verdict_dangerous_short">Danger</string>
 
     <!-- Result -->
     <string name="result_title">What we found</string>
@@ -331,4 +331,18 @@
     <string name="home_checking_1">Looking at the link…</string>
     <string name="home_checking_2">Weighing the words…</string>
     <string name="home_checking_3">Checking the tricks…</string>
+
+    <!-- Phase 1: tabs, placeholders, calm mode -->
+    <string name="tab_home">Home</string>
+    <string name="tab_learn">Learn</string>
+    <string name="tab_family">Family</string>
+    <string name="tab_history">History</string>
+    <string name="coming_soon_tag">Coming soon</string>
+    <string name="learn_coming_soon">Coming soon</string>
+    <string name="learn_coming_body">A game to spot scams, and one real scam to watch out for each week. Being built now.</string>
+    <string name="family_coming_soon">Coming soon</string>
+    <string name="family_coming_body">A family code word, and a helper wizard for setting up an elder phone. Being built now.</string>
+    <string name="calm_mode">Calm mode (less motion)</string>
+    <string name="sound_toggle">Sound</string>
+    <string name="home_pull_hint">Pull down to light the lamp.</string>
 </resources>

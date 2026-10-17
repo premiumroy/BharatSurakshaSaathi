@@ -3,14 +3,9 @@ package com.bharatsuraksha.saathi.ui.home
 import android.content.Intent
 import android.provider.Settings
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -26,15 +21,9 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContentPaste
-import androidx.compose.material.icons.filled.History
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -47,30 +36,47 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bharatsuraksha.saathi.R
 import com.bharatsuraksha.saathi.ui.common.BrandFooter
+import com.bharatsuraksha.saathi.ui.theme.JyotiFlame
+import com.bharatsuraksha.saathi.ui.theme.JyotiGear
+import com.bharatsuraksha.saathi.ui.theme.JyotiHero
+import com.bharatsuraksha.saathi.ui.theme.JyotiLamp
+import com.bharatsuraksha.saathi.ui.theme.JyotiState
+import com.bharatsuraksha.saathi.ui.theme.MotionTokens
 import com.bharatsuraksha.saathi.ui.theme.Saffron
-import com.bharatsuraksha.saathi.ui.theme.ShieldEmblem
-import com.bharatsuraksha.saathi.ui.theme.pressScale
-import com.bharatsuraksha.saathi.ui.theme.rememberReduceMotion
-import com.bharatsuraksha.saathi.ui.theme.reveal
+import com.bharatsuraksha.saathi.ui.theme.Space2
+import com.bharatsuraksha.saathi.ui.theme.Space3
+import com.bharatsuraksha.saathi.ui.theme.Space4
+import com.bharatsuraksha.saathi.ui.theme.Space6
+import com.bharatsuraksha.saathi.ui.theme.entrance
+import com.bharatsuraksha.saathi.ui.theme.latticeRipple
+import com.bharatsuraksha.saathi.ui.theme.motionAllowed
+import com.bharatsuraksha.saathi.ui.theme.rememberLowRam
+import com.bharatsuraksha.saathi.ui.theme.tappable
 import kotlinx.coroutines.delay
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     onOpenResult: () -> Unit,
@@ -91,8 +97,22 @@ fun HomeScreen(
     val incoming by viewModel.incomingText.collectAsStateWithLifecycle()
     val clipboard = LocalClipboardManager.current
     val context = LocalContext.current
-    val reduce = rememberReduceMotion()
+    val motion = motionAllowed()
+    val lowRam = rememberLowRam()
+
     var scanning by remember { mutableStateOf(false) }
+    var rippleKey by remember { mutableIntStateOf(0) }
+    var relight by remember { mutableIntStateOf(0) }
+    var pull by remember { mutableStateOf(0f) }
+    var parallax by remember { mutableStateOf(Offset.Zero) }
+    var lit by remember { mutableStateOf(false) }
+    var scanIndex by remember { mutableIntStateOf(0) }
+
+    val scanProgress by animateFloatAsState(
+        targetValue = if (scanning) 1f else 0f,
+        animationSpec = tween(MotionTokens.HeroScanMin, easing = LinearEasing),
+        label = "scan"
+    )
 
     LaunchedEffect(incoming) {
         incoming?.let {
@@ -100,67 +120,131 @@ fun HomeScreen(
             viewModel.onIncomingConsumed()
         }
     }
-    // The scan is held for at least 700ms so it reads as a deliberate gesture.
+    // Hold the scan for at least the hero minimum so it reads as a gesture.
     LaunchedEffect(Unit) {
         viewModel.navigateToResult.collect {
-            if (!reduce) delay(700)
+            if (motion) delay(MotionTokens.HeroScanMin.toLong())
             scanning = false
             onOpenResult()
         }
     }
 
+    // Pull-down relights the lamp for a moment.
+    LaunchedEffect(relight) {
+        if (relight > 0) {
+            lit = true
+            delay(1200)
+            lit = false
+        }
+    }
+    LaunchedEffect(scanning) {
+        if (scanning) {
+            while (true) {
+                delay(900)
+                scanIndex = (scanIndex + 1) % 3
+            }
+        }
+    }
+
+    // Pull down at the top to light the lamp and refresh.
+    val pullConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPostScroll(consumed: Offset, available: Offset, source: NestedScrollSource): Offset {
+                if (available.y > 0f) {
+                    pull = (pull + available.y * 0.5f).coerceAtMost(190f)
+                    return Offset(0f, available.y)
+                }
+                return Offset.Zero
+            }
+
+            override suspend fun onPreFling(available: Velocity): Velocity {
+                if (pull > 110f) {
+                    relight += 1
+                }
+                pull = 0f
+                return Velocity.Zero
+            }
+        }
+    }
+
+    val heroState = when {
+        scanning -> JyotiState.Scanning
+        lit -> JyotiState.Clear
+        else -> JyotiState.Idle
+    }
+
     Scaffold(
         containerColor = Color.Transparent,
-        topBar = { SaathiHeader(onHistory = onOpenHistory, onSettings = onOpenSettings) }
+        topBar = { JyotiHeader(onHistory = onOpenHistory, onSettings = onOpenSettings) }
     ) { padding ->
         Box(Modifier.fillMaxSize().padding(padding)) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
+                    .nestedScroll(pullConnection)
                     .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 20.dp)
-                    .padding(bottom = 28.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                    .padding(horizontal = Space4)
+                    .padding(bottom = Space8),
+                verticalArrangement = Arrangement.spacedBy(Space4)
             ) {
-                if (kidsMode) {
-                    Card(
-                        shape = MaterialTheme.shapes.medium,
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
-                        modifier = Modifier.reveal(0, reduce)
-                    ) {
+                // ---- hero and headline share a row, so they can never overlap ----
+                Row(
+                    modifier = Modifier.fillMaxWidth().entrance(0, motion),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(Space2)
+                ) {
+                    Column(Modifier.weight(1f)) {
                         Text(
-                            stringResource(R.string.home_kids_badge),
-                            modifier = Modifier.padding(14.dp),
-                            fontWeight = FontWeight.ExtraBold
+                            text = stringResource(R.string.home_title),
+                            style = MaterialTheme.typography.displaySmall,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                        Spacer(Modifier.size(Space2))
+                        Text(
+                            text = stringResource(R.string.home_subtitle),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Box(
+                        Modifier
+                            .size(132.dp)
+                            .offset(x = 10.dp, y = (-(pull / 4f)).dp)
+                            .pointerInput(Unit) {
+                                awaitPointerEventScope {
+                                    while (true) {
+                                        val event = awaitPointerEvent(PointerEventPass.Initial)
+                                        val pos = event.changes.firstOrNull()?.position
+                                        if (pos != null) {
+                                            parallax = Offset(
+                                                ((pos.x / size.width) - 0.5f) * 2f,
+                                                ((pos.y / size.height) - 0.5f) * 2f
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                    ) {
+                        JyotiHero(
+                            state = heroState,
+                            motion = motion,
+                            lowRam = lowRam,
+                            scanProgress = scanProgress,
+                            parallax = parallax
                         )
                     }
                 }
 
-                // ---- hero: offset shield, left-aligned heavy type, deliberate overlap ----
-                Box(
-                    Modifier.fillMaxWidth().height(190.dp).reveal(1, reduce)
-                ) {
-                    ShieldEmblem(
-                        modifier = Modifier
-                            .size(180.dp)
-                            .align(Alignment.CenterEnd)
-                            .offset(x = 26.dp, y = (-4).dp),
-                        tint = Saffron,
-                        reduceMotion = reduce
-                    )
-                    Column(
-                        Modifier.align(Alignment.CenterStart).fillMaxWidth(0.70f)
+                if (kidsMode) {
+                    Card(
+                        shape = MaterialTheme.shapes.medium,
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
+                        modifier = Modifier.entrance(1, motion)
                     ) {
                         Text(
-                            stringResource(R.string.home_title),
-                            style = MaterialTheme.typography.displaySmall,
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
-                        Spacer(Modifier.height(10.dp))
-                        Text(
-                            stringResource(R.string.home_subtitle),
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            stringResource(R.string.home_kids_badge),
+                            modifier = Modifier.padding(Space3),
+                            fontWeight = FontWeight.ExtraBold
                         )
                     }
                 }
@@ -168,7 +252,7 @@ fun HomeScreen(
                 OutlinedTextField(
                     value = state.text,
                     onValueChange = viewModel::onTextChange,
-                    modifier = Modifier.fillMaxWidth().height(160.dp).reveal(2, reduce),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 150.dp).entrance(2, motion),
                     label = { Text(stringResource(R.string.home_input_label)) },
                     placeholder = { Text(stringResource(R.string.home_input_hint)) },
                     shape = RoundedCornerShape(8.dp),
@@ -177,84 +261,102 @@ fun HomeScreen(
 
                 state.errorRes?.let {
                     Text(
-                        stringResource(it),
+                        text = stringResource(it),
                         color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
 
-                Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.reveal(3, reduce)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(Space3), modifier = Modifier.entrance(3, motion)) {
                     OutlinedButton(
                         onClick = {
                             val clip = clipboard.getText()?.text
                             if (!clip.isNullOrBlank()) viewModel.onTextChange(clip)
                         },
                         shape = RoundedCornerShape(50)
-                    ) {
-                        Icon(Icons.Filled.ContentPaste, contentDescription = null)
-                        Spacer(Modifier.padding(4.dp))
-                        Text(stringResource(R.string.home_paste_button))
-                    }
+                    ) { Text(stringResource(R.string.home_paste_button)) }
                     OutlinedButton(
                         onClick = { viewModel.onTextChange("") },
                         shape = RoundedCornerShape(50)
                     ) { Text(stringResource(R.string.home_clear_button)) }
                 }
 
-                // ---- the single saffron primary action ----
-                PillButton(
-                    text = stringResource(R.string.home_check_button),
-                    icon = { Icon(Icons.Filled.Search, contentDescription = null, tint = Color(0xFF2A1600)) },
-                    reduceMotion = reduce,
-                    modifier = Modifier.reveal(4, reduce)
+                // ---- the one saffron action ----
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 64.dp)
+                        .entrance(4, motion)
+                        .latticeRipple(rippleKey, Saffron, motion)
+                        .tappable(motion = motion) {
+                            rippleKey += 1
+                            scanning = true
+                            viewModel.check()
+                        },
+                    contentAlignment = Alignment.Center
                 ) {
-                    scanning = true
-                    viewModel.check()
+                    Box(
+                        Modifier
+                            .fillMaxWidth()
+                            .heightIn(min = 64.dp)
+                            .background(Saffron, RoundedCornerShape(50)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space2)) {
+                            Icon(JyotiFlame, contentDescription = null, tint = Color(0xFF2A1600), modifier = Modifier.size(24.dp))
+                            Text(
+                                text = stringResource(R.string.home_check_button),
+                                style = MaterialTheme.typography.titleLarge,
+                                color = Color(0xFF2A1600)
+                            )
+                        }
+                    }
                 }
 
                 OutlinedButton(
                     onClick = onOpenEasy,
                     shape = RoundedCornerShape(50),
-                    modifier = Modifier.fillMaxWidth().height(54.dp).reveal(5, reduce)
-                ) {
-                    Text(stringResource(R.string.home_easy_button), fontWeight = FontWeight.Bold)
-                }
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).entrance(5, motion)
+                ) { Text(stringResource(R.string.home_easy_button), fontWeight = FontWeight.Bold) }
 
                 Text(
-                    stringResource(R.string.home_quick_tools),
+                    text = stringResource(R.string.home_quick_tools),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.reveal(6, reduce)
+                    modifier = Modifier.entrance(6, motion)
                 )
-                // Asymmetric tool grid: rows alternate their inset.
-                ToolRow(0.dp, stringResource(R.string.home_tool_image), onOpenImage, stringResource(R.string.home_tool_link), onOpenLink, reduce, 7)
-                ToolRow(22.dp, stringResource(R.string.home_tool_phone), onOpenPhone, stringResource(R.string.home_tool_tips), onOpenTips, reduce, 8)
-                ToolRow(8.dp, stringResource(R.string.home_tool_recover), onOpenRecover, stringResource(R.string.home_tool_settings), onOpenSettings, reduce, 9)
-                ToolRow(30.dp, stringResource(R.string.easy_speak), onOpenVoice, null, null, reduce, 10)
+                // Rows alternate their inset for deliberate asymmetry. Labels wrap to two lines.
+                ToolRow(0.dp, R.string.home_tool_image to onOpenImage, R.string.home_tool_link to onOpenLink, motion, 7)
+                ToolRow(20.dp, R.string.home_tool_phone to onOpenPhone, R.string.home_tool_tips to onOpenTips, motion, 8)
+                ToolRow(8.dp, R.string.home_tool_recover to onOpenRecover, R.string.home_tool_settings to onOpenSettings, motion, 9)
+                ToolRow(28.dp, R.string.easy_speak to onOpenVoice, null, motion, 10)
 
                 Text(
-                    stringResource(R.string.home_examples_title),
+                    text = stringResource(R.string.home_examples_title),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.reveal(11, reduce)
+                    modifier = Modifier.entrance(11, motion)
                 )
                 listOf(R.string.home_example_1, R.string.home_example_2, R.string.home_example_3).forEachIndexed { i, res ->
                     val example = stringResource(res)
                     AssistChip(
                         onClick = { viewModel.onTextChange(example) },
-                        label = { Text(example.take(52) + if (example.length > 52) "…" else "", maxLines = 1) },
-                        modifier = Modifier.reveal(12 + i, reduce)
+                        label = {
+                            Text(
+                                text = example,
+                                maxLines = 2,
+                                style = MaterialTheme.typography.labelLarge
+                            )
+                        },
+                        modifier = Modifier.entrance(12 + i, motion)
                     )
                 }
 
-                Card(
-                    shape = MaterialTheme.shapes.medium,
-                    modifier = Modifier.reveal(16, reduce)
-                ) {
-                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Card(shape = MaterialTheme.shapes.medium, modifier = Modifier.entrance(16, motion)) {
+                    Column(Modifier.padding(Space4), verticalArrangement = Arrangement.spacedBy(Space2)) {
                         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                stringResource(R.string.easy_mode_label),
+                                text = stringResource(R.string.easy_mode_label),
                                 modifier = Modifier.weight(1f),
                                 style = MaterialTheme.typography.bodyMedium
                             )
@@ -270,140 +372,114 @@ fun HomeScreen(
                 }
 
                 Text(
-                    stringResource(R.string.history_privacy_note),
+                    text = stringResource(R.string.home_pull_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = stringResource(R.string.history_privacy_note),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 BrandFooter()
             }
 
-            if (scanning) ScanOverlay(Modifier.fillMaxSize())
+            if (scanning) {
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .background(Color.Black.copy(alpha = 0.62f))
+                        .tappable(motion = false) {},
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(Space6)
+                    ) {
+                        Box(Modifier.size(220.dp)) {
+                            JyotiHero(
+                                state = JyotiState.Scanning,
+                                motion = motion,
+                                lowRam = lowRam,
+                                scanProgress = scanProgress
+                            )
+                        }
+                        Text(
+                            text = stringResource(scanningLine(scanIndex)),
+                            style = MaterialTheme.typography.titleLarge,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-private fun SaathiHeader(onHistory: () -> Unit, onSettings: () -> Unit) {
+private fun JyotiHeader(onHistory: () -> Unit, onSettings: () -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
             .statusBarsPadding()
-            .padding(start = 20.dp, end = 6.dp, top = 10.dp, bottom = 4.dp),
+            .padding(start = Space4, end = 6.dp, top = Space3, bottom = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(Modifier.weight(1f)) {
             Text(
-                stringResource(R.string.app_name),
+                text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-                stringResource(R.string.brand_made_by),
+                text = stringResource(R.string.brand_made_by),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
-        IconButton(onClick = onHistory) {
-            Icon(Icons.Filled.History, stringResource(R.string.home_history_button), tint = MaterialTheme.colorScheme.onBackground)
+        IconButton(onClick = onHistory, modifier = Modifier.size(48.dp)) {
+            Icon(JyotiLamp, contentDescription = stringResource(R.string.home_history_button), tint = MaterialTheme.colorScheme.onBackground)
         }
-        IconButton(onClick = onSettings) {
-            Icon(Icons.Filled.Settings, stringResource(R.string.settings_title), tint = MaterialTheme.colorScheme.onBackground)
+        IconButton(onClick = onSettings, modifier = Modifier.size(48.dp)) {
+            Icon(JyotiGear, contentDescription = stringResource(R.string.settings_title), tint = MaterialTheme.colorScheme.onBackground)
         }
     }
 }
 
-@Composable
-private fun PillButton(
-    text: String,
-    icon: @Composable () -> Unit,
-    reduceMotion: Boolean,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(66.dp)
-            .pressScale(reduceMotion)
-            .clip(RoundedCornerShape(50))
-            .background(Saffron)
-            .clickable(onClick = onClick),
-        contentAlignment = Alignment.Center
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            icon()
-            Text(
-                text,
-                style = MaterialTheme.typography.titleLarge,
-                color = Color(0xFF2A1600)
-            )
-        }
-    }
+private fun scanningLine(index: Int): Int = when (index) {
+    0 -> R.string.home_checking_1
+    1 -> R.string.home_checking_2
+    else -> R.string.home_checking_3
 }
 
 @Composable
 private fun ToolRow(
     inset: androidx.compose.ui.unit.Dp,
-    labelA: String, onClickA: () -> Unit,
-    labelB: String?, onClickB: (() -> Unit)?,
-    reduceMotion: Boolean,
+    a: Pair<Int, () -> Unit>,
+    b: Pair<Int, () -> Unit>?,
+    motion: Boolean,
     index: Int
 ) {
     Row(
-        Modifier.fillMaxWidth().padding(start = inset).reveal(index, reduceMotion),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        Modifier.fillMaxWidth().padding(start = inset).entrance(index, motion),
+        horizontalArrangement = Arrangement.spacedBy(Space3)
     ) {
-        ToolChip(labelA, onClickA, Modifier.weight(1f))
-        if (labelB != null && onClickB != null) ToolChip(labelB, onClickB, Modifier.weight(1f))
+        ToolChip(a.first, a.second, motion, Modifier.weight(1f))
+        if (b != null) ToolChip(b.first, b.second, motion, Modifier.weight(1f))
     }
 }
 
 @Composable
-private fun ToolChip(label: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun ToolChip(labelRes: Int, onClick: () -> Unit, motion: Boolean, modifier: Modifier = Modifier) {
     OutlinedButton(
         onClick = onClick,
-        modifier = modifier.height(56.dp),
+        modifier = modifier.heightIn(min = 60.dp),
         shape = RoundedCornerShape(8.dp)
-    ) { Text(label, maxLines = 1, style = MaterialTheme.typography.labelLarge) }
-}
-
-/** The "checking" gesture: a saffron scan line sweeping over a dimmed shield. */
-@Composable
-private fun ScanOverlay(modifier: Modifier = Modifier) {
-    val transition = rememberInfiniteTransition(label = "scan")
-    val y by transition.animateFloat(
-        initialValue = 0.12f,
-        targetValue = 0.88f,
-        animationSpec = infiniteRepeatable(tween(1100, easing = LinearEasing), RepeatMode.Reverse),
-        label = "scanline"
-    )
-    val lines = listOf(R.string.home_checking_1, R.string.home_checking_2, R.string.home_checking_3)
-    var lineIndex by remember { mutableStateOf(0) }
-    LaunchedEffect(Unit) {
-        while (true) {
-            delay(900)
-            lineIndex = (lineIndex + 1) % lines.size
-        }
-    }
-    Box(
-        modifier
-            .background(Color.Black.copy(alpha = 0.55f))
-            .clickable(enabled = false) {},
-        contentAlignment = Alignment.Center
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(24.dp)) {
-            Box(Modifier.size(200.dp)) {
-                ShieldEmblem(Modifier.fillMaxSize(), tint = Saffron, breath = false, reduceMotion = true)
-                Canvas(Modifier.fillMaxSize()) {
-                    val yy = size.height * y
-                    drawLine(Saffron, androidx.compose.ui.geometry.Offset(0f, yy), androidx.compose.ui.geometry.Offset(size.width, yy), 2.dp.toPx())
-                }
-            }
-            Text(
-                stringResource(lines[lineIndex]),
-                style = MaterialTheme.typography.titleLarge,
-                color = Color.White
-            )
-        }
+        Text(
+            text = stringResource(labelRes),
+            style = MaterialTheme.typography.labelLarge,
+            maxLines = 2
+        )
     }
 }

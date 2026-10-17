@@ -40,11 +40,12 @@ import androidx.lifecycle.viewModelScope
 import com.bharatsuraksha.saathi.R
 import com.bharatsuraksha.saathi.data.prefs.SettingsRepository
 import com.bharatsuraksha.saathi.ui.common.isHindiLocale
+import com.bharatsuraksha.saathi.ui.theme.JyotiHero
+import com.bharatsuraksha.saathi.ui.theme.JyotiState
 import com.bharatsuraksha.saathi.ui.theme.Saffron
-import com.bharatsuraksha.saathi.ui.theme.ShieldEmblem
 import com.bharatsuraksha.saathi.ui.theme.pressScale
-import com.bharatsuraksha.saathi.ui.theme.rememberReduceMotion
-import com.bharatsuraksha.saathi.ui.theme.reveal
+import com.bharatsuraksha.saathi.ui.theme.entrance
+import com.bharatsuraksha.saathi.ui.theme.motionAllowed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.SharingStarted
@@ -96,7 +97,7 @@ fun EasyModeScreen(
     val contacts by viewModel.familyContacts.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val hindi = isHindiLocale()
-    val reduce = rememberReduceMotion()
+    val motion = motionAllowed()
 
     LaunchedEffect(Unit) { viewModel.guide(hindi) }
 
@@ -112,38 +113,35 @@ fun EasyModeScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(Modifier.height(8.dp))
-            ShieldEmblem(
-                modifier = Modifier.size(112.dp).reveal(0, reduce),
-                tint = Saffron,
-                breath = true,
-                reduceMotion = reduce
-            )
+            Box(Modifier.size(112.dp).entrance(0, motion)) {
+                JyotiHero(state = JyotiState.Idle, motion = motion)
+            }
             Text(
                 text = stringResource(R.string.easy_title),
                 style = MaterialTheme.typography.displaySmall,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.fillMaxWidth().reveal(1, reduce)
+                modifier = Modifier.fillMaxWidth().entrance(1, motion)
             )
             Text(
                 text = stringResource(R.string.easy_hint),
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.fillMaxWidth().reveal(2, reduce)
+                modifier = Modifier.fillMaxWidth().entrance(2, motion)
             )
 
             HugeButton(
                 text = stringResource(R.string.easy_check_message),
                 primary = true,
-                reduceMotion = reduce,
+                reduceMotion = motion,
                 index = 3,
                 onClick = onCheckMessage
             )
             HugeButton(
                 text = stringResource(R.string.easy_speak),
                 primary = false,
-                reduceMotion = reduce,
+                reduceMotion = motion,
                 index = 4,
                 onClick = onSpeak
             )
@@ -152,7 +150,7 @@ fun EasyModeScreen(
             HugeButton(
                 text = stringResource(R.string.easy_call_family),
                 primary = false,
-                reduceMotion = reduce,
+                reduceMotion = motion,
                 index = 5,
                 onClick = {
                     if (family != null) {
@@ -169,7 +167,7 @@ fun EasyModeScreen(
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.fillMaxWidth().reveal(6, reduce)
+                    modifier = Modifier.fillMaxWidth().entrance(6, motion)
                 )
             }
 
@@ -177,7 +175,7 @@ fun EasyModeScreen(
             HugeButton(
                 text = stringResource(R.string.action_back),
                 primary = false,
-                reduceMotion = reduce,
+                reduceMotion = motion,
                 index = 7,
                 compact = true,
                 onClick = onBack
@@ -202,7 +200,7 @@ private fun HugeButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(if (compact) 84.dp else 132.dp)
-            .reveal(index, reduceMotion)
+            .entrance(index, reduceMotion)
             .pressScale(reduceMotion)
             .clip(shape)
             .background(container)
