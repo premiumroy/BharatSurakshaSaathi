@@ -2,7 +2,10 @@ package com.bharatsuraksha.saathi.ui.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,10 +19,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.bharatsuraksha.saathi.R
 import com.bharatsuraksha.saathi.domain.model.Verdict
+import com.bharatsuraksha.saathi.ui.theme.BrandGold
+import com.bharatsuraksha.saathi.ui.theme.BrandGreen
+import com.bharatsuraksha.saathi.ui.theme.BrandSaffron
 import com.bharatsuraksha.saathi.ui.theme.CarefulAmber
 import com.bharatsuraksha.saathi.ui.theme.CarefulAmberBg
 import com.bharatsuraksha.saathi.ui.theme.DangerRed
@@ -103,6 +110,41 @@ fun VerdictPill(verdict: Verdict, modifier: Modifier = Modifier) {
             color = verdictColor(verdict),
             style = MaterialTheme.typography.labelLarge,
             fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+/** Thin tricolour accent bar — a small Indian touch under the app bar. */
+@Composable
+fun TricolorBar(modifier: Modifier = Modifier) {
+    Row(modifier.fillMaxWidth().height(4.dp)) {
+        Box(Modifier.weight(1f).fillMaxHeight().background(BrandSaffron))
+        Box(Modifier.weight(1f).fillMaxHeight().background(Color(0xFFF3E6CE)))
+        Box(Modifier.weight(1f).fillMaxHeight().background(BrandGreen))
+    }
+}
+
+/** Company / maker credit shown on the home and about surfaces. */
+@Composable
+fun BrandFooter(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxWidth().padding(vertical = 12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(2.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.brand_made_by),
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.Bold,
+            color = BrandGold
+        )
+        Text(
+            text = stringResource(R.string.brand_owner),
+            style = MaterialTheme.typography.bodySmall
+        )
+        Text(
+            text = stringResource(R.string.brand_alias),
+            style = MaterialTheme.typography.bodySmall
         )
     }
 }

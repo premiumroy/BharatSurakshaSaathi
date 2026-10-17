@@ -306,4 +306,9 @@
     <string name="action_open_settings">Open settings</string>
     <string name="language_label">भाषा / Language</string>
     <string name="easy_mode_label">Easy Mode (bigger text and buttons)</string>
+
+    <!-- Branding -->
+    <string name="brand_made_by">Made by Roy Limited</string>
+    <string name="brand_owner">Owner: Prashant Dobriyal</string>
+    <string name="brand_alias">Known online as “Premium Roy”</string>
 </resources>

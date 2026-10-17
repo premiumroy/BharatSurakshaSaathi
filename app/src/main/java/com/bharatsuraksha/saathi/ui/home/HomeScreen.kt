@@ -47,6 +47,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bharatsuraksha.saathi.R
+import com.bharatsuraksha.saathi.ui.common.BrandFooter
+import com.bharatsuraksha.saathi.ui.common.TricolorBar
 import com.bharatsuraksha.saathi.ui.theme.BrandGreen
 import com.bharatsuraksha.saathi.ui.theme.BrandSaffron
 
@@ -84,22 +86,34 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.app_name), fontWeight = FontWeight.Bold) },
-                actions = {
-                    IconButton(onClick = onOpenHistory) {
-                        Icon(Icons.Filled.History, contentDescription = stringResource(R.string.home_history_button))
-                    }
-                    IconButton(onClick = onOpenSettings) {
-                        Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings_title))
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = BrandGreen,
-                    titleContentColor = Color.White,
-                    actionIconContentColor = Color.White
+            Column {
+                TopAppBar(
+                    title = {
+                        Column {
+                            Text(stringResource(R.string.app_name), fontWeight = FontWeight.Bold)
+                            Text(
+                                text = stringResource(R.string.brand_made_by),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = Color.White.copy(alpha = 0.85f)
+                            )
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = onOpenHistory) {
+                            Icon(Icons.Filled.History, contentDescription = stringResource(R.string.home_history_button))
+                        }
+                        IconButton(onClick = onOpenSettings) {
+                            Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings_title))
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = BrandGreen,
+                        titleContentColor = Color.White,
+                        actionIconContentColor = Color.White
+                    )
                 )
-            )
+                TricolorBar()
+            }
         }
     ) { padding ->
         Column(
@@ -256,6 +270,7 @@ fun HomeScreen(
                 text = stringResource(R.string.history_privacy_note),
                 style = MaterialTheme.typography.bodyMedium
             )
+            BrandFooter()
             Spacer(Modifier.height(8.dp))
         }
     }

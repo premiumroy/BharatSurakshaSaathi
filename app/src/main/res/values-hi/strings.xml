@@ -306,4 +306,9 @@
     <string name="action_open_settings">सेटिंग्स खोलें</string>
     <string name="language_label">भाषा / Language</string>
     <string name="easy_mode_label">आसान मोड (बड़ा टेक्स्ट और बटन)</string>
+
+    <!-- Branding -->
+    <string name="brand_made_by">निर्माता: Roy Limited</string>
+    <string name="brand_owner">स्वामी: प्रशांत डोबरियाल</string>
+    <string name="brand_alias">ऑनलाइन “Premium Roy” के नाम से जाने जाते हैं</string>
 </resources>

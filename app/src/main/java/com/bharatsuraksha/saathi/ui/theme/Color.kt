@@ -2,11 +2,18 @@ package com.bharatsuraksha.saathi.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Brand
-val BrandGreen = Color(0xFF0B6E4F)
-val BrandGreenDark = Color(0xFF08543C)
-val BrandSaffron = Color(0xFFFF8A00)
-val SurfaceCream = Color(0xFFFFFBF5)
+// ---- Brand: a premium Indian palette — emerald, marigold, antique gold, deep indigo ----
+val BrandGreen = Color(0xFF0E6E4E)      // deep emerald — trust & safety
+val BrandGreenDark = Color(0xFF0A4F39)
+val BrandSaffron = Color(0xFFE8792B)    // marigold
+val BrandGold = Color(0xFFC9A227)       // antique gold
+val BrandIndigo = Color(0xFF1B2447)     // deep navy — premium dark surface
+val BrandIndigoSoft = Color(0xFF2A3768)
+
+val SurfaceCream = Color(0xFFFFF7EC)
+val SurfaceIvory = Color(0xFFFFFDF8)
+val SurfaceSand = Color(0xFFF4E7D2)
+val OutlineGold = Color(0xFFC9A227)
 
 // Verdict colours (high contrast for readability)
 val SafeGreen = Color(0xFF1B7F3B)

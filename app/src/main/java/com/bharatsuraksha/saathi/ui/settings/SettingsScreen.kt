@@ -38,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import com.bharatsuraksha.saathi.ui.common.BrandFooter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -317,6 +318,7 @@ fun SettingsScreen(
                     }
                     Text(stringResource(R.string.settings_about), fontWeight = FontWeight.Bold)
                     Text(stringResource(R.string.settings_about_body), style = MaterialTheme.typography.bodyMedium)
+                    BrandFooter()
                 }
             }
             Spacer(Modifier.height(24.dp))
