@@ -475,4 +475,113 @@
     <string name="helper_next">आगे</string>
     <string name="helper_done">पूरा करें</string>
     <string name="helper_plain_words">यह सब इसी फ़ोन पर होता है। कुछ भी अपलोड नहीं होता।</string>
+
+    <!-- Phase 3: share warning card -->
+    <string name="share_card_title">चेतावनी कार्ड भेजें</string>
+    <string name="share_card_none">पहले कोई संदेश जाँचें, फिर उसके बारे में चेतावनी कार्ड भेज सकते हैं।</string>
+    <string name="share_card_mask">निजी जानकारी छिपाएँ</string>
+    <string name="share_card_mask_hint">फ़ोन नंबर, UPI आईडी, खाता नंबर और लिंक छिपा दिए जाते हैं।</string>
+    <string name="share_card_share">कार्ड भेजें</string>
+    <string name="share_card_ok">भेजने के लिए तैयार।</string>
+    <string name="share_card_failed">कार्ड नहीं बन सका। फिर कोशिश करें।</string>
+    <string name="share_card_privacy">कार्ड इसी फ़ोन पर बनता है। कहीं अपलोड नहीं होता।</string>
+    <string name="share_tip_1">OTP, PIN या CVV कभी किसी को न बताएँ।</string>
+    <string name="share_tip_2">अनजान संदेश के लिंक पर क्लिक न करें।</string>
+    <string name="share_tip_3">1930 या cybercrime.gov.in पर शिकायत करें।</string>
+
+    <!-- Phase 3: dashboard -->
+    <string name="dashboard_title">सुरक्षा डैशबोर्ड</string>
+    <string name="dashboard_checks">कुल जाँचें</string>
+    <string name="dashboard_dangers">पकड़ी गई ठगियाँ</string>
+    <string name="dashboard_streak">रोज़ की लय</string>
+    <string name="dashboard_streak_days">लगातार %1$d दिन जाँच हुई</string>
+    <string name="dashboard_since_risky">आख़िरी खतरनाक जाँच से %1$d दिन बीते</string>
+    <string name="dashboard_no_risky">अब तक कोई खतरनाक जाँच नहीं।</string>
+    <string name="dashboard_week">इस हफ़्ते</string>
+    <string name="dashboard_evidence_count">%1$d सबूत इस फ़ोन पर सहेजे हैं</string>
+    <string name="dashboard_clear">सारा डेटा मिटाएँ</string>
+    <string name="dashboard_clear_confirm">इससे इस फ़ोन से आपका इतिहास और सहेजे सबूत मिट जाएँगे। इसे वापस नहीं लाया जा सकता।</string>
+    <string name="dashboard_clear_yes">हाँ, मिटाएँ</string>
+    <string name="dashboard_privacy">यह सब इसी ऐप में, इसी फ़ोन पर रहता है। हमारे पास कोई सर्वर नहीं है।</string>
+
+    <!-- Phase 3: help now -->
+    <string name="helpnow_title">अभी मदद</string>
+    <string name="helpnow_golden_title">गोल्डन आवर</string>
+    <string name="helpnow_golden_body">अगर पैसा अभी-अभी गया है, तो पहला घंटा सबसे ज़रूरी है। जल्दी शिकायत करें।</string>
+    <string name="helpnow_when">पैसा कब गया?</string>
+    <string name="helpnow_just_now">अभी-अभी</string>
+    <string name="helpnow_15">15 मिनट पहले</string>
+    <string name="helpnow_30">30 मिनट पहले</string>
+    <string name="helpnow_expired">समय निकल गया</string>
+    <string name="helpnow_expired_note">पहला घंटा निकल गया है, फिर भी शिकायत करें। इससे मदद मिलती है।</string>
+    <string name="helpnow_still_time">अभी शिकायत करें। जितनी जल्दी कॉल करेंगे, पैसा रुकने की संभावना उतनी बेहतर।</string>
+    <string name="helpnow_reset">समय फिर से चुनें</string>
+    <string name="helpnow_call_1930">अभी 1930 पर कॉल करें</string>
+    <string name="helpnow_freeze_title">कार्ड और UPI ब्लॉक कराएँ</string>
+    <string name="helpnow_freeze_body">अपने कार्ड या पासबुक पर छपे नंबर पर बैंक को कॉल करें और कार्ड तथा UPI ब्लॉक करने को कहें। बैंक ऐप में ब्लॉक का विकल्प हो तो वहाँ से भी कर सकते हैं। खोज या संदेश से मिला नंबर कभी न इस्तेमाल करें।</string>
+    <string name="helpnow_evidence_title">सबूत सहेजें</string>
+    <string name="helpnow_evidence_body">स्क्रीनशॉट, कॉलर का नंबर, तारीख और समय, और राशि सहेजें। अगली स्क्रीन इन्हें इसी फ़ोन पर रखती है और PDF बना सकती है।</string>
+    <string name="helpnow_open_evidence">सबूत की सूची खोलें</string>
+    <string name="helpnow_cybercrime">cybercrime.gov.in पर शिकायत करें</string>
+    <string name="helpnow_note">यह स्क्रीन मार्गदर्शन है, कोई गारंटी नहीं। मदद के लिए 1930 डायल करें। यह गारंटी नहीं है।</string>
+
+    <!-- Phase 3: chakshu -->
+    <string name="chakshu_title">चक्षु शिकायत सहायक</string>
+    <string name="chakshu_intro">जो जानकारी है वह भरें। ऐप एक तैयार सारांश बनाएगा जिसे आप संचार साथी पोर्टल पर चिपका सकते हैं। भेजेंगे आप, हम नहीं।</string>
+    <string name="chakshu_number">संदिग्ध नंबर</string>
+    <string name="chakshu_date">तारीख</string>
+    <string name="chakshu_time">समय</string>
+    <string name="chakshu_medium">उन्होंने कैसे संपर्क किया?</string>
+    <string name="chakshu_medium_call">कॉल</string>
+    <string name="chakshu_medium_sms">SMS</string>
+    <string name="chakshu_category">ठगी का प्रकार</string>
+    <string name="chakshu_notes">और कुछ (वैकल्पिक)</string>
+    <string name="chakshu_screenshot">मेरे पास स्क्रीनशॉट है</string>
+    <string name="chakshu_summary">आपका सारांश</string>
+    <string name="chakshu_copy">सारांश कॉपी करें</string>
+    <string name="chakshu_incomplete">कृपया नंबर, तारीख, समय और ठगी का प्रकार भरें।</string>
+    <string name="chakshu_copied">कॉपी हो गया। अब पोर्टल पर चिपकाएँ।</string>
+    <string name="chakshu_open_portal">sancharsaathi.gov.in खोलें</string>
+    <string name="chakshu_never_auto">ऐप आपकी तरफ़ से कुछ नहीं भेजता। शिकायत आप खुद करते हैं।</string>
+
+    <!-- Phase 3: my SIMs -->
+    <string name="sim_title">मेरे नाम पर कितने सिम?</string>
+    <string name="sim_intro">आप देख सकते हैं कि आपके आधार पर कितने मोबाइल कनेक्शन हैं। तरीका यह है।</string>
+    <string name="sim_step_1">ब्राउज़र में संचार साथी पोर्टल खोलें।</string>
+    <string name="sim_step_2">अपने नाम पर कनेक्शन देखने का विकल्प चुनें।</string>
+    <string name="sim_step_3">अपना मोबाइल नंबर और आया कोड डालें।</string>
+    <string name="sim_step_4">आपके आधार पर जारी नंबरों की सूची दिखेगी।</string>
+    <string name="sim_step_5">कोई नंबर आपका न हो तो उसी पोर्टल पर शिकायत करें और अपने ऑपरेटर को बताएँ।</string>
+    <string name="sim_open_portal">पोर्टल खोलें</string>
+    <string name="sim_note">यह सिर्फ़ मार्गदर्शन है। पोर्टल सरकार चलाती है, यह ऐप नहीं। यह गारंटी नहीं है।</string>
+
+    <!-- Phase 3: bank helplines -->
+    <string name="helpline_title">भरोसेमंद बैंक नंबर</string>
+    <string name="helpline_intro">अपने कार्ड के पीछे या पासबुक में छपा हेल्पलाइन नंबर सहेजें। हम कोई नंबर नहीं देते, क्योंकि गलत नंबर खतरनाक होता है।</string>
+    <string name="helpline_bank">बैंक का नाम</string>
+    <string name="helpline_number">हेल्पलाइन नंबर</string>
+    <string name="helpline_add">नंबर सहेजें</string>
+    <string name="helpline_empty">अभी कोई नंबर सहेजा नहीं है।</string>
+    <string name="helpline_remove">हटाएँ</string>
+    <string name="helpline_reason_bank">कृपया बैंक का नाम लिखें।</string>
+    <string name="helpline_reason_number">कृपया 3 से 15 अंकों का हेल्पलाइन नंबर लिखें।</string>
+    <string name="helpline_source_note">नंबर अपने कार्ड, पासबुक या बैंक की वेबसाइट से पढ़ें। किसी संदेश या खोज से कभी नहीं।</string>
+    <string name="helpline_privacy">सिर्फ़ इसी फ़ोन पर सहेजा जाता है।</string>
+
+    <!-- Phase 3: safety hub -->
+    <string name="safety_title">सुरक्षा उपकरण</string>
+    <string name="safety_intro">ज़रूरत के पलों के लिए कुछ और उपकरण।</string>
+    <string name="safety_dashboard">सुरक्षा डैशबोर्ड</string>
+    <string name="safety_dashboard_sub">आपकी जाँचें, पकड़ी गई ठगियाँ और यह हफ़्ता</string>
+    <string name="safety_share_card">चेतावनी कार्ड भेजें</string>
+    <string name="safety_share_card_sub">परिवार और दोस्तों को साफ़ कार्ड से चेताएँ</string>
+    <string name="safety_help_now">अभी मदद</string>
+    <string name="safety_help_now_sub">गोल्डन आवर, 1930 और ब्लॉक कराने के कदम</string>
+    <string name="safety_chakshu">चक्षु शिकायत सहायक</string>
+    <string name="safety_chakshu_sub">संचार साथी पोर्टल के लिए सारांश बनाएँ</string>
+    <string name="safety_sim">मेरे नाम पर कितने सिम?</string>
+    <string name="safety_sim_sub">कदम दर कदम, फिर पोर्टल खोलें</string>
+    <string name="safety_helplines">भरोसेमंद बैंक नंबर</string>
+    <string name="safety_helplines_sub">अपने कार्ड से हेल्पलाइन सहेजें</string>
+    <string name="safety_privacy">यह सब इसी फ़ोन पर चलता है। कोई एनालिटिक्स नहीं, कोई अपलोड नहीं।</string>
 </resources>

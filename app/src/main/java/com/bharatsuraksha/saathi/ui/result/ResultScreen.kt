@@ -85,6 +85,7 @@ fun ResultScreen(
     onBack: () -> Unit,
     onCheckAnother: () -> Unit,
     onOpenRecover: () -> Unit,
+    onOpenHelpNow: () -> Unit,
     viewModel: ResultViewModel = hiltViewModel()
 ) {
     val result = viewModel.result
@@ -194,6 +195,13 @@ fun ResultScreen(
             if (result.verdict != Verdict.SAFE) {
                 CalmTimerCard(motion = motion, modifier = Modifier.reveal(1, reduce))
             }
+
+            // Help now is always one tap away from a result.
+            OutlinedButton(
+                onClick = onOpenHelpNow,
+                shape = RoundedCornerShape(50),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).reveal(2, reduce)
+            ) { Text(stringResource(R.string.helpnow_title), fontWeight = FontWeight.ExtraBold) }
 
             Text(
                 stringResource(

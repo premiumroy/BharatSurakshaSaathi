@@ -90,6 +90,7 @@ fun HomeScreen(
     onOpenSettings: () -> Unit,
     onOpenEasy: () -> Unit,
     onOpenVoice: () -> Unit,
+    onOpenHelpNow: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -319,6 +320,13 @@ fun HomeScreen(
                     shape = RoundedCornerShape(50),
                     modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).entrance(5, motion)
                 ) { Text(stringResource(R.string.home_easy_button), fontWeight = FontWeight.Bold) }
+
+                // Always reachable, from the very top of Home.
+                OutlinedButton(
+                    onClick = onOpenHelpNow,
+                    shape = RoundedCornerShape(50),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).entrance(5, motion)
+                ) { Text(stringResource(R.string.helpnow_title), fontWeight = FontWeight.ExtraBold) }
 
                 Text(
                     text = stringResource(R.string.home_quick_tools),

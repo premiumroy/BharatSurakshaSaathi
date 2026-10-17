@@ -12,6 +12,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bharatsuraksha.saathi.ui.navigation.AppNavHost
 import com.bharatsuraksha.saathi.ui.navigation.Routes
+import com.bharatsuraksha.saathi.ui.session.BankHelplineStore
 import com.bharatsuraksha.saathi.ui.session.CalmMode
 import com.bharatsuraksha.saathi.ui.session.CodeWordStore
 import com.bharatsuraksha.saathi.ui.session.GameStatsStore
@@ -33,6 +34,7 @@ class MainActivity : ComponentActivity() {
         SoundPref.load(applicationContext)
         GameStatsStore.load(applicationContext)
         CodeWordStore.load(applicationContext)
+        BankHelplineStore.load(applicationContext)
 
         // Text or image shared into us from any other app (share-sheet target).
         handleShareIntent(intent)

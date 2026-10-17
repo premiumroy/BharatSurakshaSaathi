@@ -32,6 +32,13 @@ import com.bharatsuraksha.saathi.ui.phone.PhoneCheckScreen
 import com.bharatsuraksha.saathi.ui.privacy.PrivacyScreen
 import com.bharatsuraksha.saathi.ui.recover.RecoveryScreen
 import com.bharatsuraksha.saathi.ui.result.ResultScreen
+import com.bharatsuraksha.saathi.ui.safety.BankHelplinesScreen
+import com.bharatsuraksha.saathi.ui.safety.ChakshuScreen
+import com.bharatsuraksha.saathi.ui.safety.DashboardScreen
+import com.bharatsuraksha.saathi.ui.safety.HelpNowScreen
+import com.bharatsuraksha.saathi.ui.safety.SafetyToolsScreen
+import com.bharatsuraksha.saathi.ui.safety.ShareWarningCardScreen
+import com.bharatsuraksha.saathi.ui.safety.SimGuideScreen
 import com.bharatsuraksha.saathi.ui.settings.SettingsScreen
 import com.bharatsuraksha.saathi.ui.tips.TipsScreen
 import com.bharatsuraksha.saathi.ui.voice.VoiceScreen
@@ -60,6 +67,13 @@ object Routes {
     const val WEEKLY = "weekly"
     const val CODE_WORD = "code_word"
     const val HELPER = "helper"
+    const val SAFETY = "safety"
+    const val DASHBOARD = "dashboard"
+    const val SHARE_CARD = "share_card"
+    const val HELP_NOW = "help_now"
+    const val CHAKSHU = "chakshu"
+    const val SIM_GUIDE = "sim_guide"
+    const val HELPLINES = "helplines"
 }
 
 @Composable
@@ -112,7 +126,8 @@ fun AppNavHost(
                     onOpenRecover = { navController.navigate(Routes.RECOVER) },
                     onOpenSettings = { navController.navigate(Routes.SETTINGS) },
                     onOpenEasy = { navController.navigate(Routes.EASY) },
-                    onOpenVoice = { navController.navigate(Routes.VOICE) }
+                    onOpenVoice = { navController.navigate(Routes.VOICE) },
+                    onOpenHelpNow = { navController.navigate(Routes.HELP_NOW) }
                 )
             }
 
@@ -140,7 +155,8 @@ fun AppNavHost(
                 ResultScreen(
                     onBack = { navController.popBackStack() },
                     onCheckAnother = { navController.popBackStack(Routes.HOME, inclusive = false) },
-                    onOpenRecover = { navController.navigate(Routes.RECOVER) }
+                    onOpenRecover = { navController.navigate(Routes.RECOVER) },
+                    onOpenHelpNow = { navController.navigate(Routes.HELP_NOW) }
                 )
             }
 
@@ -152,6 +168,7 @@ fun AppNavHost(
                     onOpenNotificationAccess = { navController.navigate(Routes.NOTIFICATION_ACCESS) },
                     onOpenPrivacy = { navController.navigate(Routes.PRIVACY) },
                     onOpenTips = { navController.navigate(Routes.TIPS) },
+                    onOpenSafety = { navController.navigate(Routes.SAFETY) },
                     onOpenDebug = { navController.navigate(Routes.DEBUG) }
                 )
             }
@@ -183,6 +200,29 @@ fun AppNavHost(
             composable(Routes.RECOVER) { RecoveryScreen(onBack = { navController.popBackStack() }) }
             composable(Routes.PRIVACY) { PrivacyScreen(onBack = { navController.popBackStack() }) }
             composable(Routes.DEBUG) { DebugScreen(onBack = { navController.popBackStack() }) }
+
+            composable(Routes.SAFETY) {
+                SafetyToolsScreen(
+                    onBack = { navController.popBackStack() },
+                    onOpenDashboard = { navController.navigate(Routes.DASHBOARD) },
+                    onOpenShareCard = { navController.navigate(Routes.SHARE_CARD) },
+                    onOpenHelpNow = { navController.navigate(Routes.HELP_NOW) },
+                    onOpenChakshu = { navController.navigate(Routes.CHAKSHU) },
+                    onOpenSimGuide = { navController.navigate(Routes.SIM_GUIDE) },
+                    onOpenHelplines = { navController.navigate(Routes.HELPLINES) }
+                )
+            }
+            composable(Routes.DASHBOARD) { DashboardScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.SHARE_CARD) { ShareWarningCardScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.HELP_NOW) {
+                HelpNowScreen(
+                    onBack = { navController.popBackStack() },
+                    onOpenRecovery = { navController.navigate(Routes.RECOVER) }
+                )
+            }
+            composable(Routes.CHAKSHU) { ChakshuScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.SIM_GUIDE) { SimGuideScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.HELPLINES) { BankHelplinesScreen(onBack = { navController.popBackStack() }) }
         }
     }
 }

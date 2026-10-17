@@ -475,4 +475,113 @@
     <string name="helper_next">Next</string>
     <string name="helper_done">Finish</string>
     <string name="helper_plain_words">Everything here is on this phone. Nothing is uploaded.</string>
+
+    <!-- Phase 3: share warning card -->
+    <string name="share_card_title">Share a warning card</string>
+    <string name="share_card_none">Check a message first, then come back to share a warning card about it.</string>
+    <string name="share_card_mask">Hide private details</string>
+    <string name="share_card_mask_hint">Phone numbers, UPI IDs, account numbers and links are hidden.</string>
+    <string name="share_card_share">Share card</string>
+    <string name="share_card_ok">Ready to share.</string>
+    <string name="share_card_failed">Could not build the card. Please try again.</string>
+    <string name="share_card_privacy">The card is made on this phone. Nothing is uploaded.</string>
+    <string name="share_tip_1">Never share an OTP, PIN or CVV.</string>
+    <string name="share_tip_2">Do not click links in unexpected messages.</string>
+    <string name="share_tip_3">Report it on 1930 or cybercrime.gov.in.</string>
+
+    <!-- Phase 3: dashboard -->
+    <string name="dashboard_title">Safety dashboard</string>
+    <string name="dashboard_checks">Checks done</string>
+    <string name="dashboard_dangers">Dangers caught</string>
+    <string name="dashboard_streak">Daily streak</string>
+    <string name="dashboard_streak_days">%1$d day(s) in a row with a check</string>
+    <string name="dashboard_since_risky">%1$d day(s) since the last dangerous check</string>
+    <string name="dashboard_no_risky">No dangerous check so far.</string>
+    <string name="dashboard_week">This week</string>
+    <string name="dashboard_evidence_count">%1$d saved evidence item(s)</string>
+    <string name="dashboard_clear">Clear all data</string>
+    <string name="dashboard_clear_confirm">This deletes your history and saved evidence from this phone. It cannot be undone.</string>
+    <string name="dashboard_clear_yes">Yes, delete</string>
+    <string name="dashboard_privacy">All of this lives in this app on this phone. We have no servers.</string>
+
+    <!-- Phase 3: help now -->
+    <string name="helpnow_title">Help now</string>
+    <string name="helpnow_golden_title">The golden hour</string>
+    <string name="helpnow_golden_body">If money has just left your account, the first hour matters most. Report it fast.</string>
+    <string name="helpnow_when">When did the money go?</string>
+    <string name="helpnow_just_now">Just now</string>
+    <string name="helpnow_15">15 min ago</string>
+    <string name="helpnow_30">30 min ago</string>
+    <string name="helpnow_expired">Time is up</string>
+    <string name="helpnow_expired_note">The first hour has passed, but report anyway. Reporting still helps.</string>
+    <string name="helpnow_still_time">Report now. The sooner you call, the better the chance of freezing the money.</string>
+    <string name="helpnow_reset">Set the time again</string>
+    <string name="helpnow_call_1930">Call 1930 now</string>
+    <string name="helpnow_freeze_title">Freeze your card and UPI</string>
+    <string name="helpnow_freeze_body">Call your bank on the number printed on your card or passbook and ask to block the card and UPI. Do it from the bank app if it has a block option. Never use a number from a search result or a message.</string>
+    <string name="helpnow_evidence_title">Keep the evidence</string>
+    <string name="helpnow_evidence_body">Save screenshots, the caller number, the date and time, and the amount. The next screen stores them on this phone and can make a PDF.</string>
+    <string name="helpnow_open_evidence">Open the evidence list</string>
+    <string name="helpnow_cybercrime">Report on cybercrime.gov.in</string>
+    <string name="helpnow_note">This screen is a guide, not a guarantee. Dial 1930 for help. यह गारंटी नहीं है।</string>
+
+    <!-- Phase 3: chakshu -->
+    <string name="chakshu_title">Chakshu report helper</string>
+    <string name="chakshu_intro">Fill what you know. The app makes a ready summary you can paste into the Sanchar Saathi portal. You send it, not us.</string>
+    <string name="chakshu_number">Suspicious number</string>
+    <string name="chakshu_date">Date</string>
+    <string name="chakshu_time">Time</string>
+    <string name="chakshu_medium">How did they reach you?</string>
+    <string name="chakshu_medium_call">Call</string>
+    <string name="chakshu_medium_sms">SMS</string>
+    <string name="chakshu_category">Fraud type</string>
+    <string name="chakshu_notes">Anything else (optional)</string>
+    <string name="chakshu_screenshot">I have a screenshot</string>
+    <string name="chakshu_summary">Your summary</string>
+    <string name="chakshu_copy">Copy the summary</string>
+    <string name="chakshu_incomplete">Please fill the number, date, time and fraud type.</string>
+    <string name="chakshu_copied">Copied. Now paste it in the portal.</string>
+    <string name="chakshu_open_portal">Open sancharsaathi.gov.in</string>
+    <string name="chakshu_never_auto">The app never submits anything for you. You file the report yourself.</string>
+
+    <!-- Phase 3: my SIMs -->
+    <string name="sim_title">How many SIMs are in my name?</string>
+    <string name="sim_intro">You can see every mobile connection registered on your Aadhaar. Here is how.</string>
+    <string name="sim_step_1">Open the Sanchar Saathi portal in your browser.</string>
+    <string name="sim_step_2">Choose the option to see the connections in your name.</string>
+    <string name="sim_step_3">Enter your mobile number and the code you receive.</string>
+    <string name="sim_step_4">You will see the list of numbers issued on your Aadhaar.</string>
+    <string name="sim_step_5">If a number is not yours, report it on the same portal and tell your operator.</string>
+    <string name="sim_open_portal">Open the portal</string>
+    <string name="sim_note">This is a guide only. The portal is run by the government, not by this app. यह गारंटी नहीं है।</string>
+
+    <!-- Phase 3: bank helplines -->
+    <string name="helpline_title">Trusted bank numbers</string>
+    <string name="helpline_intro">Save the helpline printed on the back of your card or in your passbook. We do not ship any number, because a wrong one is dangerous.</string>
+    <string name="helpline_bank">Bank name</string>
+    <string name="helpline_number">Helpline number</string>
+    <string name="helpline_add">Save number</string>
+    <string name="helpline_empty">No numbers saved yet.</string>
+    <string name="helpline_remove">Remove</string>
+    <string name="helpline_reason_bank">Please write the bank name.</string>
+    <string name="helpline_reason_number">Please write a helpline number of 3 to 15 digits.</string>
+    <string name="helpline_source_note">Read the number from your own card, passbook or the bank website. Never from a message or a search result.</string>
+    <string name="helpline_privacy">Saved on this phone only.</string>
+
+    <!-- Phase 3: safety hub -->
+    <string name="safety_title">Safety tools</string>
+    <string name="safety_intro">Extra tools for the moments that matter.</string>
+    <string name="safety_dashboard">Safety dashboard</string>
+    <string name="safety_dashboard_sub">Your checks, dangers caught and this week at a glance</string>
+    <string name="safety_share_card">Share a warning card</string>
+    <string name="safety_share_card_sub">Warn family and friends with a clean card</string>
+    <string name="safety_help_now">Help now</string>
+    <string name="safety_help_now_sub">Golden hour, 1930 and the freeze steps</string>
+    <string name="safety_chakshu">Chakshu report helper</string>
+    <string name="safety_chakshu_sub">Prepare a summary for the Sanchar Saathi portal</string>
+    <string name="safety_sim">How many SIMs are in my name?</string>
+    <string name="safety_sim_sub">Step by step, then open the portal</string>
+    <string name="safety_helplines">Trusted bank numbers</string>
+    <string name="safety_helplines_sub">Save the helplines from your own card</string>
+    <string name="safety_privacy">Everything here runs on this phone. No analytics, no uploads.</string>
 </resources>
