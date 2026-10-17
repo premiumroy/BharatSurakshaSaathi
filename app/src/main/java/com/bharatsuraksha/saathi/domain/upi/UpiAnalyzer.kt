@@ -78,7 +78,10 @@ object UpiAnalyzer {
             findings += Finding("upi_odd_handle", 10, REASON_HANDLE)
         }
 
-        if (payload.payeeAddress == null) {
+        // A missing payee only matters on an actual UPI request; an unrelated
+        // string is not a UPI payload at all, so it must not be flagged.
+        val isRequest = payload.kind == UpiKind.PAY || payload.kind == UpiKind.MANDATE
+        if (isRequest && payload.payeeAddress == null) {
             score += 15
             findings += Finding("upi_missing_payee", 15, REASON_MISSING_PAYEE)
         }
