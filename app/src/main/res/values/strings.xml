@@ -756,7 +756,7 @@
     <string name="health_check_now">Check now</string>
     <string name="health_limits_title">What this check cannot see</string>
     <string name="health_limit_1">Android hides other apps from us unless we ask about them by name, so the app lists here are short by design.</string>
-    <string name="health_limit_2">Reading other apps' downloaded files needs a permission we do not ask for, so that check often finds nothing.</string>
+    <string name="health_limit_2">Reading other apps\' downloaded files needs a permission we do not ask for, so that check often finds nothing.</string>
     <string name="health_limit_3">Nothing is ever uninstalled, disabled or changed. These are things for you to look at yourself.</string>
 
     <!-- Phase 5b: battery guidance -->
