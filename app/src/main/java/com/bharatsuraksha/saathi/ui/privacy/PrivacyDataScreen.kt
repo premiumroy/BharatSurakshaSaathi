@@ -143,7 +143,7 @@ fun PrivacyDataScreen(
             },
             dismissButton = {
                 TextButton(onClick = { confirming = false }) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(R.string.history_cancel))
                 }
             }
         )
